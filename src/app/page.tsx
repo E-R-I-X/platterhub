@@ -1,21 +1,7 @@
-import { About } from "@/components/about"
-import { Contact } from "@/components/contact"
-import { Hero } from "@/components/hero"
-import { SelectedWork } from "@/components/selected-work"
-import { SiteFooter } from "@/components/site-footer"
-import { SiteHeader } from "@/components/site-header"
+import { redirect } from "next/navigation"
 
-export default function Home() {
-  return (
-    <>
-      <SiteHeader />
-      <main className="flex-1">
-        <Hero />
-        <SelectedWork />
-        <About />
-        <Contact />
-      </main>
-      <SiteFooter />
-    </>
-  )
+export const instant = false
+
+export default function HomePage() {
+  redirect("/dashboard")
 }
