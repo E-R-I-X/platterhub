@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { createServerClient } from "@supabase/ssr"
+import { getIdentity } from "../cursor/identity"
 import { getSupabaseEnv, isSupabaseConfigured } from "@/lib/supabase/config"
 
 const PUBLIC_PATHS = ["/login"]
@@ -40,10 +41,13 @@ export async function proxy(request: NextRequest) {
     const { data } = await supabase.auth.getUser()
     isAuthenticated = Boolean(data.user)
   } else {
-    isAuthenticated = Boolean(request.cookies.get("platter_hub_session")?.value)
+    const identity = await getIdentity(request)
+    isAuthenticated = identity.verified && identity.kind === "person"
   }
 
-  const isPublic = PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))
+  const isPublic = PUBLIC_PATHS.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  )
 
   if (!isAuthenticated && !isPublic && pathname !== "/") {
     const url = request.nextUrl.clone()

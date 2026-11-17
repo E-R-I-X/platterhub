@@ -1,19 +1,21 @@
 import "server-only"
-import { cookies } from "next/headers"
+import { headers } from "next/headers"
+import { connection } from "next/server"
 import { redirect } from "next/navigation"
+import { getIdentity } from "../../cursor/identity"
 import { isSupabaseConfigured } from "@/lib/supabase/config"
 import { createClient } from "@/lib/supabase/server"
-
-const DEMO_COOKIE = "platter_hub_session"
 
 export type AuthUser = {
   id: string
   email: string
   name: string
-  mode: "supabase" | "demo"
+  mode: "supabase" | "cursor"
 }
 
 export async function getSessionUser(): Promise<AuthUser | null> {
+  await connection()
+
   if (isSupabaseConfigured()) {
     try {
       const supabase = await createClient()
@@ -32,20 +34,15 @@ export async function getSessionUser(): Promise<AuthUser | null> {
     }
   }
 
-  const cookieStore = await cookies()
-  const session = cookieStore.get(DEMO_COOKIE)?.value
-  if (!session) return null
+  const identity = await getIdentity(await headers())
+  if (!identity.verified) return null
+  if (identity.kind === "key") return null
 
-  try {
-    const parsed = JSON.parse(session) as { email: string; name: string }
-    return {
-      id: "demo-owner",
-      email: parsed.email,
-      name: parsed.name,
-      mode: "demo",
-    }
-  } catch {
-    return null
+  return {
+    id: identity.sub,
+    email: identity.email || "owner@local.dev",
+    name: identity.name || "Owner",
+    mode: "cursor",
   }
 }
 
@@ -53,11 +50,4 @@ export async function requireUser(): Promise<AuthUser> {
   const user = await getSessionUser()
   if (!user) redirect("/login")
   return user
-}
-
-export function getDemoCredentials() {
-  return {
-    email: process.env.DEMO_EMAIL || "owner@platterhub.ng",
-    password: process.env.DEMO_PASSWORD || "platterhub",
-  }
 }

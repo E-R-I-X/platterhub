@@ -71,7 +71,7 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 autoComplete="email"
-                placeholder="owner@platterhub.ng"
+                placeholder="you@example.com"
                 required
               />
             </div>
@@ -98,9 +98,9 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <p className="mt-6 rounded-lg border border-olive-muted bg-olive-soft/60 px-3 py-2 text-xs text-olive-dark">
-            Demo mode: use <strong>owner@platterhub.ng</strong> / <strong>platterhub</strong> when
-            Supabase is not configured.
+          <p className="mt-6 text-xs text-muted-foreground">
+            Private and team publishes use your Cursor account. Email login is available when
+            Supabase Auth is configured.
           </p>
         </div>
       </div>

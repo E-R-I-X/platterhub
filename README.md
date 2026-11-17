@@ -23,29 +23,24 @@ npm run dev
 
 Open [http://localhost:3847](http://localhost:3847).
 
-### Demo mode (no Supabase)
+### Auth
 
-If Supabase env vars are not set, the app uses an in-memory demo store and cookie login:
+- **Published private/team app:** Cursor sign-in (no password form). Viewer identity comes from `cursor/identity.ts`.
+- **Local development:** a simulated Cursor viewer (`cursor/identity.dev.ts`) so pages work without secrets.
+- **Optional Supabase Auth:** set Supabase env vars to enable email/password login.
 
-- Email: `owner@platterhub.ng`
-- Password: `platterhub`
+### Sample data
 
-### Supabase setup
+Without Supabase, orders/menu/customers come from an in-memory sample store (`src/lib/data/`).
+
+### Supabase setup (optional)
 
 1. Create a Supabase project
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor
 3. Create an Auth user (email/password) for the owner
-4. Set in `.env.local`:
+4. Copy `.env.example` to `.env.local` and fill in the Supabase values
 
-```
-NEXT_PUBLIC_SUPABASE_URL=...
-NEXT_PUBLIC_SUPABASE_ANON_KEY=...
-SUPABASE_URL=...
-SUPABASE_ANON_KEY=...
-SUPABASE_SERVICE_ROLE_KEY=...
-```
-
-> Note: the current app data layer uses the local demo store so the UI works without credentials. Wire Supabase queries into `src/lib/data/store.ts` (or a parallel repository) once your project is ready.
+> Wire Supabase queries into `src/lib/data/store.ts` when you are ready to persist beyond sample data.
 
 ## Scripts
 
