@@ -2,11 +2,22 @@ import "server-only"
 import { randomUUID } from "crypto"
 import { connection } from "next/server"
 import {
+  dbCreateOrder,
+  dbGetOrderById,
+  dbListCategories,
+  dbListCustomers,
+  dbListMenuItems,
+  dbListOrders,
+  dbUpdateOrder,
+} from "@/lib/data/db"
+import { ensureSupabaseSeeded } from "@/lib/data/ensure-seed"
+import {
   seedCategories,
   seedCustomers,
   seedMenuItems,
   seedOrders,
 } from "@/lib/data/seed"
+import { canUseSupabaseData } from "@/lib/supabase/admin"
 import type {
   Customer,
   MenuCategory,
@@ -19,6 +30,17 @@ import type {
 
 async function ready() {
   await connection()
+}
+
+async function useSupabase(): Promise<boolean> {
+  if (!canUseSupabaseData()) return false
+  try {
+    await ensureSupabaseSeeded()
+    return true
+  } catch (error) {
+    console.error("[platter-hub] Supabase data unavailable, using in-memory seed:", error)
+    return false
+  }
 }
 
 type StoreShape = {
@@ -39,7 +61,7 @@ function createStore(): StoreShape {
     menuItems: structuredClone(seedMenuItems),
     customers: structuredClone(seedCustomers),
     orders: structuredClone(seedOrders),
-    nextOrderSeq: 1070,
+    nextOrderSeq: 2051,
   }
 }
 
@@ -60,11 +82,13 @@ function withCustomer(order: Order): Order {
 
 export async function listCategories(): Promise<MenuCategory[]> {
   await ready()
+  if (await useSupabase()) return dbListCategories()
   return getStore().categories.slice().sort((a, b) => a.sort_order - b.sort_order)
 }
 
 export async function listMenuItems(): Promise<MenuItem[]> {
   await ready()
+  if (await useSupabase()) return dbListMenuItems()
   return getStore()
     .menuItems.slice()
     .filter((item) => item.is_active)
@@ -73,23 +97,24 @@ export async function listMenuItems(): Promise<MenuItem[]> {
 
 export async function listCustomers(): Promise<Customer[]> {
   await ready()
-  const store = getStore()
-  return store.customers
-    .slice()
+  if (await useSupabase()) return dbListCustomers()
+  return getStore()
+    .customers.slice()
     .sort((a, b) => a.name.localeCompare(b.name))
 }
 
 export async function getCustomerStats() {
   await ready()
-  const store = getStore()
-  return store.customers.map((customer) => {
-    const orders = store.orders.filter((o) => o.customer_id === customer.id)
-    const lastOrder = orders
+  const customers = await listCustomers()
+  const orders = await listOrders()
+  return customers.map((customer) => {
+    const customerOrders = orders.filter((o) => o.customer_id === customer.id)
+    const lastOrder = customerOrders
       .slice()
       .sort((a, b) => b.event_date.localeCompare(a.event_date))[0]
     return {
       ...customer,
-      order_count: orders.length,
+      order_count: customerOrders.length,
       last_order_date: lastOrder?.event_date ?? null,
     }
   })
@@ -97,8 +122,9 @@ export async function getCustomerStats() {
 
 export async function listOrders(filters: OrderFilters = {}): Promise<Order[]> {
   await ready()
-  const store = getStore()
-  let orders = store.orders.map(withCustomer)
+  if (await useSupabase()) return dbListOrders(filters)
+
+  let orders = getStore().orders.map(withCustomer)
 
   if (filters.type && filters.type !== "all") {
     orders = orders.filter((o) => o.order_type === filters.type)
@@ -151,6 +177,7 @@ export async function listOrders(filters: OrderFilters = {}): Promise<Order[]> {
 
 export async function getOrderById(id: string): Promise<Order | null> {
   await ready()
+  if (await useSupabase()) return dbGetOrderById(id)
   const order = getStore().orders.find((o) => o.id === id || o.order_number === id)
   return order ? withCustomer(order) : null
 }
@@ -295,6 +322,8 @@ function upsertCustomerFromOrder(input: OrderInput): string {
 
 export async function createOrder(input: OrderInput): Promise<Order> {
   await ready()
+  if (await useSupabase()) return dbCreateOrder(input)
+
   const store = getStore()
   const now = new Date().toISOString()
   const id = randomUUID()
@@ -321,6 +350,8 @@ export async function createOrder(input: OrderInput): Promise<Order> {
 
 export async function updateOrder(id: string, input: OrderInput): Promise<Order | null> {
   await ready()
+  if (await useSupabase()) return dbUpdateOrder(id, input)
+
   const store = getStore()
   const index = store.orders.findIndex((o) => o.id === id)
   if (index < 0) return null

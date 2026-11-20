@@ -1,5 +1,5 @@
 -- The Platter Hub — Order Management Schema
--- Run in Supabase SQL editor. Currency amounts are stored in Naira (integer kobo optional; we use numeric Naira).
+-- Run in Supabase SQL editor. Currency amounts are stored in CAD.
 
 create extension if not exists "pgcrypto";
 
