@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { DM_Sans, Fraunces, Geist_Mono } from "next/font/google"
+import { ThemeProvider } from "@/components/providers/theme-provider"
 import "./globals.css"
 
 const dmSans = DM_Sans({
@@ -28,8 +29,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${dmSans.variable} ${fraunces.variable} ${geistMono.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   )
 }

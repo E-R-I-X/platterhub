@@ -10,7 +10,6 @@ import {
   Wallet,
   Users,
   Settings,
-  HelpCircle,
   LogOut,
   X,
   ChefHat,
@@ -25,6 +24,7 @@ const navItems = [
   { href: "/menu", label: "Menu", icon: UtensilsCrossed },
   { href: "/finance", label: "Finance", icon: Wallet },
   { href: "/customers", label: "Customers", icon: Users },
+  { href: "/settings", label: "Settings", icon: Settings },
 ]
 
 export function Sidebar({
@@ -106,21 +106,6 @@ export function Sidebar({
         </nav>
 
         <div className="mt-auto space-y-3 border-t border-sidebar-border p-4">
-          <Link
-            href="#"
-            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-          >
-            <HelpCircle className="size-4" />
-            Help & Support
-          </Link>
-          <Link
-            href="#"
-            className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-          >
-            <Settings className="size-4" />
-            Settings
-          </Link>
-
           <div className="flex items-center gap-3 rounded-xl border border-border bg-olive-soft/40 px-3 py-3">
             <div className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
               {userName

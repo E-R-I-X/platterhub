@@ -1,9 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Bell, Menu, Search } from "lucide-react"
+import { Menu, Search } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/layout/sidebar"
+import { NotificationsButton } from "@/components/layout/notifications-panel"
+import { ProfileMenu } from "@/components/layout/profile-menu"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -15,13 +18,15 @@ export function AppShell({
   userName: string
 }) {
   const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState("")
+  const router = useRouter()
 
   return (
     <div className="flex min-h-screen bg-canvas">
       <Sidebar open={open} onClose={() => setOpen(false)} userName={userName} />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-border bg-white/90 px-4 py-3 backdrop-blur md:px-6">
+        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-border bg-card/90 px-4 py-3 backdrop-blur md:px-6">
           <button
             type="button"
             className="rounded-lg p-2 text-muted-foreground hover:bg-muted lg:hidden"
@@ -31,13 +36,22 @@ export function AppShell({
             <Menu className="size-5" />
           </button>
 
-          <div className="relative hidden min-w-0 flex-1 md:block">
+          <form
+            className="relative hidden min-w-0 flex-1 md:block"
+            onSubmit={(e) => {
+              e.preventDefault()
+              const q = query.trim()
+              router.push(q ? `/orders?q=${encodeURIComponent(q)}` : "/orders")
+            }}
+          >
             <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search orders, customers, menu..."
               className="h-10 max-w-xl pl-9"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
-          </div>
+          </form>
 
           <div className="ml-auto flex items-center gap-2">
             <Button
@@ -46,21 +60,8 @@ export function AppShell({
             >
               + New Order
             </Button>
-            <button
-              type="button"
-              className="rounded-lg p-2 text-muted-foreground hover:bg-muted"
-              aria-label="Notifications"
-            >
-              <Bell className="size-5" />
-            </button>
-            <div className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
-              {userName
-                .split(" ")
-                .map((p) => p[0])
-                .slice(0, 2)
-                .join("")
-                .toUpperCase() || "AD"}
-            </div>
+            <NotificationsButton />
+            <ProfileMenu userName={userName} />
           </div>
         </header>
 

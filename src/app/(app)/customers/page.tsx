@@ -5,7 +5,7 @@ import { Pagination } from "@/components/shared/pagination"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { getCustomerStats } from "@/lib/data/store"
-import { customerInitials, formatDate } from "@/lib/format"
+import { customerInitials, formatDate, pluralize } from "@/lib/format"
 
 export const instant = false
 
@@ -120,7 +120,7 @@ export default async function CustomersPage({
                 <p className="text-xs text-muted-foreground">{customer.phone}</p>
               </div>
               <div className="text-right text-xs text-muted-foreground">
-                <p>{customer.order_count} orders</p>
+                <p>{pluralize(customer.order_count, "order")}</p>
                 <p>
                   {customer.last_order_date
                     ? formatDate(customer.last_order_date)

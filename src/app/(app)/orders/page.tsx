@@ -6,8 +6,13 @@ import { OrdersFilters } from "@/components/orders/orders-filters"
 import { Pagination } from "@/components/shared/pagination"
 import { OrderTypeBadge, PaymentBadge } from "@/components/shared/status-badge"
 import { listOrders } from "@/lib/data/store"
-import { formatDate, formatNaira } from "@/lib/format"
-import type { OrderType, PaymentStatus } from "@/lib/types"
+import { formatDate, formatMoney } from "@/lib/format"
+import type {
+  OrderStatus,
+  OrderType,
+  PaymentStatus,
+  ScheduleFilter,
+} from "@/lib/types"
 
 export const instant = false
 
@@ -20,25 +25,47 @@ export default async function OrdersPage({
 }) {
   const params = await searchParams
   const q = typeof params.q === "string" ? params.q : undefined
+  const customer = typeof params.customer === "string" ? params.customer : undefined
+  const address = typeof params.address === "string" ? params.address : undefined
   const type = (typeof params.type === "string" ? params.type : "all") as
     | OrderType
     | "all"
   const payment = (typeof params.payment === "string" ? params.payment : "all") as
     | PaymentStatus
     | "all"
+  const status = (typeof params.status === "string" ? params.status : "all") as
+    | OrderStatus
+    | "all"
+  const schedule = (typeof params.schedule === "string"
+    ? params.schedule
+    : "all") as ScheduleFilter
   const from = typeof params.from === "string" ? params.from : undefined
   const to = typeof params.to === "string" ? params.to : undefined
   const page = Math.max(1, Number(params.page || 1) || 1)
 
-  const orders = await listOrders({ q, type, payment, from, to })
+  const orders = await listOrders({
+    q,
+    customer,
+    address,
+    type,
+    payment,
+    status,
+    schedule,
+    from,
+    to,
+  })
   const pageCount = Math.max(1, Math.ceil(orders.length / PAGE_SIZE))
   const currentPage = Math.min(page, pageCount)
   const pageItems = orders.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
 
   const query = {
     q,
+    customer,
+    address,
     type: type === "all" ? undefined : type,
     payment: payment === "all" ? undefined : payment,
+    status: status === "all" ? undefined : status,
+    schedule: schedule === "all" ? undefined : schedule,
     from,
     to,
   }
@@ -88,7 +115,7 @@ export default async function OrdersPage({
                   <td className="px-5 py-4">
                     <OrderTypeBadge type={order.order_type} />
                   </td>
-                  <td className="px-5 py-4 font-medium">{formatNaira(order.total_price)}</td>
+                  <td className="px-5 py-4 font-medium">{formatMoney(order.total_price)}</td>
                   <td className="px-5 py-4">
                     <PaymentBadge status={order.payment_status} />
                   </td>
@@ -129,7 +156,7 @@ export default async function OrdersPage({
                     {formatDate(order.event_date)} · {order.order_number}
                   </p>
                 </div>
-                <p className="font-semibold text-olive">{formatNaira(order.total_price)}</p>
+                <p className="font-semibold text-olive">{formatMoney(order.total_price)}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <OrderTypeBadge type={order.order_type} />

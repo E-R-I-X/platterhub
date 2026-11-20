@@ -1,12 +1,16 @@
 import Link from "next/link"
-import { BarChart3, Clock3, Info, Search, Wallet } from "lucide-react"
+import { Suspense } from "react"
+import { Clock3, Receipt, Wallet } from "lucide-react"
 import { PageHeader } from "@/components/layout/page-header"
+import { FinanceFilters } from "@/components/finance/finance-filters"
+import {
+  FinanceInfoButton,
+  FinanceReportButton,
+} from "@/components/finance/finance-info"
 import { Pagination } from "@/components/shared/pagination"
 import { PaymentBadge, OrderTypeBadge } from "@/components/shared/status-badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { getFinanceSummary } from "@/lib/data/store"
-import { balanceDue, formatDate, formatNaira } from "@/lib/format"
+import { balanceDue, formatDate, formatMoney } from "@/lib/format"
 
 export const instant = false
 
@@ -17,8 +21,10 @@ export default async function FinancePage({
 }) {
   const params = await searchParams
   const q = typeof params.q === "string" ? params.q.toLowerCase() : ""
+  const from = typeof params.from === "string" ? params.from : undefined
+  const to = typeof params.to === "string" ? params.to : undefined
   const page = Math.max(1, Number(params.page || 1) || 1)
-  const summary = await getFinanceSummary()
+  const summary = await getFinanceSummary(from, to)
 
   let balances = summary.withBalances
   if (q) {
@@ -48,48 +54,68 @@ export default async function FinancePage({
       <PageHeader
         title="Finance / Revenue"
         description="Overview of revenue, balances and order payments."
+        actions={
+          <Suspense fallback={<div className="h-10 w-28 animate-pulse rounded-lg bg-muted" />}>
+            <FinanceFilters />
+          </Suspense>
+        }
       />
 
-      <div className="mb-6 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-border bg-white p-5">
+      <div className="mb-6 grid gap-4 lg:grid-cols-3">
+        <div className="rounded-xl border border-border bg-card p-5">
           <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
             <Wallet className="size-5" />
           </div>
           <p className="text-sm text-muted-foreground">Total Revenue</p>
           <p className="mt-1 text-3xl font-bold text-olive">
-            {formatNaira(summary.totalRevenue)}
+            {formatMoney(summary.totalRevenue)}
           </p>
           <p className="mt-3 text-xs text-muted-foreground">
-            Total revenue from all paid and partially paid orders.
+            Sum of amount paid in the selected date range.
           </p>
         </div>
         <Link
           href="/orders?payment=partial"
-          className="rounded-xl border border-border bg-white p-5 transition-colors hover:bg-canvas/50"
+          className="rounded-xl border border-border bg-card p-5 transition-colors hover:bg-muted/40"
         >
           <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
             <Clock3 className="size-5" />
           </div>
           <p className="text-sm text-muted-foreground">Outstanding Balance</p>
           <p className="mt-1 text-3xl font-bold text-olive">
-            {formatNaira(summary.outstandingBalance)}
+            {formatMoney(summary.outstandingBalance)}
           </p>
           <p className="mt-3 text-xs text-muted-foreground">
-            Total balance due across all orders.
+            Total of total price minus amount paid.
           </p>
         </Link>
+        <div className="rounded-xl border border-border bg-card p-5">
+          <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
+            <Receipt className="size-5" />
+          </div>
+          <p className="text-sm text-muted-foreground">Orders with balance due</p>
+          <p className="mt-1 text-3xl font-bold text-olive">
+            {summary.withBalances.length}
+          </p>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Orders where outstanding is greater than zero.
+          </p>
+        </div>
       </div>
 
-      <section className="mb-6 rounded-xl border border-border bg-white p-5">
+      <section className="mb-6 rounded-xl border border-border bg-card p-5">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 font-semibold">
             Revenue Breakdown by Order Type
-            <Info className="size-4 text-muted-foreground" />
+            <FinanceInfoButton />
           </h2>
-          <Button variant="outline" size="sm">
-            <BarChart3 className="size-4" />
-            View Full Report
-          </Button>
+          <FinanceReportButton
+            totalRevenue={summary.totalRevenue}
+            outstanding={summary.outstandingBalance}
+            delivery={summary.byType.food_delivery}
+            catering={summary.byType.event_catering}
+            dueCount={summary.withBalances.length}
+          />
         </div>
 
         <div className="space-y-4">
@@ -97,7 +123,7 @@ export default async function FinancePage({
             <div className="mb-1 flex items-center justify-between text-sm">
               <span className="font-medium">Event Catering</span>
               <span>
-                {formatNaira(summary.byType.event_catering)} ({eventShare.toFixed(1)}%)
+                {formatMoney(summary.byType.event_catering)} ({eventShare.toFixed(1)}%)
               </span>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-muted">
@@ -108,7 +134,7 @@ export default async function FinancePage({
             <div className="mb-1 flex items-center justify-between text-sm">
               <span className="font-medium">Food Delivery</span>
               <span>
-                {formatNaira(summary.byType.food_delivery)} ({deliveryShare.toFixed(1)}%)
+                {formatMoney(summary.byType.food_delivery)} ({deliveryShare.toFixed(1)}%)
               </span>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-muted">
@@ -118,58 +144,46 @@ export default async function FinancePage({
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-xl border border-border bg-white">
-        <div className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <section className="overflow-hidden rounded-xl border border-border bg-card">
+        <div className="border-b border-border px-5 py-4">
           <h2 className="font-semibold">Orders with Balances Due</h2>
-          <div className="relative w-full sm:max-w-xs">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-            <form>
-              <Input
-                name="q"
-                defaultValue={q}
-                placeholder="Search orders..."
-                className="pl-9"
-              />
-            </form>
-          </div>
         </div>
 
         <div className="hidden md:block">
           <table className="w-full text-sm">
             <thead className="bg-canvas/80 text-left text-xs tracking-wide text-muted-foreground uppercase">
               <tr>
-                <th className="px-5 py-3 font-medium">Order #</th>
-                <th className="px-5 py-3 font-medium">Date</th>
-                <th className="px-5 py-3 font-medium">Client</th>
-                <th className="px-5 py-3 font-medium">Order Type</th>
+                <th className="px-5 py-3 font-medium">Order date</th>
+                <th className="px-5 py-3 font-medium">Customer</th>
+                <th className="px-5 py-3 font-medium">Order type</th>
                 <th className="px-5 py-3 font-medium">Total</th>
-                <th className="px-5 py-3 font-medium">Paid</th>
-                <th className="px-5 py-3 font-medium">Balance Due</th>
-                <th className="px-5 py-3 font-medium">Status</th>
+                <th className="px-5 py-3 font-medium">Amount paid</th>
+                <th className="px-5 py-3 font-medium">Balance due</th>
+                <th className="px-5 py-3 font-medium">Payment status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {pageItems.map((order) => {
                 const due = balanceDue(order.total_price, order.amount_paid)
                 return (
-                  <tr key={order.id} className="hover:bg-canvas/60">
+                  <tr key={order.id} className="hover:bg-muted/40">
                     <td className="px-5 py-4">
                       <Link
                         href={`/orders/${order.id}`}
                         className="font-medium text-olive underline-offset-2 hover:underline"
                       >
-                        {order.order_number}
+                        {formatDate(order.event_date)}
                       </Link>
+                      <p className="text-xs text-muted-foreground">{order.order_number}</p>
                     </td>
-                    <td className="px-5 py-4">{formatDate(order.event_date)}</td>
                     <td className="px-5 py-4">{order.customer_name}</td>
                     <td className="px-5 py-4">
                       <OrderTypeBadge type={order.order_type} />
                     </td>
-                    <td className="px-5 py-4">{formatNaira(order.total_price)}</td>
-                    <td className="px-5 py-4">{formatNaira(order.amount_paid)}</td>
+                    <td className="px-5 py-4">{formatMoney(order.total_price)}</td>
+                    <td className="px-5 py-4">{formatMoney(order.amount_paid)}</td>
                     <td className="px-5 py-4 font-semibold text-olive">
-                      {formatNaira(due)}
+                      {formatMoney(due)}
                     </td>
                     <td className="px-5 py-4">
                       <PaymentBadge status={order.payment_status} />
@@ -179,7 +193,7 @@ export default async function FinancePage({
               })}
               {pageItems.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-5 py-10 text-center text-muted-foreground">
+                  <td colSpan={7} className="px-5 py-10 text-center text-muted-foreground">
                     No outstanding balances.
                   </td>
                 </tr>
@@ -199,10 +213,12 @@ export default async function FinancePage({
               >
                 <div className="flex justify-between gap-3">
                   <div>
-                    <p className="font-semibold text-olive">{order.order_number}</p>
-                    <p className="text-sm">{order.customer_name}</p>
+                    <p className="font-semibold">{order.customer_name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatDate(order.event_date)} · {order.order_number}
+                    </p>
                   </div>
-                  <p className="font-semibold">{formatNaira(due)}</p>
+                  <p className="font-semibold text-olive">{formatMoney(due)}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <OrderTypeBadge type={order.order_type} />
@@ -219,7 +235,7 @@ export default async function FinancePage({
           total={balances.length}
           pageSize={pageSize}
           basePath="/finance"
-          query={{ q: q || undefined }}
+          query={{ q: q || undefined, from, to }}
         />
       </section>
     </div>

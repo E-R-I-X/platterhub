@@ -2,7 +2,7 @@
 
 Internal order management web app for a catering business. Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, and **Supabase** (database + auth).
 
-Primary accent: olive green `#556B2F`. Currency: **Naira (₦)**.
+Primary accent: olive green `#556B2F`. Currency: **Canadian dollars (CAD)**.
 
 ## Features
 

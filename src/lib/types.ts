@@ -76,10 +76,16 @@ export interface Order {
   line_items?: OrderLineItem[]
 }
 
+export type ScheduleFilter = "all" | "upcoming" | "completed"
+
 export interface OrderFilters {
   q?: string
+  customer?: string
+  address?: string
   type?: OrderType | "all"
   payment?: PaymentStatus | "all"
+  status?: OrderStatus | "all"
+  schedule?: ScheduleFilter
   from?: string
   to?: string
 }

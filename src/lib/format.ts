@@ -1,12 +1,13 @@
 import { format, parseISO, isValid } from "date-fns"
 import type { OrderType, PaymentStatus, OrderStatus, MenuVariant } from "@/lib/types"
 
-export function formatNaira(amount: number): string {
-  const formatted = new Intl.NumberFormat("en-NG", {
+export function formatMoney(amount: number): string {
+  return new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(amount || 0)
-  return `₦${formatted}`
 }
 
 export function formatDate(value: string | Date, pattern = "MMM d, yyyy"): string {
@@ -63,4 +64,8 @@ export function customerInitials(name: string): string {
 
 export function balanceDue(total: number, paid: number): number {
   return Math.max(0, (total || 0) - (paid || 0))
+}
+
+export function pluralize(count: number, singular: string, plural = `${singular}s`): string {
+  return `${count} ${count === 1 ? singular : plural}`
 }

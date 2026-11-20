@@ -106,11 +106,31 @@ export async function listOrders(filters: OrderFilters = {}): Promise<Order[]> {
   if (filters.payment && filters.payment !== "all") {
     orders = orders.filter((o) => o.payment_status === filters.payment)
   }
+  if (filters.status && filters.status !== "all") {
+    orders = orders.filter((o) => o.status === filters.status)
+  }
+  if (filters.schedule === "upcoming") {
+    const today = new Date().toISOString().slice(0, 10)
+    orders = orders.filter(
+      (o) => o.event_date >= today && o.status !== "cancelled" && o.status !== "completed"
+    )
+  }
+  if (filters.schedule === "completed") {
+    orders = orders.filter((o) => o.status === "completed")
+  }
   if (filters.from) {
     orders = orders.filter((o) => o.event_date >= filters.from!)
   }
   if (filters.to) {
     orders = orders.filter((o) => o.event_date <= filters.to!)
+  }
+  if (filters.customer) {
+    const c = filters.customer.toLowerCase()
+    orders = orders.filter((o) => o.customer_name.toLowerCase().includes(c))
+  }
+  if (filters.address) {
+    const a = filters.address.toLowerCase()
+    orders = orders.filter((o) => o.address.toLowerCase().includes(a))
   }
   if (filters.q) {
     const q = filters.q.toLowerCase()
@@ -119,7 +139,10 @@ export async function listOrders(filters: OrderFilters = {}): Promise<Order[]> {
         o.customer_name.toLowerCase().includes(q) ||
         o.order_number.toLowerCase().includes(q) ||
         o.phone.toLowerCase().includes(q) ||
-        (o.notes ?? "").toLowerCase().includes(q)
+        o.address.toLowerCase().includes(q) ||
+        (o.notes ?? "").toLowerCase().includes(q) ||
+        (o.theme ?? "").toLowerCase().includes(q) ||
+        (o.recipient ?? "").toLowerCase().includes(q)
     )
   }
 

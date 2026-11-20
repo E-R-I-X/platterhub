@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { formatNaira, isPreferredDeliveryDay } from "@/lib/format"
+import { formatMoney, isPreferredDeliveryDay } from "@/lib/format"
 import type { MenuItem, MenuVariant, Order, OrderType, PaymentStatus } from "@/lib/types"
 
 type DraftItem = {
@@ -276,7 +276,7 @@ export function OrderForm({
               />
             </div>
             <div>
-              <Label htmlFor="delivery_fee">Delivery fee (₦)</Label>
+              <Label htmlFor="delivery_fee">Delivery fee (CAD)</Label>
               <Input
                 id="delivery_fee"
                 name="delivery_fee"
@@ -325,7 +325,7 @@ export function OrderForm({
               />
             </div>
             <div>
-              <Label htmlFor="styling_fee">Styling & set-up fee (₦)</Label>
+              <Label htmlFor="styling_fee">Styling & set-up fee (CAD)</Label>
               <Input
                 id="styling_fee"
                 name="styling_fee"
@@ -482,7 +482,7 @@ export function OrderForm({
                   <div>
                     <Label>Total</Label>
                     <p className="flex h-10 items-center text-sm font-medium">
-                      {formatNaira(item.quantity * item.unit_price)}
+                      {formatMoney(item.quantity * item.unit_price)}
                     </p>
                   </div>
                   <div className="flex items-end">
@@ -504,22 +504,22 @@ export function OrderForm({
         <div className="mt-5 ml-auto w-full max-w-xs space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-muted-foreground">Product fee</span>
-            <span>{formatNaira(productFee)}</span>
+            <span>{formatMoney(productFee)}</span>
           </div>
           {orderType === "food_delivery" ? (
             <div className="flex justify-between">
               <span className="text-muted-foreground">Delivery fee</span>
-              <span>{formatNaira(deliveryFee)}</span>
+              <span>{formatMoney(deliveryFee)}</span>
             </div>
           ) : (
             <div className="flex justify-between">
               <span className="text-muted-foreground">Styling fee</span>
-              <span>{formatNaira(stylingFee)}</span>
+              <span>{formatMoney(stylingFee)}</span>
             </div>
           )}
           <div className="flex justify-between text-base font-semibold">
             <span>Total</span>
-            <span className="text-olive">{formatNaira(total)}</span>
+            <span className="text-olive">{formatMoney(total)}</span>
           </div>
         </div>
       </div>
@@ -543,7 +543,7 @@ export function OrderForm({
             </Select>
           </div>
           <div>
-            <Label htmlFor="amount_paid">Amount paid (₦)</Label>
+            <Label htmlFor="amount_paid">Amount paid (CAD)</Label>
             <Input
               id="amount_paid"
               name="amount_paid"

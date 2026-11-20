@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/layout/page-header"
 import { StatCard } from "@/components/dashboard/stat-card"
 import { OrderTypeBadge, PaymentBadge } from "@/components/shared/status-badge"
 import { getDashboardStats } from "@/lib/data/store"
-import { formatDate, formatNaira } from "@/lib/format"
+import { formatDate, formatMoney } from "@/lib/format"
 
 export const instant = false
 
@@ -28,13 +28,13 @@ export default async function DashboardPage() {
         <StatCard
           icon={<Wallet className="size-5" />}
           label="Outstanding Balance"
-          value={formatNaira(stats.outstandingBalance)}
+          value={formatMoney(stats.outstandingBalance)}
           trend={{ label: "Balances due across open orders", positive: false }}
         />
         <StatCard
           icon={<TrendingUp className="size-5" />}
           label="Revenue This Month"
-          value={formatNaira(stats.revenueThisMonth)}
+          value={formatMoney(stats.revenueThisMonth)}
           trend={{ label: "From paid & partial payments", positive: true }}
         />
       </div>
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
                   <td className="px-5 py-4">
                     <OrderTypeBadge type={order.order_type} />
                   </td>
-                  <td className="px-5 py-4 font-medium">{formatNaira(order.total_price)}</td>
+                  <td className="px-5 py-4 font-medium">{formatMoney(order.total_price)}</td>
                   <td className="px-5 py-4">
                     <PaymentBadge status={order.payment_status} />
                   </td>
@@ -109,7 +109,7 @@ export default async function DashboardPage() {
                     {formatDate(order.event_date)} · {order.notes || order.theme || "Order"}
                   </p>
                 </div>
-                <p className="font-semibold text-olive">{formatNaira(order.total_price)}</p>
+                <p className="font-semibold text-olive">{formatMoney(order.total_price)}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <OrderTypeBadge type={order.order_type} />

@@ -20,7 +20,7 @@ import { getOrderById } from "@/lib/data/store"
 import {
   balanceDue,
   formatDateLong,
-  formatNaira,
+  formatMoney,
   formatOrderType,
   formatVariant,
 } from "@/lib/format"
@@ -139,7 +139,7 @@ export default async function OrderDetailPage({
                 Includes table linens, place settings, centerpieces, and serviceware.
               </p>
             </div>
-            <p className="font-semibold">{formatNaira(order.styling_fee)}</p>
+            <p className="font-semibold">{formatMoney(order.styling_fee)}</p>
           </div>
           <div className="mt-4 rounded-lg bg-olive-soft px-3 py-2 text-sm text-olive-dark">
             Eco-friendly disposables and linens included
@@ -205,9 +205,9 @@ export default async function OrderDetailPage({
                     </div>
                   </td>
                   <td className="py-3">{item.quantity}</td>
-                  <td className="py-3">{formatNaira(item.unit_price)}</td>
+                  <td className="py-3">{formatMoney(item.unit_price)}</td>
                   <td className="py-3 text-right font-medium">
-                    {formatNaira(item.total_price)}
+                    {formatMoney(item.total_price)}
                   </td>
                 </tr>
               ))}
@@ -225,7 +225,7 @@ export default async function OrderDetailPage({
                     {formatVariant(item.variant)} · Qty {item.quantity}
                   </p>
                 </div>
-                <p className="font-semibold">{formatNaira(item.total_price)}</p>
+                <p className="font-semibold">{formatMoney(item.total_price)}</p>
               </div>
             </div>
           ))}
@@ -235,23 +235,23 @@ export default async function OrderDetailPage({
           <div className="w-full max-w-xs space-y-2">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Product fee</span>
-              <span>{formatNaira(order.product_fee)}</span>
+              <span>{formatMoney(order.product_fee)}</span>
             </div>
             {order.delivery_fee > 0 ? (
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Delivery fee</span>
-                <span>{formatNaira(order.delivery_fee)}</span>
+                <span>{formatMoney(order.delivery_fee)}</span>
               </div>
             ) : null}
             {order.styling_fee > 0 ? (
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Styling fee</span>
-                <span>{formatNaira(order.styling_fee)}</span>
+                <span>{formatMoney(order.styling_fee)}</span>
               </div>
             ) : null}
             <div className="flex justify-between font-semibold">
               <span>Subtotal</span>
-              <span>{formatNaira(order.total_price)}</span>
+              <span>{formatMoney(order.total_price)}</span>
             </div>
           </div>
         </div>
@@ -279,7 +279,7 @@ export default async function OrderDetailPage({
             </div>
             <p className="text-sm text-olive-dark">Total Price</p>
             <p className="mt-1 text-3xl font-bold text-olive">
-              {formatNaira(order.total_price)}
+              {formatMoney(order.total_price)}
             </p>
             <p className="mt-2 text-xs text-olive-dark/80">
               {formatOrderType(order.order_type)} · {order.order_number}
@@ -287,7 +287,7 @@ export default async function OrderDetailPage({
           </div>
           <div className="flex flex-col justify-center p-6">
             <p className="text-sm text-muted-foreground">Balance Due</p>
-            <p className="mt-1 text-3xl font-bold text-foreground">{formatNaira(due)}</p>
+            <p className="mt-1 text-3xl font-bold text-foreground">{formatMoney(due)}</p>
             <div className="mt-3">
               <PaymentBadge status={order.payment_status} />
             </div>
