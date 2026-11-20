@@ -95,20 +95,23 @@ export function OrderForm({
     order?.order_type ?? "food_delivery"
   )
   const [eventDate, setEventDate] = useState(order?.event_date ?? "")
-  const [deliveryFee, setDeliveryFee] = useState(order?.delivery_fee ?? 0)
+  const [deliveryFee, setDeliveryFee] = useState(
+    order && order.delivery_fee > 0 ? String(order.delivery_fee) : ""
+  )
   const [stylingFee, setStylingFee] = useState(order?.styling_fee ?? 0)
   const [tableOrg, setTableOrg] = useState(order?.table_organisation ?? false)
   const [items, setItems] = useState<DraftItem[]>(
     (order?.line_items ?? []).map((item, index) => toDraft(item, index))
   )
 
+  const deliveryFeeAmount = Number(deliveryFee) || 0
   const productFee = useMemo(
     () => items.reduce((sum, item) => sum + item.quantity * item.unit_price, 0),
     [items]
   )
   const total =
     productFee +
-    (orderType === "food_delivery" ? deliveryFee : 0) +
+    (orderType === "food_delivery" ? deliveryFeeAmount : 0) +
     (orderType === "event_catering" ? stylingFee : 0)
 
   const showDateWarning = eventDate && !isPreferredDeliveryDay(eventDate)
@@ -326,13 +329,13 @@ export function OrderForm({
             {showDateWarning ? (
               <p className="mt-2 flex items-start gap-2 text-sm text-olive">
                 <Info className="mt-0.5 size-4 shrink-0" />
-                Please note: Deliveries on Thu–Sat may have longer wait times. This date
-                is not Thursday, Friday, or Saturday.
+                Please note: Availability is Thursday–Sunday. This date is outside that
+                window and may have longer wait times.
               </p>
             ) : eventDate ? (
               <p className="mt-2 flex items-start gap-2 text-sm text-olive">
                 <Info className="mt-0.5 size-4 shrink-0" />
-                Preferred delivery window: Thursday–Saturday.
+                Preferred availability window: Thursday–Sunday.
               </p>
             ) : null}
           </div>
@@ -390,8 +393,10 @@ export function OrderForm({
                 type="number"
                 min="0"
                 step="0.01"
+                inputMode="decimal"
+                placeholder="Enter delivery fee"
                 value={deliveryFee}
-                onChange={(e) => setDeliveryFee(Number(e.target.value) || 0)}
+                onChange={(e) => setDeliveryFee(e.target.value)}
               />
             </div>
           </div>
@@ -696,7 +701,7 @@ export function OrderForm({
           {orderType === "food_delivery" ? (
             <div className="flex justify-between">
               <span className="text-muted-foreground">Delivery fee</span>
-              <span>{formatMoney(deliveryFee)}</span>
+              <span>{formatMoney(deliveryFeeAmount)}</span>
             </div>
           ) : (
             <div className="flex justify-between">

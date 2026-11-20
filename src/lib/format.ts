@@ -50,7 +50,8 @@ export function isPreferredDeliveryDay(dateStr: string): boolean {
   const date = parseISO(dateStr)
   if (!isValid(date)) return true
   const day = date.getDay()
-  return day === 4 || day === 5 || day === 6
+  // Thursday (4) through Sunday (0)
+  return day === 4 || day === 5 || day === 6 || day === 0
 }
 
 export function customerInitials(name: string): string {
