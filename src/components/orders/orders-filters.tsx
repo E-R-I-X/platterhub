@@ -142,14 +142,15 @@ export function OrdersFilters() {
       </div>
 
       {open ? (
-        <div className="fixed inset-0 z-50 flex justify-end">
+        <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-stretch md:justify-end">
           <button
             type="button"
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
             aria-label="Close filters"
             onClick={() => setOpen(false)}
           />
-          <aside className="relative z-10 flex h-full w-full max-w-md flex-col bg-card shadow-xl md:my-4 md:mr-4 md:h-auto md:max-h-[calc(100vh-2rem)] md:rounded-2xl">
+          <aside className="relative z-10 flex max-h-[92dvh] w-full max-w-md flex-col rounded-t-3xl border border-border bg-card shadow-2xl md:my-4 md:mr-4 md:max-h-[calc(100dvh-2rem)] md:rounded-3xl">
+            <div className="mx-auto mt-3 h-1 w-10 shrink-0 rounded-full bg-border md:hidden" />
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
               <div>
                 <h2 className="text-lg font-semibold">Filters</h2>
@@ -159,7 +160,7 @@ export function OrdersFilters() {
               </div>
               <button
                 type="button"
-                className="rounded-lg p-2 hover:bg-muted"
+                className="rounded-xl p-2 hover:bg-muted"
                 onClick={() => setOpen(false)}
                 aria-label="Close"
               >
@@ -276,7 +277,7 @@ export function OrdersFilters() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-3 border-t border-border px-5 py-4">
+            <div className="flex items-center justify-between gap-3 border-t border-border px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
               <button
                 type="button"
                 className="text-sm font-medium text-muted-foreground hover:text-foreground hover:underline"

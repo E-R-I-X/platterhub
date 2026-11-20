@@ -62,8 +62,8 @@ export default async function FinancePage({
       />
 
       <div className="mb-6 grid gap-4 lg:grid-cols-3">
-        <div className="rounded-xl border border-border bg-card p-5">
-          <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
+        <div className="surface-card p-5 sm:p-6">
+          <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
             <Wallet className="size-5" />
           </div>
           <p className="text-sm text-muted-foreground">Total Revenue</p>
@@ -76,9 +76,9 @@ export default async function FinancePage({
         </div>
         <Link
           href="/orders?payment=partial"
-          className="rounded-xl border border-border bg-card p-5 transition-colors hover:bg-muted/40"
+          className="surface-card p-5 transition-colors hover:bg-muted/30 sm:p-6"
         >
-          <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
+          <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
             <Clock3 className="size-5" />
           </div>
           <p className="text-sm text-muted-foreground">Outstanding Balance</p>
@@ -89,8 +89,8 @@ export default async function FinancePage({
             Total of total price minus amount paid.
           </p>
         </Link>
-        <div className="rounded-xl border border-border bg-card p-5">
-          <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
+        <div className="surface-card p-5 sm:p-6">
+          <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
             <Receipt className="size-5" />
           </div>
           <p className="text-sm text-muted-foreground">Orders with balance due</p>
@@ -103,7 +103,7 @@ export default async function FinancePage({
         </div>
       </div>
 
-      <section className="mb-6 rounded-xl border border-border bg-card p-5">
+      <section className="surface-card mb-6 p-5 sm:p-6">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 font-semibold">
             Revenue Breakdown by Order Type
@@ -144,7 +144,7 @@ export default async function FinancePage({
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-xl border border-border bg-card">
+      <section className="surface-card overflow-hidden">
         <div className="border-b border-border px-5 py-4">
           <h2 className="font-semibold">Orders with Balances Due</h2>
         </div>

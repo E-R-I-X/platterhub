@@ -37,7 +37,7 @@ export default function SettingsPage() {
         </p>
       ) : null}
 
-      <section id="appearance" className="rounded-xl border border-border bg-card p-5">
+      <section id="appearance" className="surface-card p-5 sm:p-6">
         <h2 className="mb-1 flex items-center gap-2 font-semibold">
           <Sun className="size-4 text-olive" />
           Appearance
@@ -77,7 +77,7 @@ export default function SettingsPage() {
         </div>
       </section>
 
-      <section id="notifications" className="rounded-xl border border-border bg-card p-5">
+      <section id="notifications" className="surface-card p-5 sm:p-6">
         <h2 className="mb-1 flex items-center gap-2 font-semibold">
           <Bell className="size-4 text-olive" />
           Notifications
@@ -124,7 +124,7 @@ export default function SettingsPage() {
         </Button>
       </section>
 
-      <section id="profile" className="rounded-xl border border-border bg-card p-5">
+      <section id="profile" className="surface-card p-5 sm:p-6">
         <h2 className="mb-1 flex items-center gap-2 font-semibold">
           <User className="size-4 text-olive" />
           Profile
@@ -162,7 +162,7 @@ export default function SettingsPage() {
         </form>
       </section>
 
-      <section id="password" className="rounded-xl border border-border bg-card p-5">
+      <section id="password" className="surface-card p-5 sm:p-6">
         <h2 className="mb-1 flex items-center gap-2 font-semibold">
           <KeyRound className="size-4 text-olive" />
           Update password
@@ -195,7 +195,7 @@ export default function SettingsPage() {
         </form>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5">
+      <section className="surface-card p-5 sm:p-6">
         <h2 className="mb-4 font-semibold">Business preferences</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>

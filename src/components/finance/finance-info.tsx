@@ -90,17 +90,18 @@ function Modal({
   onClose: () => void
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[60] flex items-end justify-center p-0 sm:items-center sm:p-4">
       <button
         type="button"
-        className="absolute inset-0 bg-black/40"
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
         aria-label="Close"
         onClick={onClose}
       />
-      <div className="relative z-10 w-full max-w-md rounded-2xl border border-border bg-card p-5 shadow-xl">
+      <div className="relative z-10 max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-t-3xl border border-border bg-card p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl sm:rounded-3xl">
+        <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-border sm:hidden" />
         <div className="mb-4 flex items-start justify-between gap-3">
           <h3 className="text-lg font-semibold">{title}</h3>
-          <button type="button" className="rounded-lg p-1 hover:bg-muted" onClick={onClose}>
+          <button type="button" className="rounded-xl p-1 hover:bg-muted" onClick={onClose}>
             <X className="size-5" />
           </button>
         </div>

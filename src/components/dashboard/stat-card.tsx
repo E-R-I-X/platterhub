@@ -16,28 +16,25 @@ export function StatCard({
   className?: string
 }) {
   return (
-    <div
-      className={cn(
-        "rounded-xl border border-border bg-white p-5 shadow-[0_1px_2px_rgba(28,36,20,0.04)]",
-        className
-      )}
-    >
-      <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-olive-soft text-olive">
+    <div className={cn("surface-card p-5 sm:p-6", className)}>
+      <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
         {icon}
       </div>
       <p className="text-sm text-muted-foreground">{label}</p>
-      <p className="mt-1 text-2xl font-bold tracking-tight text-olive">{value}</p>
+      <p className="mt-1.5 text-2xl font-semibold tracking-tight text-olive sm:text-[1.7rem]">
+        {value}
+      </p>
       {trend ? (
         <p
           className={cn(
-            "mt-2 text-xs font-medium",
-            trend.positive ? "text-emerald-600" : "text-rose-600"
+            "mt-2.5 text-xs font-medium",
+            trend.positive ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
           )}
         >
           {trend.label}
         </p>
       ) : null}
-      {hint ? <p className="mt-2 text-xs text-muted-foreground">{hint}</p> : null}
+      {hint ? <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{hint}</p> : null}
     </div>
   )
 }

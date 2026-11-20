@@ -67,19 +67,20 @@ export function FinanceFilters() {
       </button>
 
       {open ? (
-        <div className="fixed inset-0 z-50 flex items-start justify-end p-0 md:items-center md:justify-center md:p-6">
+        <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-6">
           <button
             type="button"
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
             aria-label="Close"
             onClick={() => setOpen(false)}
           />
-          <div className="relative z-10 mt-auto w-full rounded-t-2xl border border-border bg-card p-5 shadow-xl md:mt-0 md:max-w-md md:rounded-2xl">
+          <div className="relative z-10 max-h-[90dvh] w-full overflow-y-auto rounded-t-3xl border border-border bg-card p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl md:max-w-md md:rounded-3xl">
+            <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-border md:hidden" />
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-lg font-semibold">Finance filters</h2>
               <button
                 type="button"
-                className="rounded-lg p-2 hover:bg-muted"
+                className="rounded-xl p-2 hover:bg-muted"
                 onClick={() => setOpen(false)}
               >
                 <X className="size-5" />
@@ -116,7 +117,7 @@ export function FinanceFilters() {
                 />
               </div>
             </div>
-            <div className="mt-5 flex items-center justify-between">
+            <div className="mt-5 flex items-center justify-between gap-3">
               <button
                 type="button"
                 className="text-sm font-medium text-muted-foreground hover:underline"

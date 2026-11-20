@@ -1,13 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
-import { ChevronDown, LogOut, Settings, User } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ChevronDown, LogOut, Settings, User, X } from "lucide-react"
 import { logoutAction } from "@/app/actions/auth"
 
 export function ProfileMenu({ userName }: { userName: string }) {
   const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
   const initials =
     userName
       .split(" ")
@@ -17,62 +16,109 @@ export function ProfileMenu({ userName }: { userName: string }) {
       .toUpperCase() || "AD"
 
   useEffect(() => {
-    function onClick(e: MouseEvent) {
-      if (!ref.current?.contains(e.target as Node)) setOpen(false)
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false)
     }
-    document.addEventListener("mousedown", onClick)
-    return () => document.removeEventListener("mousedown", onClick)
-  }, [])
+    window.addEventListener("keydown", onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener("keydown", onKey)
+    }
+  }, [open])
 
   return (
-    <div className="relative" ref={ref}>
+    <>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 rounded-full p-0.5 hover:bg-muted"
+        className="flex items-center gap-1.5 rounded-full p-0.5 transition-colors hover:bg-muted"
         aria-label="Account menu"
+        aria-expanded={open}
       >
-        <span className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+        <span className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white shadow-sm ring-2 ring-olive-soft">
           {initials}
         </span>
         <ChevronDown className="hidden size-4 text-muted-foreground sm:block" />
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-border bg-card shadow-lg">
-          <div className="border-b border-border px-4 py-3">
-            <p className="truncate text-sm font-semibold">{userName}</p>
-            <p className="text-xs text-muted-foreground">Catering Manager</p>
-          </div>
-          <div className="p-1">
-            <Link
-              href="/settings#profile"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted"
-            >
-              <User className="size-4" />
-              Profile
-            </Link>
-            <Link
-              href="/settings"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted"
-            >
-              <Settings className="size-4" />
-              Settings
-            </Link>
-            <form action={logoutAction}>
+        <div className="fixed inset-0 z-[60]">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
+            aria-label="Close account menu"
+            onClick={() => setOpen(false)}
+          />
+
+          {/* Mobile bottom sheet */}
+          <div className="absolute inset-x-0 bottom-0 overflow-hidden rounded-t-3xl border border-border bg-card shadow-2xl md:hidden">
+            <div className="mx-auto mt-3 h-1 w-10 rounded-full bg-border" />
+            <div className="flex items-start justify-between border-b border-border px-5 py-4">
+              <div className="flex items-center gap-3">
+                <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+                  {initials}
+                </span>
+                <div>
+                  <p className="font-semibold">{userName}</p>
+                  <p className="text-xs text-muted-foreground">Catering Manager</p>
+                </div>
+              </div>
               <button
-                type="submit"
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted"
+                type="button"
+                className="rounded-lg p-2 text-muted-foreground hover:bg-muted"
+                onClick={() => setOpen(false)}
               >
-                <LogOut className="size-4" />
-                Log out
+                <X className="size-4" />
               </button>
-            </form>
+            </div>
+            <MenuLinks onClose={() => setOpen(false)} />
+          </div>
+
+          {/* Desktop dropdown */}
+          <div className="absolute top-16 right-4 hidden w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:block lg:right-8">
+            <div className="border-b border-border px-4 py-3.5">
+              <p className="truncate text-sm font-semibold">{userName}</p>
+              <p className="text-xs text-muted-foreground">Catering Manager</p>
+            </div>
+            <MenuLinks onClose={() => setOpen(false)} />
           </div>
         </div>
       ) : null}
+    </>
+  )
+}
+
+function MenuLinks({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="space-y-1 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <Link
+        href="/settings#profile"
+        onClick={onClose}
+        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+      >
+        <User className="size-4 text-olive" />
+        Profile
+      </Link>
+      <Link
+        href="/settings"
+        onClick={onClose}
+        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+      >
+        <Settings className="size-4 text-olive" />
+        Settings
+      </Link>
+      <form action={logoutAction}>
+        <button
+          type="submit"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+        >
+          <LogOut className="size-4 text-olive" />
+          Log out
+        </button>
+      </form>
     </div>
   )
 }

@@ -44,7 +44,7 @@ export function Sidebar({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-black/30 transition-opacity lg:hidden",
+          "fixed inset-0 z-40 bg-black/35 backdrop-blur-[2px] transition-opacity lg:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         onClick={onClose}
@@ -53,17 +53,17 @@ export function Sidebar({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-sidebar-border bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-[min(100vw-3rem,18rem)] flex-col border-r border-sidebar-border bg-sidebar transition-transform duration-300 lg:static lg:w-72 lg:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex items-center justify-between gap-3 px-5 py-5">
-          <Link href="/dashboard" className="flex items-center gap-3" onClick={onClose}>
-            <div className="flex size-10 items-center justify-center rounded-full bg-olive text-white">
+        <div className="flex items-center justify-between gap-3 px-4 py-5 sm:px-5">
+          <Link href="/dashboard" className="flex min-w-0 items-center gap-3" onClick={onClose}>
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-olive text-white shadow-sm">
               <ChefHat className="size-5" />
             </div>
-            <div>
-              <p className="font-display text-lg leading-tight font-semibold tracking-tight text-foreground">
+            <div className="min-w-0">
+              <p className="font-display truncate text-lg leading-tight font-semibold tracking-tight text-foreground">
                 The Platter Hub
               </p>
               <p className="text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
@@ -73,7 +73,7 @@ export function Sidebar({
           </Link>
           <button
             type="button"
-            className="rounded-lg p-2 text-muted-foreground hover:bg-muted lg:hidden"
+            className="rounded-xl p-2 text-muted-foreground hover:bg-muted lg:hidden"
             onClick={onClose}
             aria-label="Close menu"
           >
@@ -81,7 +81,7 @@ export function Sidebar({
           </button>
         </div>
 
-        <nav className="flex-1 space-y-1 px-3 py-2">
+        <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-1">
           {navItems.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`)
@@ -92,22 +92,22 @@ export function Sidebar({
                 href={item.href}
                 onClick={onClose}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                   active
-                    ? "bg-olive-soft text-olive"
+                    ? "bg-olive-soft text-olive shadow-sm"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
-                <Icon className="size-4" />
+                <Icon className={cn("size-4", active && "text-olive")} />
                 {item.label}
               </Link>
             )
           })}
         </nav>
 
-        <div className="mt-auto space-y-3 border-t border-sidebar-border p-4">
-          <div className="flex items-center gap-3 rounded-xl border border-border bg-olive-soft/40 px-3 py-3">
-            <div className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+        <div className="mt-auto space-y-3 border-t border-sidebar-border p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          <div className="flex items-center gap-3 rounded-2xl border border-border bg-olive-soft/50 px-3 py-3">
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
               {userName
                 .split(" ")
                 .map((p) => p[0])
@@ -124,7 +124,7 @@ export function Sidebar({
           <form action={logoutAction}>
             <button
               type="submit"
-              className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+              className="flex w-full items-center gap-3 rounded-xl px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
               <LogOut className="size-4" />
               Log out

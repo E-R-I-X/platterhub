@@ -39,7 +39,7 @@ export default async function DashboardPage() {
         />
       </div>
 
-      <section className="overflow-hidden rounded-xl border border-border bg-white">
+      <section className="surface-card overflow-hidden">
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <h2 className="font-semibold text-foreground">Upcoming Orders</h2>
           <Link href="/orders" className="text-sm font-medium text-olive hover:underline">

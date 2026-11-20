@@ -81,7 +81,7 @@ export default async function OrdersPage({
         <OrdersFilters />
       </Suspense>
 
-      <div className="overflow-hidden rounded-xl border border-border bg-white">
+      <div className="surface-card overflow-hidden">
         <div className="hidden lg:block">
           <table className="w-full text-sm">
             <thead className="bg-canvas/80 text-left text-xs tracking-wide text-muted-foreground uppercase">
