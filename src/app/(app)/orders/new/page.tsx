@@ -1,9 +1,12 @@
 import { OrderForm } from "@/components/orders/order-form"
-import { listMenuItems } from "@/lib/data/store"
+import { listCategories, listMenuItems } from "@/lib/data/store"
 
 export const instant = false
 
 export default async function NewOrderPage() {
-  const menuItems = await listMenuItems()
-  return <OrderForm menuItems={menuItems} />
+  const [menuItems, categories] = await Promise.all([
+    listMenuItems(),
+    listCategories(),
+  ])
+  return <OrderForm menuItems={menuItems} categories={categories} />
 }

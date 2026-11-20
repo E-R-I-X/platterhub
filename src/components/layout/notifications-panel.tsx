@@ -58,7 +58,7 @@ export function NotificationsButton() {
       >
         <Bell className="size-5" />
         {unread > 0 ? (
-          <span className="absolute top-1.5 right-1.5 flex size-4 items-center justify-center rounded-full bg-olive text-[10px] font-bold text-white ring-2 ring-card">
+          <span className="absolute top-1.5 right-1.5 flex size-4 items-center justify-center rounded-full bg-olive text-[10px] font-bold text-on-olive ring-2 ring-card">
             {unread}
           </span>
         ) : null}

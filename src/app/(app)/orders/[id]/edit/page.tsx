@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { OrderForm } from "@/components/orders/order-form"
-import { getOrderById, listMenuItems } from "@/lib/data/store"
+import { getOrderById, listCategories, listMenuItems } from "@/lib/data/store"
 
 export const instant = false
 
@@ -10,7 +10,13 @@ export default async function EditOrderPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const [order, menuItems] = await Promise.all([getOrderById(id), listMenuItems()])
+  const [order, menuItems, categories] = await Promise.all([
+    getOrderById(id),
+    listMenuItems(),
+    listCategories(),
+  ])
   if (!order) notFound()
-  return <OrderForm menuItems={menuItems} order={order} />
+  return (
+    <OrderForm menuItems={menuItems} categories={categories} order={order} />
+  )
 }

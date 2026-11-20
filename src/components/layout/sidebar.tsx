@@ -59,7 +59,7 @@ export function Sidebar({
       >
         <div className="flex items-center justify-between gap-3 px-4 py-5 sm:px-5">
           <Link href="/dashboard" className="flex min-w-0 items-center gap-3" onClick={onClose}>
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-olive text-white shadow-sm">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-olive text-on-olive shadow-sm">
               <ChefHat className="size-5" />
             </div>
             <div className="min-w-0">
@@ -107,7 +107,7 @@ export function Sidebar({
 
         <div className="mt-auto space-y-3 border-t border-sidebar-border p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
           <div className="flex items-center gap-3 rounded-2xl border border-border bg-olive-soft/50 px-3 py-3">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-olive text-sm font-semibold text-on-olive">
               {userName
                 .split(" ")
                 .map((p) => p[0])

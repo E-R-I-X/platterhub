@@ -149,7 +149,7 @@ export function MonthCalendar({
                     <span
                       className={`text-sm font-medium ${
                         isToday
-                          ? "inline-flex size-6 items-center justify-center rounded-full bg-olive text-white"
+                          ? "inline-flex size-6 items-center justify-center rounded-full bg-olive text-on-olive"
                           : ""
                       }`}
                     >
@@ -163,7 +163,7 @@ export function MonthCalendar({
                     {dayOrders.slice(0, 2).map((order) => (
                       <p
                         key={order.id}
-                        className="truncate rounded-md bg-olive-soft px-1.5 py-0.5 text-[10px] font-medium text-olive-dark"
+                        className="truncate rounded-md bg-olive-soft px-1.5 py-0.5 text-[10px] font-medium text-olive"
                       >
                         {order.order_type === "food_delivery" ? "Delivery" : "Catering"}
                       </p>

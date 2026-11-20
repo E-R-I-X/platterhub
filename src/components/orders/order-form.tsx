@@ -14,7 +14,14 @@ import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { formatMoney, isPreferredDeliveryDay } from "@/lib/format"
-import type { MenuItem, MenuVariant, Order, OrderType, PaymentStatus } from "@/lib/types"
+import type {
+  MenuCategory,
+  MenuItem,
+  MenuVariant,
+  Order,
+  OrderType,
+  PaymentStatus,
+} from "@/lib/types"
 
 const CUSTOM_ITEM = "__custom__"
 
@@ -71,9 +78,11 @@ function toDraft(
 
 export function OrderForm({
   menuItems,
+  categories = [],
   order,
 }: {
   menuItems: MenuItem[]
+  categories?: MenuCategory[]
   order?: Order
 }) {
   const isEdit = Boolean(order)
@@ -103,6 +112,35 @@ export function OrderForm({
     (orderType === "event_catering" ? stylingFee : 0)
 
   const showDateWarning = eventDate && !isPreferredDeliveryDay(eventDate)
+
+  const groupedMenu = useMemo(() => {
+    const sortedCategories = [...categories].sort(
+      (a, b) => a.sort_order - b.sort_order
+    )
+    const groups = sortedCategories
+      .map((category) => ({
+        category,
+        items: menuItems
+          .filter((item) => item.category_id === category.id && item.is_active)
+          .sort((a, b) => a.sort_order - b.sort_order),
+      }))
+      .filter((group) => group.items.length > 0)
+
+    const groupedIds = new Set(groups.flatMap((g) => g.items.map((i) => i.id)))
+    const uncategorized = menuItems.filter((item) => !groupedIds.has(item.id))
+    if (uncategorized.length > 0) {
+      groups.push({
+        category: {
+          id: "uncategorized",
+          name: "Other",
+          description: null,
+          sort_order: 999,
+        },
+        items: uncategorized,
+      })
+    }
+    return groups
+  }, [categories, menuItems])
 
   const lineItemsJson = useMemo(
     () =>
@@ -237,7 +275,7 @@ export function OrderForm({
             onClick={() => setOrderType(type)}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
               orderType === type
-                ? "bg-olive text-white"
+                ? "bg-olive text-on-olive"
                 : "border border-border bg-card text-muted-foreground hover:bg-muted"
             }`}
           >
@@ -413,7 +451,7 @@ export function OrderForm({
                   onClick={() => setTableOrg(false)}
                   className={`rounded-lg px-4 py-2 text-sm font-medium ${
                     !tableOrg
-                      ? "bg-olive text-white"
+                      ? "bg-olive text-on-olive"
                       : "border border-border bg-card text-muted-foreground"
                   }`}
                 >
@@ -424,7 +462,7 @@ export function OrderForm({
                   onClick={() => setTableOrg(true)}
                   className={`rounded-lg px-4 py-2 text-sm font-medium ${
                     tableOrg
-                      ? "bg-olive text-white"
+                      ? "bg-olive text-on-olive"
                       : "border border-border bg-card text-muted-foreground"
                   }`}
                 >
@@ -496,7 +534,7 @@ export function OrderForm({
         </div>
 
         {items.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-olive-muted bg-olive-soft/40 px-4 py-10 text-center text-sm text-olive-dark">
+          <div className="rounded-xl border border-dashed border-olive-muted bg-olive-soft/40 px-4 py-10 text-center text-sm text-olive">
             No items added yet. Add from the menu or create a custom item with a price.
           </div>
         ) : (
@@ -529,10 +567,14 @@ export function OrderForm({
                         }}
                       >
                         <option value={CUSTOM_ITEM}>Custom item…</option>
-                        {menuItems.map((m) => (
-                          <option key={m.id} value={m.id}>
-                            {m.name}
-                          </option>
+                        {groupedMenu.map(({ category, items: groupItems }) => (
+                          <optgroup key={category.id} label={category.name}>
+                            {groupItems.map((m) => (
+                              <option key={m.id} value={m.id}>
+                                {m.name}
+                              </option>
+                            ))}
+                          </optgroup>
                         ))}
                       </Select>
                     </div>

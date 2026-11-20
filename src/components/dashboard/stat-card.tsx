@@ -22,7 +22,7 @@ export function StatCard({
       className={cn(
         "relative overflow-hidden rounded-[1.35rem] border p-5 sm:p-6",
         accent
-          ? "border-olive/25 bg-gradient-to-br from-olive to-olive-dark text-white shadow-[0_18px_40px_-24px_rgba(85,107,47,0.8)]"
+          ? "border-olive/30 bg-gradient-to-br from-olive to-olive-dark text-on-olive shadow-[0_18px_40px_-24px_rgba(85,107,47,0.8)]"
           : "surface-card",
         className
       )}
@@ -30,23 +30,23 @@ export function StatCard({
       {!accent ? (
         <div className="absolute top-0 left-0 h-full w-1 bg-olive/70" />
       ) : (
-        <div className="pointer-events-none absolute -right-8 -bottom-10 size-36 rounded-full bg-white/10 blur-2xl" />
+        <div className="pointer-events-none absolute -right-8 -bottom-10 size-36 rounded-full bg-on-olive/10 blur-2xl" />
       )}
       <div
         className={cn(
           "mb-4 flex size-11 items-center justify-center rounded-2xl",
-          accent ? "bg-white/15 text-white" : "bg-olive-soft text-olive"
+          accent ? "bg-on-olive/15 text-on-olive" : "bg-olive-soft text-olive"
         )}
       >
         {icon}
       </div>
-      <p className={cn("text-sm", accent ? "text-white/75" : "text-muted-foreground")}>
+      <p className={cn("text-sm", accent ? "text-on-olive/80" : "text-muted-foreground")}>
         {label}
       </p>
       <p
         className={cn(
           "mt-1.5 text-2xl font-semibold tracking-tight sm:text-[1.7rem]",
-          accent ? "text-white" : "text-olive"
+          accent ? "text-on-olive" : "text-olive"
         )}
       >
         {value}
@@ -56,10 +56,10 @@ export function StatCard({
           className={cn(
             "mt-2.5 text-xs font-medium",
             accent
-              ? "text-white/70"
+              ? "text-on-olive/75"
               : trend.positive
-                ? "text-emerald-600 dark:text-emerald-400"
-                : "text-rose-600 dark:text-rose-400"
+                ? "text-emerald-700 dark:text-emerald-300"
+                : "text-rose-700 dark:text-rose-300"
           )}
         >
           {trend.label}
@@ -69,7 +69,7 @@ export function StatCard({
         <p
           className={cn(
             "mt-2 text-xs leading-relaxed",
-            accent ? "text-white/65" : "text-muted-foreground"
+            accent ? "text-on-olive/70" : "text-muted-foreground"
           )}
         >
           {hint}

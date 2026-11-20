@@ -17,12 +17,12 @@ export function PaymentBadge({ status }: { status: PaymentStatus }) {
       <span
         className={`size-1.5 rounded-full ${
           status === "paid"
-            ? "bg-emerald-500"
+            ? "bg-emerald-500 dark:bg-emerald-300"
             : status === "partial"
-              ? "bg-orange-500"
+              ? "bg-orange-500 dark:bg-orange-300"
               : status === "failed"
-                ? "bg-rose-500"
-                : "bg-amber-500"
+                ? "bg-rose-500 dark:bg-rose-300"
+                : "bg-amber-500 dark:bg-amber-300"
         }`}
       />
       {formatPaymentStatus(status)}

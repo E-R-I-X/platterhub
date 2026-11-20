@@ -33,7 +33,7 @@ export default function SettingsPage() {
       />
 
       {saved ? (
-        <p className="rounded-xl border border-olive-muted bg-olive-soft px-4 py-2.5 text-sm text-olive-dark transition-opacity">
+        <p className="rounded-xl border border-olive-muted bg-olive-soft px-4 py-2.5 text-sm text-olive transition-opacity">
           {saved}
         </p>
       ) : null}

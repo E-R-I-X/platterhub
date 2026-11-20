@@ -61,7 +61,7 @@ export function FinanceFilters() {
         <Filter className="size-4" />
         Date range
         {activeCount > 0 ? (
-          <span className="flex size-5 items-center justify-center rounded-full bg-olive text-[11px] font-bold text-white">
+          <span className="flex size-5 items-center justify-center rounded-full bg-olive text-[11px] font-bold text-on-olive">
             {activeCount}
           </span>
         ) : null}

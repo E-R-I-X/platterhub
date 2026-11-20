@@ -7,14 +7,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-olive text-white hover:bg-olive-dark",
+        default: "bg-olive text-on-olive hover:bg-olive-dark",
         outline:
-          "border-border bg-white hover:bg-muted hover:text-foreground aria-expanded:bg-muted",
+          "border-border bg-card text-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted",
         secondary:
-          "bg-olive-soft text-olive-dark hover:bg-olive-muted aria-expanded:bg-olive-soft",
+          "bg-olive-soft text-olive hover:bg-olive-muted aria-expanded:bg-olive-soft",
         ghost: "hover:bg-muted hover:text-foreground aria-expanded:bg-muted",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
+          "bg-destructive/15 text-destructive hover:bg-destructive/25 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
         link: "text-olive underline-offset-4 hover:underline",
       },
       size: {

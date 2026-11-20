@@ -113,7 +113,7 @@ export default async function MenuPage() {
         })}
       </div>
 
-      <p className="mt-8 rounded-2xl border border-dashed border-olive-muted bg-olive-soft/50 px-5 py-4 text-sm text-olive-dark">
+      <p className="mt-8 rounded-2xl border border-dashed border-olive-muted bg-olive-soft/50 px-5 py-4 text-sm text-olive">
         <strong>Minimums:</strong> 10 pieces per finger food or dessert; 10 fruit cups or
         skewers. Puff-puff: 50 pieces. Styling & set-up fees are quoted per event.
       </p>

@@ -25,7 +25,7 @@ export function ProfileMenu({ userName }: { userName: string }) {
         aria-label="Account menu"
         aria-expanded={open}
       >
-        <span className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white shadow-sm ring-2 ring-olive-soft">
+        <span className="flex size-9 items-center justify-center rounded-full bg-olive text-sm font-semibold text-on-olive shadow-sm ring-2 ring-olive-soft">
           {initials}
         </span>
         <ChevronDown className="hidden size-4 text-muted-foreground sm:block" />
@@ -39,7 +39,7 @@ export function ProfileMenu({ userName }: { userName: string }) {
         panelClassName="max-w-none md:w-64 md:max-w-none md:rounded-2xl"
       >
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
-          <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+          <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-on-olive">
             {initials}
           </span>
           <div className="min-w-0 flex-1">

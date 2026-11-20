@@ -149,7 +149,7 @@ export default async function OrderDetailPage({
             </div>
             <p className="font-semibold">{formatMoney(order.styling_fee)}</p>
           </div>
-          <div className="mt-4 rounded-lg bg-olive-soft px-3 py-2 text-sm text-olive-dark">
+          <div className="mt-4 rounded-lg bg-olive-soft px-3 py-2 text-sm text-olive">
             Eco-friendly disposables and linens included
           </div>
         </section>
@@ -290,14 +290,14 @@ export default async function OrderDetailPage({
       <section className="overflow-hidden surface-card">
         <div className="grid md:grid-cols-2">
           <div className="bg-olive-soft p-6">
-            <div className="mb-3 flex size-10 items-center justify-center rounded-full bg-white text-olive">
+            <div className="mb-3 flex size-10 items-center justify-center rounded-full bg-card text-olive">
               <Tag className="size-5" />
             </div>
-            <p className="text-sm text-olive-dark">Total Price</p>
+            <p className="text-sm text-olive/80">Total Price</p>
             <p className="mt-1 text-3xl font-bold text-olive">
               {formatMoney(order.total_price)}
             </p>
-            <p className="mt-2 text-xs text-olive-dark/80">
+            <p className="mt-2 text-xs text-olive/70">
               {formatOrderType(order.order_type)} · {order.order_number}
             </p>
           </div>

@@ -47,7 +47,7 @@ export default function LoginPage() {
       <div className="flex flex-1 items-center justify-center bg-canvas px-6 py-12">
         <div className="w-full max-w-md">
           <div className="mb-8 flex items-center gap-3 lg:hidden">
-            <div className="flex size-10 items-center justify-center rounded-full bg-olive text-white">
+            <div className="flex size-10 items-center justify-center rounded-full bg-olive text-on-olive">
               <ChefHat className="size-5" />
             </div>
             <div>
