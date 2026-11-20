@@ -3,6 +3,7 @@
  * Generates src/lib/data/seed.ts and supabase/seed.sql from real Platter Hub orders.
  * Run: node scripts/generate-real-seed.mjs
  */
+import { createHash } from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -489,8 +490,76 @@ function slug(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
 }
 
+/** Deterministic UUID v5-style id from a stable string key (valid for Postgres uuid). */
+function uuidFromId(namespace, id) {
+  const hex = createHash("sha1")
+    .update(`platterhub:${namespace}:${id}`)
+    .digest("hex")
+    .slice(0, 32)
+  return [
+    hex.slice(0, 8),
+    hex.slice(8, 12),
+    `4${hex.slice(13, 16)}`,
+    `a${hex.slice(17, 20)}`,
+    hex.slice(20, 32),
+  ].join("-")
+}
+
+const CAT_UUID = Object.fromEntries(
+  [
+    "cat-boxes",
+    "cat-rice",
+    "cat-proteins",
+    "cat-soups",
+    "cat-finger",
+    "cat-desserts",
+    "cat-fruits",
+    "cat-extras",
+  ].map((id) => [id, uuidFromId("cat", id)])
+)
+
+const MENU_UUID = Object.fromEntries(
+  [
+    "mi-signature",
+    "mi-tease",
+    "mi-breakfast",
+    "mi-culture",
+    "mi-jollof",
+    "mi-fried-rice",
+    "mi-native-rice",
+    "mi-pasta",
+    "mi-chicken",
+    "mi-turkey",
+    "mi-fish",
+    "mi-beef",
+    "mi-efo",
+    "mi-egusi",
+    "mi-ogbono",
+    "mi-afang",
+    "mi-okra",
+    "mi-ayamase-green",
+    "mi-ayamase-red",
+    "mi-ofada",
+    "mi-meat-pie",
+    "mi-spring-roll",
+    "mi-samosa",
+    "mi-slider",
+    "mi-puff",
+    "mi-hotdog",
+    "mi-cheesecake",
+    "mi-cake-pops",
+    "mi-cake-slice",
+    "mi-doughnuts",
+    "mi-fruit-cups",
+    "mi-fruit-skewers",
+    "mi-fruit-platter",
+    "mi-balloon",
+    "mi-polaroid",
+  ].map((id) => [id, uuidFromId("menu", id)])
+)
+
 function customerId(name, index) {
-  return `cu-${slug(name)}-${index}`
+  return uuidFromId("customer", `cu-${slug(name)}-${index}`)
 }
 
 function build() {
@@ -515,13 +584,14 @@ function build() {
       customers.push(customer)
     }
 
+    const orderId = uuidFromId("order", `ord-${raw.n}`)
     const lineItems = (raw.items || []).map((item, i) => {
       const qty = item.qty || 1
       const unit = item.price ?? 0
       return {
-        id: `li-${raw.n}-${i + 1}`,
-        order_id: `ord-${raw.n}`,
-        menu_item_id: item.menu || null,
+        id: uuidFromId("line", `li-${raw.n}-${i + 1}`),
+        order_id: orderId,
+        menu_item_id: item.menu ? MENU_UUID[item.menu] || null : null,
         name: item.name,
         description: item.description || null,
         variant: item.variant || null,
@@ -553,7 +623,7 @@ function build() {
       raw.date < "2026-11-20" ? "completed" : amountPaid > 0 ? "confirmed" : "pending"
 
     orders.push({
-      id: `ord-${raw.n}`,
+      id: orderId,
       order_number: `ORD-${2000 + raw.n}`,
       order_type: orderType,
       customer_id: customer.id,
@@ -588,52 +658,52 @@ function build() {
 }
 
 const CATEGORIES = [
-  ["cat-boxes", "Signature Boxes", "Curated gift and meal boxes", 0],
-  ["cat-rice", "Rice & Pasta", "Signature rice dishes and pasta trays", 1],
-  ["cat-proteins", "Proteins", "Peppered and grilled proteins", 2],
-  ["cat-soups", "Soups & Sauces", "Soups by the litre and specialty sauces", 3],
-  ["cat-finger", "Finger Foods", "Passed bites and party favourites", 4],
-  ["cat-desserts", "Desserts", "Sweet finishes for any gathering", 5],
-  ["cat-fruits", "Fresh Fruits", "Cups, skewers, and platters", 6],
-  ["cat-extras", "Extras", "Balloons, polaroids, and add-ons", 7],
+  [CAT_UUID["cat-boxes"], "Signature Boxes", "Curated gift and meal boxes", 0],
+  [CAT_UUID["cat-rice"], "Rice & Pasta", "Signature rice dishes and pasta trays", 1],
+  [CAT_UUID["cat-proteins"], "Proteins", "Peppered and grilled proteins", 2],
+  [CAT_UUID["cat-soups"], "Soups & Sauces", "Soups by the litre and specialty sauces", 3],
+  [CAT_UUID["cat-finger"], "Finger Foods", "Passed bites and party favourites", 4],
+  [CAT_UUID["cat-desserts"], "Desserts", "Sweet finishes for any gathering", 5],
+  [CAT_UUID["cat-fruits"], "Fresh Fruits", "Cups, skewers, and platters", 6],
+  [CAT_UUID["cat-extras"], "Extras", "Balloons, polaroids, and add-ons", 7],
 ]
 
 const MENU = [
-  ["mi-signature", "cat-boxes", "The Signature Box", "Curated signature gift meal box", 150, null, null, "per box", 1],
-  ["mi-tease", "cat-boxes", "The Tease Box", "Breakfast / tease gift box", 120, null, null, "per box", 2],
-  ["mi-breakfast", "cat-boxes", "Breakfast Box", "Breakfast assortment box", 100, null, null, "per box", 3],
-  ["mi-culture", "cat-boxes", "Culture Box", "Afang, efo, egusi, okra culture box", 180, null, null, "per box", 4],
-  ["mi-jollof", "cat-rice", "Jollof Rice", "Party-style jollof, smoky and richly seasoned", 50, 80, 110, null, 1],
-  ["mi-fried-rice", "cat-rice", "Fried Rice", "Vegetable fried rice with aromatic spices", 70, 100, 120, null, 2],
-  ["mi-native-rice", "cat-rice", "Native Rice", "Palm oil native rice with local spices", 80, 120, 150, null, 3],
-  ["mi-pasta", "cat-rice", "Pasta", "Creamy or tomato-based pasta trays", 50, null, null, null, 4],
-  ["mi-chicken", "cat-proteins", "Peppered Chicken", "Spicy peppered chicken pieces", 60, 90, 130, null, 1],
-  ["mi-turkey", "cat-proteins", "Peppered Turkey", "Tender peppered turkey", 80, 110, 160, null, 2],
-  ["mi-fish", "cat-proteins", "Peppered Fish", "Fresh fish in pepper sauce", 90, 160, 250, null, 3],
-  ["mi-beef", "cat-proteins", "Peppered Beef", "Slow-cooked peppered beef", 150, 240, 350, null, 4],
-  ["mi-efo", "cat-soups", "Efo Riro", "Vegetable soup priced per litre tray", 25, 50, 75, "per litre tier", 1],
-  ["mi-egusi", "cat-soups", "Egusi", "Melon-seed soup priced per litre tray", 25, 50, 75, "per litre tier", 2],
-  ["mi-ogbono", "cat-soups", "Ogbono", "Draw soup priced per litre tray", 25, 50, 75, "per litre tier", 3],
-  ["mi-afang", "cat-soups", "Afang", "Afang soup priced per litre tray", 25, 50, 75, "per litre tier", 4],
-  ["mi-okra", "cat-soups", "Okra", "Okra soup priced per litre tray", 25, 50, 75, "per litre tier", 5],
-  ["mi-ayamase-green", "cat-soups", "Ayamase (Green)", "Green ayamase sauce", 25, 50, 75, "per litre tier", 6],
-  ["mi-ayamase-red", "cat-soups", "Ayamase (Red)", "Red ayamase / ofada-style sauce", 25, 50, 75, "per litre tier", 7],
-  ["mi-ofada", "cat-soups", "Ofada Sauce (Red)", "500ml ofada sauce", 20, null, null, "500ml", 8],
-  ["mi-meat-pie", "cat-finger", "Mini Meat Pie", "Flaky mini meat pies", 6, 10, 14, "per 10 pcs", 1],
-  ["mi-spring-roll", "cat-finger", "Spring Roll", "Crispy vegetable spring rolls", 6, 10, 14, "per 10 pcs", 2],
-  ["mi-samosa", "cat-finger", "Samosa", "Golden mini samosas", 6, 10, 14, "per 10 pcs", 3],
-  ["mi-slider", "cat-finger", "Mini Beef Slider", "Bite-sized beef sliders", 12, 18, 24, "per 10 pcs", 4],
-  ["mi-puff", "cat-finger", "Puff-Puff", "Soft fried dough balls", 8, null, null, "50 pieces", 5],
-  ["mi-hotdog", "cat-finger", "Mini Hotdogs", "Mini hotdogs", 8, 12, 16, "per 10 pcs", 6],
-  ["mi-cheesecake", "cat-desserts", "Cheesecake Shooters", "Individual cheesecake shooters", 15, 25, 35, "per 10 pcs", 1],
-  ["mi-cake-pops", "cat-desserts", "Cake Pops", "Decorated cake pops", 12, 20, 28, "per 10 pcs", 2],
-  ["mi-cake-slice", "cat-desserts", "Cake Slices", "Assorted cake slices", 8, 14, 20, "per 10 pcs", 3],
-  ["mi-doughnuts", "cat-desserts", "Doughnuts", "Assorted doughnuts", 10, 16, 22, "per 10 pcs", 4],
-  ["mi-fruit-cups", "cat-fruits", "Fresh Fruit Cups", "Seasonal fruit cups", 5, 8, 12, "per 10 pcs", 1],
-  ["mi-fruit-skewers", "cat-fruits", "Fresh Fruit Skewers", "Colourful fruit skewers", 6, 10, 14, "per 10 pcs", 2],
-  ["mi-fruit-platter", "cat-fruits", "Fresh Fruit Platter", "Large mixed fruit platter", 25, 40, 60, null, 3],
-  ["mi-balloon", "cat-extras", "Balloon", "Helium / birthday balloon", 25, null, null, "each", 1],
-  ["mi-polaroid", "cat-extras", "Polaroid", "Polaroid photo add-on", 15, null, null, "each", 2],
+  [MENU_UUID["mi-signature"], CAT_UUID["cat-boxes"], "The Signature Box", "Curated signature gift meal box", 150, null, null, "per box", 1],
+  [MENU_UUID["mi-tease"], CAT_UUID["cat-boxes"], "The Tease Box", "Breakfast / tease gift box", 120, null, null, "per box", 2],
+  [MENU_UUID["mi-breakfast"], CAT_UUID["cat-boxes"], "Breakfast Box", "Breakfast assortment box", 100, null, null, "per box", 3],
+  [MENU_UUID["mi-culture"], CAT_UUID["cat-boxes"], "Culture Box", "Afang, efo, egusi, okra culture box", 180, null, null, "per box", 4],
+  [MENU_UUID["mi-jollof"], CAT_UUID["cat-rice"], "Jollof Rice", "Party-style jollof, smoky and richly seasoned", 50, 80, 110, null, 1],
+  [MENU_UUID["mi-fried-rice"], CAT_UUID["cat-rice"], "Fried Rice", "Vegetable fried rice with aromatic spices", 70, 100, 120, null, 2],
+  [MENU_UUID["mi-native-rice"], CAT_UUID["cat-rice"], "Native Rice", "Palm oil native rice with local spices", 80, 120, 150, null, 3],
+  [MENU_UUID["mi-pasta"], CAT_UUID["cat-rice"], "Pasta", "Creamy or tomato-based pasta trays", 50, null, null, null, 4],
+  [MENU_UUID["mi-chicken"], CAT_UUID["cat-proteins"], "Peppered Chicken", "Spicy peppered chicken pieces", 60, 90, 130, null, 1],
+  [MENU_UUID["mi-turkey"], CAT_UUID["cat-proteins"], "Peppered Turkey", "Tender peppered turkey", 80, 110, 160, null, 2],
+  [MENU_UUID["mi-fish"], CAT_UUID["cat-proteins"], "Peppered Fish", "Fresh fish in pepper sauce", 90, 160, 250, null, 3],
+  [MENU_UUID["mi-beef"], CAT_UUID["cat-proteins"], "Peppered Beef", "Slow-cooked peppered beef", 150, 240, 350, null, 4],
+  [MENU_UUID["mi-efo"], CAT_UUID["cat-soups"], "Efo Riro", "Vegetable soup priced per litre tray", 25, 50, 75, "per litre tier", 1],
+  [MENU_UUID["mi-egusi"], CAT_UUID["cat-soups"], "Egusi", "Melon-seed soup priced per litre tray", 25, 50, 75, "per litre tier", 2],
+  [MENU_UUID["mi-ogbono"], CAT_UUID["cat-soups"], "Ogbono", "Draw soup priced per litre tray", 25, 50, 75, "per litre tier", 3],
+  [MENU_UUID["mi-afang"], CAT_UUID["cat-soups"], "Afang", "Afang soup priced per litre tray", 25, 50, 75, "per litre tier", 4],
+  [MENU_UUID["mi-okra"], CAT_UUID["cat-soups"], "Okra", "Okra soup priced per litre tray", 25, 50, 75, "per litre tier", 5],
+  [MENU_UUID["mi-ayamase-green"], CAT_UUID["cat-soups"], "Ayamase (Green)", "Green ayamase sauce", 25, 50, 75, "per litre tier", 6],
+  [MENU_UUID["mi-ayamase-red"], CAT_UUID["cat-soups"], "Ayamase (Red)", "Red ayamase / ofada-style sauce", 25, 50, 75, "per litre tier", 7],
+  [MENU_UUID["mi-ofada"], CAT_UUID["cat-soups"], "Ofada Sauce (Red)", "500ml ofada sauce", 20, null, null, "500ml", 8],
+  [MENU_UUID["mi-meat-pie"], CAT_UUID["cat-finger"], "Mini Meat Pie", "Flaky mini meat pies", 6, 10, 14, "per 10 pcs", 1],
+  [MENU_UUID["mi-spring-roll"], CAT_UUID["cat-finger"], "Spring Roll", "Crispy vegetable spring rolls", 6, 10, 14, "per 10 pcs", 2],
+  [MENU_UUID["mi-samosa"], CAT_UUID["cat-finger"], "Samosa", "Golden mini samosas", 6, 10, 14, "per 10 pcs", 3],
+  [MENU_UUID["mi-slider"], CAT_UUID["cat-finger"], "Mini Beef Slider", "Bite-sized beef sliders", 12, 18, 24, "per 10 pcs", 4],
+  [MENU_UUID["mi-puff"], CAT_UUID["cat-finger"], "Puff-Puff", "Soft fried dough balls", 8, null, null, "50 pieces", 5],
+  [MENU_UUID["mi-hotdog"], CAT_UUID["cat-finger"], "Mini Hotdogs", "Mini hotdogs", 8, 12, 16, "per 10 pcs", 6],
+  [MENU_UUID["mi-cheesecake"], CAT_UUID["cat-desserts"], "Cheesecake Shooters", "Individual cheesecake shooters", 15, 25, 35, "per 10 pcs", 1],
+  [MENU_UUID["mi-cake-pops"], CAT_UUID["cat-desserts"], "Cake Pops", "Decorated cake pops", 12, 20, 28, "per 10 pcs", 2],
+  [MENU_UUID["mi-cake-slice"], CAT_UUID["cat-desserts"], "Cake Slices", "Assorted cake slices", 8, 14, 20, "per 10 pcs", 3],
+  [MENU_UUID["mi-doughnuts"], CAT_UUID["cat-desserts"], "Doughnuts", "Assorted doughnuts", 10, 16, 22, "per 10 pcs", 4],
+  [MENU_UUID["mi-fruit-cups"], CAT_UUID["cat-fruits"], "Fresh Fruit Cups", "Seasonal fruit cups", 5, 8, 12, "per 10 pcs", 1],
+  [MENU_UUID["mi-fruit-skewers"], CAT_UUID["cat-fruits"], "Fresh Fruit Skewers", "Colourful fruit skewers", 6, 10, 14, "per 10 pcs", 2],
+  [MENU_UUID["mi-fruit-platter"], CAT_UUID["cat-fruits"], "Fresh Fruit Platter", "Large mixed fruit platter", 25, 40, 60, null, 3],
+  [MENU_UUID["mi-balloon"], CAT_UUID["cat-extras"], "Balloon", "Helium / birthday balloon", 25, null, null, "each", 1],
+  [MENU_UUID["mi-polaroid"], CAT_UUID["cat-extras"], "Polaroid", "Polaroid photo add-on", 15, null, null, "each", 2],
 ]
 
 function tsSerialize(value, indent = 0) {
@@ -683,48 +753,36 @@ export const seedOrders: Order[] = ${tsSerialize(orders)}
   fs.writeFileSync(path.join(root, "src/lib/data/seed.ts"), content)
 }
 
-function uuidFromId(prefix, id) {
-  // Deterministic fake UUIDs for SQL seed based on string ids
-  const hex = Buffer.from(id).toString("hex").padEnd(32, "0").slice(0, 32)
-  return `${prefix}${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20, 32)}`
-}
-
 function writeSql({ customers, orders }) {
   const lines = []
   lines.push(`-- Real Platter Hub seed (CAD). Generated by scripts/generate-real-seed.mjs`)
-  lines.push(`-- Run AFTER supabase/schema.sql. Safe to re-run only on empty tables.`)
+  lines.push(`-- Run AFTER supabase/schema.sql. Safe to re-run (truncates first).`)
   lines.push(`begin;`)
   lines.push(`truncate table public.order_line_items, public.orders, public.customers, public.menu_items, public.menu_categories restart identity cascade;`)
 
   lines.push(`\ninsert into public.menu_categories (id, name, description, sort_order) values`)
   lines.push(
     CATEGORIES.map(([id, name, description, sort], i) => {
-      const uid = uuidFromId("a", id)
-      return `  ('${uid}', ${sqlStr(name)}, ${sqlStr(description)}, ${sort})${i === CATEGORIES.length - 1 ? ";" : ","}`
+      return `  ('${id}', ${sqlStr(name)}, ${sqlStr(description)}, ${sort})${i === CATEGORIES.length - 1 ? ";" : ","}`
     }).join("\n")
   )
-
-  const catUuid = Object.fromEntries(CATEGORIES.map(([id]) => [id, uuidFromId("a", id)]))
-  const menuUuid = Object.fromEntries(MENU.map(([id]) => [id, uuidFromId("b", id)]))
 
   lines.push(`\ninsert into public.menu_items (id, category_id, name, description, price_small, price_medium, price_large, unit_label, sort_order) values`)
   lines.push(
     MENU.map(([id, cat, name, description, s, m, l, unit, sort], i) => {
-      return `  ('${menuUuid[id]}', '${catUuid[cat]}', ${sqlStr(name)}, ${sqlStr(description)}, ${num(s)}, ${num(m)}, ${num(l)}, ${unit == null ? "null" : sqlStr(unit)}, ${sort})${i === MENU.length - 1 ? ";" : ","}`
+      return `  ('${id}', '${cat}', ${sqlStr(name)}, ${sqlStr(description)}, ${num(s)}, ${num(m)}, ${num(l)}, ${unit == null ? "null" : sqlStr(unit)}, ${sort})${i === MENU.length - 1 ? ";" : ","}`
     }).join("\n")
   )
 
-  const custUuid = Object.fromEntries(customers.map((c) => [c.id, uuidFromId("c", c.id)]))
   lines.push(`\ninsert into public.customers (id, name, phone, address, created_at, updated_at) values`)
   lines.push(
     customers
       .map((c, i) => {
-        return `  ('${custUuid[c.id]}', ${sqlStr(c.name)}, ${sqlStr(c.phone)}, ${c.address ? sqlStr(c.address) : "null"}, '${c.created_at}', '${c.updated_at}')${i === customers.length - 1 ? ";" : ","}`
+        return `  ('${c.id}', ${sqlStr(c.name)}, ${sqlStr(c.phone)}, ${c.address ? sqlStr(c.address) : "null"}, '${c.created_at}', '${c.updated_at}')${i === customers.length - 1 ? ";" : ","}`
       })
       .join("\n")
   )
 
-  const orderUuid = Object.fromEntries(orders.map((o) => [o.id, uuidFromId("d", o.id)]))
   lines.push(`\ninsert into public.orders (
   id, order_number, order_type, customer_id, customer_name, phone, address,
   event_date, event_time, recipient, special_requests, guest_count, theme,
@@ -734,7 +792,7 @@ function writeSql({ customers, orders }) {
   lines.push(
     orders
       .map((o, i) => {
-        return `  ('${orderUuid[o.id]}', ${sqlStr(o.order_number)}, '${o.order_type}', '${custUuid[o.customer_id]}', ${sqlStr(o.customer_name)}, ${sqlStr(o.phone)}, ${sqlStr(o.address)}, '${o.event_date}', ${o.event_time ? sqlStr(o.event_time) : "null"}, ${o.recipient ? sqlStr(o.recipient) : "null"}, ${o.special_requests ? sqlStr(o.special_requests) : "null"}, ${o.guest_count ?? "null"}, ${o.theme ? sqlStr(o.theme) : "null"}, false, ${o.styling_fee}, ${o.delivery_fee}, ${o.product_fee}, ${o.total_price}, ${o.amount_paid}, '${o.payment_status}', '${o.status}', ${o.notes ? sqlStr(o.notes) : "null"}, '${o.created_at}', '${o.updated_at}')${i === orders.length - 1 ? ";" : ","}`
+        return `  ('${o.id}', ${sqlStr(o.order_number)}, '${o.order_type}', '${o.customer_id}', ${sqlStr(o.customer_name)}, ${sqlStr(o.phone)}, ${sqlStr(o.address)}, '${o.event_date}', ${o.event_time ? sqlStr(o.event_time) : "null"}, ${o.recipient ? sqlStr(o.recipient) : "null"}, ${o.special_requests ? sqlStr(o.special_requests) : "null"}, ${o.guest_count ?? "null"}, ${o.theme ? sqlStr(o.theme) : "null"}, false, ${o.styling_fee}, ${o.delivery_fee}, ${o.product_fee}, ${o.total_price}, ${o.amount_paid}, '${o.payment_status}', '${o.status}', ${o.notes ? sqlStr(o.notes) : "null"}, '${o.created_at}', '${o.updated_at}')${i === orders.length - 1 ? ";" : ","}`
       })
       .join("\n")
   )
@@ -746,9 +804,9 @@ function writeSql({ customers, orders }) {
   lines.push(
     allLines
       .map((li, i) => {
-        const mid = li.menu_item_id && menuUuid[li.menu_item_id] ? `'${menuUuid[li.menu_item_id]}'` : "null"
+        const mid = li.menu_item_id ? `'${li.menu_item_id}'` : "null"
         const variant = li.variant ? `'${li.variant}'` : "null"
-        return `  ('${uuidFromId("e", li.id)}', '${orderUuid[li.order_id]}', ${mid}, ${sqlStr(li.name)}, ${li.description ? sqlStr(li.description) : "null"}, ${variant}, ${li.quantity}, ${li.unit_price}, ${li.total_price})${i === allLines.length - 1 ? ";" : ","}`
+        return `  ('${li.id}', '${li.order_id}', ${mid}, ${sqlStr(li.name)}, ${li.description ? sqlStr(li.description) : "null"}, ${variant}, ${li.quantity}, ${li.unit_price}, ${li.total_price})${i === allLines.length - 1 ? ";" : ","}`
       })
       .join("\n")
   )

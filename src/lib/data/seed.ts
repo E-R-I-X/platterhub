@@ -7,49 +7,49 @@ import type { Customer, MenuCategory, MenuItem, Order } from "@/lib/types"
 
 export const seedCategories: MenuCategory[] = [
   {
-    id: "cat-boxes",
+    id: "ed7f2540-d6a3-4d8c-a01d-1b6e819d9ee0",
     name: "Signature Boxes",
     description: "Curated gift and meal boxes",
     sort_order: 0,
   },
   {
-    id: "cat-rice",
+    id: "80975361-a362-481a-a66d-ea9f6b94f905",
     name: "Rice & Pasta",
     description: "Signature rice dishes and pasta trays",
     sort_order: 1,
   },
   {
-    id: "cat-proteins",
+    id: "e4e6fb36-e436-42ce-a218-ea8493bca49f",
     name: "Proteins",
     description: "Peppered and grilled proteins",
     sort_order: 2,
   },
   {
-    id: "cat-soups",
+    id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Soups & Sauces",
     description: "Soups by the litre and specialty sauces",
     sort_order: 3,
   },
   {
-    id: "cat-finger",
+    id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Finger Foods",
     description: "Passed bites and party favourites",
     sort_order: 4,
   },
   {
-    id: "cat-desserts",
+    id: "22ddff6e-c0ad-4211-a3f6-f71dd8080d9f",
     name: "Desserts",
     description: "Sweet finishes for any gathering",
     sort_order: 5,
   },
   {
-    id: "cat-fruits",
+    id: "0d5da5a5-529e-41e5-ab25-6ab38e803b2f",
     name: "Fresh Fruits",
     description: "Cups, skewers, and platters",
     sort_order: 6,
   },
   {
-    id: "cat-extras",
+    id: "eaba15fa-dbe7-47ac-ab71-10c0765594a7",
     name: "Extras",
     description: "Balloons, polaroids, and add-ons",
     sort_order: 7,
@@ -58,8 +58,8 @@ export const seedCategories: MenuCategory[] = [
 
 export const seedMenuItems: MenuItem[] = [
   {
-    id: "mi-signature",
-    category_id: "cat-boxes",
+    id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
+    category_id: "ed7f2540-d6a3-4d8c-a01d-1b6e819d9ee0",
     name: "The Signature Box",
     description: "Curated signature gift meal box",
     price_small: 150,
@@ -70,8 +70,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-tease",
-    category_id: "cat-boxes",
+    id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
+    category_id: "ed7f2540-d6a3-4d8c-a01d-1b6e819d9ee0",
     name: "The Tease Box",
     description: "Breakfast / tease gift box",
     price_small: 120,
@@ -82,8 +82,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-breakfast",
-    category_id: "cat-boxes",
+    id: "912f7fdb-6461-4f0c-a394-cc8cc3ee77e6",
+    category_id: "ed7f2540-d6a3-4d8c-a01d-1b6e819d9ee0",
     name: "Breakfast Box",
     description: "Breakfast assortment box",
     price_small: 100,
@@ -94,8 +94,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-culture",
-    category_id: "cat-boxes",
+    id: "da626bdc-0d5f-4427-a841-e86707651a75",
+    category_id: "ed7f2540-d6a3-4d8c-a01d-1b6e819d9ee0",
     name: "Culture Box",
     description: "Afang, efo, egusi, okra culture box",
     price_small: 180,
@@ -106,8 +106,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 4,
   },
   {
-    id: "mi-jollof",
-    category_id: "cat-rice",
+    id: "2452e7e8-35c1-49f1-a356-a679b9602299",
+    category_id: "80975361-a362-481a-a66d-ea9f6b94f905",
     name: "Jollof Rice",
     description: "Party-style jollof, smoky and richly seasoned",
     price_small: 50,
@@ -118,8 +118,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-fried-rice",
-    category_id: "cat-rice",
+    id: "dff57217-eac3-4f48-a5ae-c6170ec6fd7d",
+    category_id: "80975361-a362-481a-a66d-ea9f6b94f905",
     name: "Fried Rice",
     description: "Vegetable fried rice with aromatic spices",
     price_small: 70,
@@ -130,8 +130,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-native-rice",
-    category_id: "cat-rice",
+    id: "6414af67-59ae-486d-a3d6-f1b9ea22b205",
+    category_id: "80975361-a362-481a-a66d-ea9f6b94f905",
     name: "Native Rice",
     description: "Palm oil native rice with local spices",
     price_small: 80,
@@ -142,8 +142,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-pasta",
-    category_id: "cat-rice",
+    id: "2632fced-113a-4765-a17a-8617fdb8de1a",
+    category_id: "80975361-a362-481a-a66d-ea9f6b94f905",
     name: "Pasta",
     description: "Creamy or tomato-based pasta trays",
     price_small: 50,
@@ -154,8 +154,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 4,
   },
   {
-    id: "mi-chicken",
-    category_id: "cat-proteins",
+    id: "c1439bdd-90c8-4e8c-a800-2cc0e2a7d5da",
+    category_id: "e4e6fb36-e436-42ce-a218-ea8493bca49f",
     name: "Peppered Chicken",
     description: "Spicy peppered chicken pieces",
     price_small: 60,
@@ -166,8 +166,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-turkey",
-    category_id: "cat-proteins",
+    id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
+    category_id: "e4e6fb36-e436-42ce-a218-ea8493bca49f",
     name: "Peppered Turkey",
     description: "Tender peppered turkey",
     price_small: 80,
@@ -178,8 +178,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-fish",
-    category_id: "cat-proteins",
+    id: "204b8f6e-933c-49cb-ac65-81f9ca321b38",
+    category_id: "e4e6fb36-e436-42ce-a218-ea8493bca49f",
     name: "Peppered Fish",
     description: "Fresh fish in pepper sauce",
     price_small: 90,
@@ -190,8 +190,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-beef",
-    category_id: "cat-proteins",
+    id: "11e1c4d7-1195-4a4a-a9aa-e78aa30929b7",
+    category_id: "e4e6fb36-e436-42ce-a218-ea8493bca49f",
     name: "Peppered Beef",
     description: "Slow-cooked peppered beef",
     price_small: 150,
@@ -202,8 +202,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 4,
   },
   {
-    id: "mi-efo",
-    category_id: "cat-soups",
+    id: "16dd219b-f7a7-455e-a61b-fd32e9ea1904",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Efo Riro",
     description: "Vegetable soup priced per litre tray",
     price_small: 25,
@@ -214,8 +214,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-egusi",
-    category_id: "cat-soups",
+    id: "ddaf6286-9dbd-49f6-a4f1-085f29e33222",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Egusi",
     description: "Melon-seed soup priced per litre tray",
     price_small: 25,
@@ -226,8 +226,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-ogbono",
-    category_id: "cat-soups",
+    id: "d6ff755c-6dc0-4cee-aa53-b641bde73290",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Ogbono",
     description: "Draw soup priced per litre tray",
     price_small: 25,
@@ -238,8 +238,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-afang",
-    category_id: "cat-soups",
+    id: "b87d1c8f-0796-49fe-ae89-b0c7128693fe",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Afang",
     description: "Afang soup priced per litre tray",
     price_small: 25,
@@ -250,8 +250,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 4,
   },
   {
-    id: "mi-okra",
-    category_id: "cat-soups",
+    id: "f64fc108-6f36-418b-a706-c70fd4f74a8b",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Okra",
     description: "Okra soup priced per litre tray",
     price_small: 25,
@@ -262,8 +262,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 5,
   },
   {
-    id: "mi-ayamase-green",
-    category_id: "cat-soups",
+    id: "dc5ef0dc-f82a-4fea-a8ff-719b9367f0d0",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Ayamase (Green)",
     description: "Green ayamase sauce",
     price_small: 25,
@@ -274,8 +274,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 6,
   },
   {
-    id: "mi-ayamase-red",
-    category_id: "cat-soups",
+    id: "1a25b8e3-c6f2-461a-a5dd-e4155d9d29ee",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Ayamase (Red)",
     description: "Red ayamase / ofada-style sauce",
     price_small: 25,
@@ -286,8 +286,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 7,
   },
   {
-    id: "mi-ofada",
-    category_id: "cat-soups",
+    id: "443003c4-519a-4982-a63d-5e6c6d754043",
+    category_id: "0d2e8871-bf48-44e9-a5fa-9a0297fe9793",
     name: "Ofada Sauce (Red)",
     description: "500ml ofada sauce",
     price_small: 20,
@@ -298,8 +298,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 8,
   },
   {
-    id: "mi-meat-pie",
-    category_id: "cat-finger",
+    id: "e19cb160-bc36-46f0-a562-0d12f7b87154",
+    category_id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Mini Meat Pie",
     description: "Flaky mini meat pies",
     price_small: 6,
@@ -310,8 +310,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-spring-roll",
-    category_id: "cat-finger",
+    id: "eb2abe2a-7e60-4994-abe2-8bfb46f097f2",
+    category_id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Spring Roll",
     description: "Crispy vegetable spring rolls",
     price_small: 6,
@@ -322,8 +322,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-samosa",
-    category_id: "cat-finger",
+    id: "39a2d9c6-fe64-43cc-a50d-9b85b5d4032e",
+    category_id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Samosa",
     description: "Golden mini samosas",
     price_small: 6,
@@ -334,8 +334,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-slider",
-    category_id: "cat-finger",
+    id: "27745932-b1b4-4ed3-abbe-eec852848142",
+    category_id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Mini Beef Slider",
     description: "Bite-sized beef sliders",
     price_small: 12,
@@ -346,8 +346,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 4,
   },
   {
-    id: "mi-puff",
-    category_id: "cat-finger",
+    id: "e9249a30-b974-4089-a516-be0e6837f5c9",
+    category_id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Puff-Puff",
     description: "Soft fried dough balls",
     price_small: 8,
@@ -358,8 +358,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 5,
   },
   {
-    id: "mi-hotdog",
-    category_id: "cat-finger",
+    id: "cc61ccf9-8182-403b-a16f-1deb1590a0da",
+    category_id: "fc90f138-fc1e-4368-a6c2-f605dca2a3f0",
     name: "Mini Hotdogs",
     description: "Mini hotdogs",
     price_small: 8,
@@ -370,8 +370,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 6,
   },
   {
-    id: "mi-cheesecake",
-    category_id: "cat-desserts",
+    id: "3cff6d21-f90e-4bb2-a423-9754b74864dc",
+    category_id: "22ddff6e-c0ad-4211-a3f6-f71dd8080d9f",
     name: "Cheesecake Shooters",
     description: "Individual cheesecake shooters",
     price_small: 15,
@@ -382,8 +382,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-cake-pops",
-    category_id: "cat-desserts",
+    id: "27aacdf8-082a-4f9e-a63a-9084e02baa0e",
+    category_id: "22ddff6e-c0ad-4211-a3f6-f71dd8080d9f",
     name: "Cake Pops",
     description: "Decorated cake pops",
     price_small: 12,
@@ -394,8 +394,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-cake-slice",
-    category_id: "cat-desserts",
+    id: "e32d75ff-38b2-42f2-a3c9-d5b7242bb450",
+    category_id: "22ddff6e-c0ad-4211-a3f6-f71dd8080d9f",
     name: "Cake Slices",
     description: "Assorted cake slices",
     price_small: 8,
@@ -406,8 +406,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-doughnuts",
-    category_id: "cat-desserts",
+    id: "a8777ff3-d296-49f4-a8d1-93aa3f5d50fd",
+    category_id: "22ddff6e-c0ad-4211-a3f6-f71dd8080d9f",
     name: "Doughnuts",
     description: "Assorted doughnuts",
     price_small: 10,
@@ -418,8 +418,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 4,
   },
   {
-    id: "mi-fruit-cups",
-    category_id: "cat-fruits",
+    id: "a98d1415-10c1-4e0a-ae97-dba30e644089",
+    category_id: "0d5da5a5-529e-41e5-ab25-6ab38e803b2f",
     name: "Fresh Fruit Cups",
     description: "Seasonal fruit cups",
     price_small: 5,
@@ -430,8 +430,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-fruit-skewers",
-    category_id: "cat-fruits",
+    id: "ecba0e8a-b71d-46d9-a81a-fe898efcd87e",
+    category_id: "0d5da5a5-529e-41e5-ab25-6ab38e803b2f",
     name: "Fresh Fruit Skewers",
     description: "Colourful fruit skewers",
     price_small: 6,
@@ -442,8 +442,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 2,
   },
   {
-    id: "mi-fruit-platter",
-    category_id: "cat-fruits",
+    id: "4a7ff94b-1e82-4333-a126-1be4cc37f6ae",
+    category_id: "0d5da5a5-529e-41e5-ab25-6ab38e803b2f",
     name: "Fresh Fruit Platter",
     description: "Large mixed fruit platter",
     price_small: 25,
@@ -454,8 +454,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 3,
   },
   {
-    id: "mi-balloon",
-    category_id: "cat-extras",
+    id: "1b85276e-7b9a-4b0d-a17d-8f0a639abda8",
+    category_id: "eaba15fa-dbe7-47ac-ab71-10c0765594a7",
     name: "Balloon",
     description: "Helium / birthday balloon",
     price_small: 25,
@@ -466,8 +466,8 @@ export const seedMenuItems: MenuItem[] = [
     sort_order: 1,
   },
   {
-    id: "mi-polaroid",
-    category_id: "cat-extras",
+    id: "6758510b-7e13-4b7a-a80e-0dfe2928609a",
+    category_id: "eaba15fa-dbe7-47ac-ab71-10c0765594a7",
     name: "Polaroid",
     description: "Polaroid photo add-on",
     price_small: 15,
@@ -481,7 +481,7 @@ export const seedMenuItems: MenuItem[] = [
 
 export const seedCustomers: Customer[] = [
   {
-    id: "cu-busayo-1",
+    id: "0e92b645-afc9-4820-aa43-7a8d97e5a82e",
     name: "Busayo",
     phone: "+1 (215) 986-6991",
     address: "86 Greatfalls Blvd, Hamilton, Ontario",
@@ -489,7 +489,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-06T12:00:00.000Z"
   },
   {
-    id: "cu-moyin-2",
+    id: "c7a6193e-d26b-44ae-af52-ea90bc7c5a7f",
     name: "Moyin",
     phone: "+1 437 246 9234",
     address: "50 Gerrard Street East, Toronto ON, M5B 1J6",
@@ -497,7 +497,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-06T12:00:00.000Z"
   },
   {
-    id: "cu-adenike-3",
+    id: "c37cf22e-83ab-43cc-abb1-1ad02863bfb5",
     name: "Adenike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -505,7 +505,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-06T12:00:00.000Z"
   },
   {
-    id: "cu-oladunni-4",
+    id: "31055266-716f-41ef-a4ec-f178aea67445",
     name: "Oladunni",
     phone: "+1 6478348111",
     address: "412 Ellerslie Avenue, North York, M2R 1C2",
@@ -513,7 +513,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-07T12:00:00.000Z"
   },
   {
-    id: "cu-eno-attah-5",
+    id: "73f830ea-8844-4bbd-aa38-cdd97b320baf",
     name: "Eno Attah",
     phone: "+1 (437) 898-1125",
     address: "1603 Eglinton Avenue West, Toronto, Ontario M6E 0A1, Room 208",
@@ -521,7 +521,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-08T12:00:00.000Z"
   },
   {
-    id: "cu-dominic-6",
+    id: "2f309880-686b-4bdf-ab9c-7466c1e2be8b",
     name: "Dominic",
     phone: "+1 416-948-1803",
     address: "5001 Corporate Drive, Unit 607, Burlington ON",
@@ -529,7 +529,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-09T12:00:00.000Z"
   },
   {
-    id: "cu-opemititi-7",
+    id: "71ca965d-5d6e-4bc0-aaae-a0089d65b3e8",
     name: "Opemititi",
     phone: "+1 437 333 0153",
     address: "Apartment 305, 2356 Eglinton Ave E, Scarborough, ON M1K 2P1",
@@ -537,7 +537,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-09T12:00:00.000Z"
   },
   {
-    id: "cu-abisola-8",
+    id: "76864213-8bb3-42da-a7ea-288cb76d81fe",
     name: "Abisola",
     phone: "+1 587 830 5192",
     address: "2325-68 Corporate Drive, Scarborough ON M1H 3H3",
@@ -545,7 +545,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-13T12:00:00.000Z"
   },
   {
-    id: "cu-idara-9",
+    id: "749d1057-877d-4365-a0eb-081301995aa2",
     name: "Idara",
     phone: "Not provided",
     address: null,
@@ -553,7 +553,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-14T12:00:00.000Z"
   },
   {
-    id: "cu-sane-10",
+    id: "e8c78ec3-fa8a-4b3b-a094-023b747e565e",
     name: "Sane",
     phone: "+1 226 246 3521",
     address: "16 Foster Crescent, Brampton",
@@ -561,7 +561,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-14T12:00:00.000Z"
   },
   {
-    id: "cu-keisha-11",
+    id: "6c4b3fc8-42d3-4e7e-a931-350572958fa3",
     name: "Keisha",
     phone: "Not provided",
     address: null,
@@ -569,7 +569,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-14T12:00:00.000Z"
   },
   {
-    id: "cu-shaiyee-12",
+    id: "1aaa7500-4ada-44d1-a9d3-403b46bfe66a",
     name: "Shaiyee",
     phone: "+1 (437) 263-3962",
     address: "1350 Ellesmere Rd, Scarborough ON M1P 0G6",
@@ -577,7 +577,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-15T12:00:00.000Z"
   },
   {
-    id: "cu-nofisat-13",
+    id: "57eb4893-ed69-43e0-a395-a46192c10ebb",
     name: "Nofisat",
     phone: "Not provided",
     address: "Event venue — details with customer",
@@ -585,7 +585,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-16T12:00:00.000Z"
   },
   {
-    id: "cu-adiat-14",
+    id: "7d68be1f-0d8a-4d09-a785-f9d01b9668d7",
     name: "Adiat",
     phone: "+1 647 740 2649",
     address: "20 Mississauga Valley Blvd",
@@ -593,7 +593,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-20T12:00:00.000Z"
   },
   {
-    id: "cu-adenike-15",
+    id: "d47761cf-9171-4543-a92d-0e06f1384aa4",
     name: "Adenike",
     phone: "+1 (647) 467-3118",
     address: "1117-543 Richmond Street West, Toronto Ontario M5V 0W9",
@@ -601,7 +601,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-20T12:00:00.000Z"
   },
   {
-    id: "cu-divine-kc-16",
+    id: "73a5c257-4f6b-4a06-ad98-fb30566e6c17",
     name: "Divine_kc",
     phone: "Not provided",
     address: null,
@@ -609,7 +609,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-21T12:00:00.000Z"
   },
   {
-    id: "cu-jewel-17",
+    id: "c91d359b-2e49-450a-a84e-65f9d5d42b09",
     name: "Jewel",
     phone: "Not provided",
     address: null,
@@ -617,7 +617,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-23T12:00:00.000Z"
   },
   {
-    id: "cu-laurent-david-18",
+    id: "410a2a7b-f1ee-4694-ae24-f2d8198b5bba",
     name: "Laurent David",
     phone: "+1 437-255-4279",
     address: "East Maple House, 181 Mill St, Toronto, ON M5A 1C8",
@@ -625,7 +625,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-25T12:00:00.000Z"
   },
   {
-    id: "cu-adaramoti-19",
+    id: "4b98899b-7286-4b8c-adae-5a39a3c13228",
     name: "Adaramoti",
     phone: "Not provided",
     address: "7021 Guildhall Court, Mississauga, Ontario L5N 6Y7",
@@ -633,7 +633,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-08-26T12:00:00.000Z"
   },
   {
-    id: "cu-nike-20",
+    id: "b51f1651-9a37-4e1e-a9c8-7319ecfeadf3",
     name: "Nike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -641,7 +641,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-03T12:00:00.000Z"
   },
   {
-    id: "cu-ablegod4eva-21",
+    id: "9ce9a56b-a66e-4aa9-a76b-41a76a3058c5",
     name: "ablegod4eva",
     phone: "+1 647 769 8684",
     address: "73 Broadway Avenue, Apt 2205",
@@ -649,7 +649,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-04T12:00:00.000Z"
   },
   {
-    id: "cu-my-own-world-22",
+    id: "c419b107-a39b-4238-af1b-55ca3191d152",
     name: "my_own_world",
     phone: "Not provided",
     address: null,
@@ -657,7 +657,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-04T12:00:00.000Z"
   },
   {
-    id: "cu-diana-delphonso-23",
+    id: "4bc01d50-e017-441a-a139-cb5609c11795",
     name: "Diana Delphonso",
     phone: "+1 437 665 8468",
     address: "1356 Woodbine Avenue, M4C 4G5",
@@ -665,7 +665,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-10T12:00:00.000Z"
   },
   {
-    id: "cu-moon-24",
+    id: "fe6a4e1b-4b78-4086-a587-cb820e4ae106",
     name: "Moon",
     phone: "+1 250 797 4216",
     address: "People's Church Play Place, 510 Mohawk Rd W, Hamilton, ON L9C 1X4",
@@ -673,7 +673,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-12T12:00:00.000Z"
   },
   {
-    id: "cu-abidemi-25",
+    id: "3fc9595d-2d52-4e88-a55c-66c4e04d4edd",
     name: "Abidemi",
     phone: "Not provided",
     address: "Address pending from customer",
@@ -681,7 +681,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-26T12:00:00.000Z"
   },
   {
-    id: "cu-jane-keke-26",
+    id: "a7833105-33ae-4aeb-a1db-84cb16fbabac",
     name: "Jane Keke",
     phone: "Not provided",
     address: "329 Vanilla Trail, Thorold",
@@ -689,7 +689,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-26T12:00:00.000Z"
   },
   {
-    id: "cu-sonia-27",
+    id: "276d17ab-bc34-4a71-a0e3-0361be35dd5b",
     name: "Sonia",
     phone: "+1 647-901-6615",
     address: "160 Vanderhoof Ave, M4G 0B7, Toronto (Leaside)",
@@ -697,7 +697,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-27T12:00:00.000Z"
   },
   {
-    id: "cu-ubuntu-28",
+    id: "5dbce2d5-c504-4c6d-a0ac-928f1b9471fc",
     name: "Ubuntu",
     phone: "Not provided",
     address: null,
@@ -705,7 +705,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-27T12:00:00.000Z"
   },
   {
-    id: "cu-amarachukwu-ezeh-29",
+    id: "f0beff4d-c830-4e7c-a7b0-4a33a5f0bf90",
     name: "Amarachukwu Ezeh",
     phone: "Not provided",
     address: null,
@@ -713,7 +713,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-09-27T12:00:00.000Z"
   },
   {
-    id: "cu-dhami-xo-30",
+    id: "0d94382f-cf15-4920-aeb4-9b59a97ef7ac",
     name: "dhami_xo",
     phone: "(506) 999-2886",
     address: "128 Grandravine Drive",
@@ -721,7 +721,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-03T12:00:00.000Z"
   },
   {
-    id: "cu-franchesca-31",
+    id: "82af803e-c985-47a7-a958-08faf93b8910",
     name: "Franchesca",
     phone: "+1 437 661 8059",
     address: "Bayhampton Crescent, Thornhill, ON L4J 7G9",
@@ -729,7 +729,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-04T12:00:00.000Z"
   },
   {
-    id: "cu-melissa-32",
+    id: "a0eb8032-bb61-438d-aa6f-708181125e30",
     name: "Melissa",
     phone: "+1 (416) 456-0698",
     address: "2910-159 Wellesley Street East, Toronto, M4Y 0H5",
@@ -737,7 +737,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-15T12:00:00.000Z"
   },
   {
-    id: "cu-mikazzi-33",
+    id: "cd6495ba-c88e-4772-a82b-fad4b8d666f6",
     name: "Mikazzi",
     phone: "+1 (437) 556-8263",
     address: "410 - 3250 Carding Mill Trail, Oakville, Ontario L6M 5T3",
@@ -745,7 +745,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-15T12:00:00.000Z"
   },
   {
-    id: "cu-latre-exclusivefashion-34",
+    id: "98eb0f81-aec3-4c0c-a7e1-499f917296b8",
     name: "latre_exclusivefashion",
     phone: "+1 (226) 637-2859",
     address: "5191 Dundas Street West, Unit 1105",
@@ -753,7 +753,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-16T12:00:00.000Z"
   },
   {
-    id: "cu-big-mo-35",
+    id: "a9d33c42-8790-4e32-a907-3d640c8fc7e3",
     name: "Big_mo",
     phone: "+1 437 246 9234",
     address: "50 Gerrard Street East, Toronto ON, M5B 1J6",
@@ -761,7 +761,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-17T12:00:00.000Z"
   },
   {
-    id: "cu-dolly-36",
+    id: "eff8f80e-25a5-4ae7-a045-fca6f363f2f7",
     name: "Dolly",
     phone: "Not provided",
     address: "65 Broadway Avenue, Toronto",
@@ -769,7 +769,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-17T12:00:00.000Z"
   },
   {
-    id: "cu-athomewuthdunni-daily-37",
+    id: "9c151caf-bd50-4676-aa2d-c070b38e5a0b",
     name: "athomewuthdunni_daily",
     phone: "Not provided",
     address: "81 Irwin Road, Unit 17, Etobicoke, Ontario M9W 5W1",
@@ -777,7 +777,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-22T12:00:00.000Z"
   },
   {
-    id: "cu-obiyinka-yetunde-38",
+    id: "a5a4c268-6953-4d0f-a36f-a8cfb11aa3a7",
     name: "Obiyinka Yetunde",
     phone: "Not provided",
     address: "990 Gainsborough Rd, London, ON N6H 5L4",
@@ -785,7 +785,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-23T12:00:00.000Z"
   },
   {
-    id: "cu-jessy-39",
+    id: "dd1975df-702a-4932-a5b0-0715101fc134",
     name: "Jessy",
     phone: "+1 (437) 473-7570",
     address: "19 Marta Ave, Side door, Scarborough",
@@ -793,7 +793,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-23T12:00:00.000Z"
   },
   {
-    id: "cu-latre-exclusivefashion-40",
+    id: "c1fcf2d1-c804-4d4a-aad3-a074d0dbe5b9",
     name: "latre_exclusivefashion",
     phone: "Not provided",
     address: "9 Valhalla Inn Road, Etobicoke",
@@ -801,7 +801,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-10-25T12:00:00.000Z"
   },
   {
-    id: "cu-ohenemaa-titi-41",
+    id: "6bf29153-132c-4268-a6c9-ce2ead79e9f8",
     name: "Ohenemaa Titi",
     phone: "+1 (437) 999-8157",
     address: "20 Huronia Crt, Brampton, ON L6S 2C7",
@@ -809,7 +809,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-11-07T12:00:00.000Z"
   },
   {
-    id: "cu-zikky-of-lagos-42",
+    id: "907933af-150b-4bb8-a1e4-15751ab18fcc",
     name: "Zikky of Lagos",
     phone: "+353 899 568066",
     address: "2847 Lake Shore Blvd W, Toronto, ON M8V 1H8",
@@ -817,7 +817,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-11-07T12:00:00.000Z"
   },
   {
-    id: "cu-ellah-43",
+    id: "338aae11-a060-43b3-a9ca-d3c8dd9e2a7c",
     name: "Ellah",
     phone: "+1 (416) 746-5600",
     address: "5 Mabelle Ave, Etobicoke",
@@ -825,7 +825,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-11-13T12:00:00.000Z"
   },
   {
-    id: "cu-w-44",
+    id: "550712ef-451c-490c-a107-cd843a2155be",
     name: "W",
     phone: "+1 (437) 605-2547",
     address: "263 Dixon Road, Apt 812",
@@ -833,7 +833,7 @@ export const seedCustomers: Customer[] = [
     updated_at: "2026-11-19T12:00:00.000Z"
   },
   {
-    id: "cu-rita-e-a-45",
+    id: "a6a0672d-0cfe-4d82-aaf8-28a426b5ad0c",
     name: "Rita E.A",
     phone: "+1 (437) 505-3468",
     address: "22 John Street, York M9N 0B1",
@@ -844,10 +844,10 @@ export const seedCustomers: Customer[] = [
 
 export const seedOrders: Order[] = [
   {
-    id: "ord-1",
+    id: "0bfddced-dbac-4805-aee8-2ad64cc2e07b",
     order_number: "ORD-2001",
     order_type: "food_delivery",
-    customer_id: "cu-busayo-1",
+    customer_id: "0e92b645-afc9-4820-aa43-7a8d97e5a82e",
     customer_name: "Busayo",
     phone: "+1 (215) 986-6991",
     address: "86 Greatfalls Blvd, Hamilton, Ontario",
@@ -873,9 +873,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-06T10:00:00.000Z",
     line_items: [
       {
-        id: "li-1-1",
-        order_id: "ord-1",
-        menu_item_id: "mi-signature",
+        id: "698861c3-586b-43a1-af23-0fed907bdef9",
+        order_id: "0bfddced-dbac-4805-aee8-2ad64cc2e07b",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -886,10 +886,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-2",
+    id: "3ed34d1f-c845-4a34-af88-c17e1ad036ab",
     order_number: "ORD-2002",
     order_type: "food_delivery",
-    customer_id: "cu-moyin-2",
+    customer_id: "c7a6193e-d26b-44ae-af52-ea90bc7c5a7f",
     customer_name: "Moyin",
     phone: "+1 437 246 9234",
     address: "50 Gerrard Street East, Toronto ON, M5B 1J6",
@@ -915,9 +915,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-06T10:00:00.000Z",
     line_items: [
       {
-        id: "li-2-1",
-        order_id: "ord-2",
-        menu_item_id: "mi-signature",
+        id: "d8f6c0cc-1f85-4329-a85a-7007cebdf6f9",
+        order_id: "3ed34d1f-c845-4a34-af88-c17e1ad036ab",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -928,10 +928,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-3",
+    id: "eb757b6e-34b1-4840-aee7-84a0c1d24d64",
     order_number: "ORD-2003",
     order_type: "food_delivery",
-    customer_id: "cu-adenike-3",
+    customer_id: "c37cf22e-83ab-43cc-abb1-1ad02863bfb5",
     customer_name: "Adenike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -957,9 +957,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-06T10:00:00.000Z",
     line_items: [
       {
-        id: "li-3-1",
-        order_id: "ord-3",
-        menu_item_id: "mi-jollof",
+        id: "70fa45d1-7a10-4bf8-a63d-530c155ff174",
+        order_id: "eb757b6e-34b1-4840-aee7-84a0c1d24d64",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "medium",
@@ -968,9 +968,9 @@ export const seedOrders: Order[] = [
         total_price: 80
       },
       {
-        id: "li-3-2",
-        order_id: "ord-3",
-        menu_item_id: "mi-fish",
+        id: "438a3f70-8138-46a8-a4bf-9973c77fea6d",
+        order_id: "eb757b6e-34b1-4840-aee7-84a0c1d24d64",
+        menu_item_id: "204b8f6e-933c-49cb-ac65-81f9ca321b38",
         name: "Peppered Fish",
         description: null,
         variant: "medium",
@@ -979,9 +979,9 @@ export const seedOrders: Order[] = [
         total_price: 160
       },
       {
-        id: "li-3-3",
-        order_id: "ord-3",
-        menu_item_id: "mi-turkey",
+        id: "3ecc1cc2-f6c8-4ada-ab3a-ae3ca8d28570",
+        order_id: "eb757b6e-34b1-4840-aee7-84a0c1d24d64",
+        menu_item_id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
         name: "Peppered Turkey",
         description: null,
         variant: "medium",
@@ -992,10 +992,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-4",
+    id: "68de3431-e2c0-4571-abaa-a1ecd10365f1",
     order_number: "ORD-2004",
     order_type: "food_delivery",
-    customer_id: "cu-oladunni-4",
+    customer_id: "31055266-716f-41ef-a4ec-f178aea67445",
     customer_name: "Oladunni",
     phone: "+1 6478348111",
     address: "412 Ellerslie Avenue, North York, M2R 1C2",
@@ -1021,9 +1021,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-07T10:00:00.000Z",
     line_items: [
       {
-        id: "li-4-1",
-        order_id: "ord-4",
-        menu_item_id: "mi-signature",
+        id: "a287840f-49bd-4855-aa22-f1e42b3e16b7",
+        order_id: "68de3431-e2c0-4571-abaa-a1ecd10365f1",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -1034,10 +1034,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-5",
+    id: "337472ce-9c53-4796-ae41-48320321a33a",
     order_number: "ORD-2005",
     order_type: "food_delivery",
-    customer_id: "cu-eno-attah-5",
+    customer_id: "73f830ea-8844-4bbd-aa38-cdd97b320baf",
     customer_name: "Eno Attah",
     phone: "+1 (437) 898-1125",
     address: "1603 Eglinton Avenue West, Toronto, Ontario M6E 0A1, Room 208",
@@ -1063,9 +1063,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-08T10:00:00.000Z",
     line_items: [
       {
-        id: "li-5-1",
-        order_id: "ord-5",
-        menu_item_id: "mi-tease",
+        id: "d43b5ee7-9320-4d8f-ab5f-2cad4ff6f004",
+        order_id: "337472ce-9c53-4796-ae41-48320321a33a",
+        menu_item_id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
         name: "The Tease Box",
         description: null,
         variant: null,
@@ -1076,10 +1076,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-6",
+    id: "804ecb22-57f6-4b72-ae31-63b45e3921e6",
     order_number: "ORD-2006",
     order_type: "food_delivery",
-    customer_id: "cu-dominic-6",
+    customer_id: "2f309880-686b-4bdf-ab9c-7466c1e2be8b",
     customer_name: "Dominic",
     phone: "+1 416-948-1803",
     address: "5001 Corporate Drive, Unit 607, Burlington ON",
@@ -1105,9 +1105,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-09T10:00:00.000Z",
     line_items: [
       {
-        id: "li-6-1",
-        order_id: "ord-6",
-        menu_item_id: "mi-efo",
+        id: "9bc81671-c9d2-4944-ad43-9523fed9725e",
+        order_id: "804ecb22-57f6-4b72-ae31-63b45e3921e6",
+        menu_item_id: "16dd219b-f7a7-455e-a61b-fd32e9ea1904",
         name: "Efo Riro",
         description: "2L",
         variant: null,
@@ -1116,9 +1116,9 @@ export const seedOrders: Order[] = [
         total_price: 50
       },
       {
-        id: "li-6-2",
-        order_id: "ord-6",
-        menu_item_id: "mi-fish",
+        id: "85e725be-953f-4a03-a1c0-44ea64d32ada",
+        order_id: "804ecb22-57f6-4b72-ae31-63b45e3921e6",
+        menu_item_id: "204b8f6e-933c-49cb-ac65-81f9ca321b38",
         name: "Peppered Fish",
         description: null,
         variant: "small",
@@ -1127,9 +1127,9 @@ export const seedOrders: Order[] = [
         total_price: 90
       },
       {
-        id: "li-6-3",
-        order_id: "ord-6",
-        menu_item_id: "mi-jollof",
+        id: "c616992a-afff-4d72-a258-874ecfa251ae",
+        order_id: "804ecb22-57f6-4b72-ae31-63b45e3921e6",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: "Very mild pepper",
         variant: "small",
@@ -1140,10 +1140,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-7",
+    id: "c88e1447-5e95-4be5-ad41-ac469cbfd30b",
     order_number: "ORD-2007",
     order_type: "food_delivery",
-    customer_id: "cu-opemititi-7",
+    customer_id: "71ca965d-5d6e-4bc0-aaae-a0089d65b3e8",
     customer_name: "Opemititi",
     phone: "+1 437 333 0153",
     address: "Apartment 305, 2356 Eglinton Ave E, Scarborough, ON M1K 2P1",
@@ -1169,9 +1169,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-09T10:00:00.000Z",
     line_items: [
       {
-        id: "li-7-1",
-        order_id: "ord-7",
-        menu_item_id: "mi-signature",
+        id: "2a90bab7-e5a2-4c75-ad3f-e0b8c37074d1",
+        order_id: "c88e1447-5e95-4be5-ad41-ac469cbfd30b",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -1182,10 +1182,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-8",
+    id: "1733ded8-47cd-4db8-a902-1f29b595f69a",
     order_number: "ORD-2008",
     order_type: "food_delivery",
-    customer_id: "cu-adenike-3",
+    customer_id: "c37cf22e-83ab-43cc-abb1-1ad02863bfb5",
     customer_name: "Adenike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -1211,9 +1211,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-13T10:00:00.000Z",
     line_items: [
       {
-        id: "li-8-1",
-        order_id: "ord-8",
-        menu_item_id: "mi-efo",
+        id: "54fbbdb6-5cf9-41f2-aade-8b178b120c06",
+        order_id: "1733ded8-47cd-4db8-a902-1f29b595f69a",
+        menu_item_id: "16dd219b-f7a7-455e-a61b-fd32e9ea1904",
         name: "Efo Riro",
         description: "3L",
         variant: null,
@@ -1222,9 +1222,9 @@ export const seedOrders: Order[] = [
         total_price: 75
       },
       {
-        id: "li-8-2",
-        order_id: "ord-8",
-        menu_item_id: "mi-jollof",
+        id: "003c9860-bfbd-4c0b-a63b-b72be76b9532",
+        order_id: "1733ded8-47cd-4db8-a902-1f29b595f69a",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "medium",
@@ -1233,9 +1233,9 @@ export const seedOrders: Order[] = [
         total_price: 80
       },
       {
-        id: "li-8-3",
-        order_id: "ord-8",
-        menu_item_id: "mi-egusi",
+        id: "4d5808f5-a6f1-4101-a361-07cb78e935d0",
+        order_id: "1733ded8-47cd-4db8-a902-1f29b595f69a",
+        menu_item_id: "ddaf6286-9dbd-49f6-a4f1-085f29e33222",
         name: "Egusi",
         description: "3L",
         variant: null,
@@ -1246,10 +1246,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-9",
+    id: "685277bf-e5f9-4af7-af03-2bbc462a2916",
     order_number: "ORD-2009",
     order_type: "food_delivery",
-    customer_id: "cu-abisola-8",
+    customer_id: "76864213-8bb3-42da-a7ea-288cb76d81fe",
     customer_name: "Abisola",
     phone: "+1 587 830 5192",
     address: "2325-68 Corporate Drive, Scarborough ON M1H 3H3",
@@ -1275,9 +1275,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-13T10:00:00.000Z",
     line_items: [
       {
-        id: "li-9-1",
-        order_id: "ord-9",
-        menu_item_id: "mi-culture",
+        id: "fa4f0bbc-ba00-4c02-a89c-7a30df194c47",
+        order_id: "685277bf-e5f9-4af7-af03-2bbc462a2916",
+        menu_item_id: "da626bdc-0d5f-4427-a841-e86707651a75",
         name: "Culture Box",
         description: "Afang, efo, egusi, okra",
         variant: null,
@@ -1286,9 +1286,9 @@ export const seedOrders: Order[] = [
         total_price: 180
       },
       {
-        id: "li-9-2",
-        order_id: "ord-9",
-        menu_item_id: "mi-turkey",
+        id: "9bb35e4c-53bc-49a1-ae57-efefed2536ff",
+        order_id: "685277bf-e5f9-4af7-af03-2bbc462a2916",
+        menu_item_id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
         name: "Peppered Turkey",
         description: null,
         variant: "small",
@@ -1299,10 +1299,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-10",
+    id: "aaff253c-93a5-4825-a62e-ccac019a70c9",
     order_number: "ORD-2010",
     order_type: "food_delivery",
-    customer_id: "cu-idara-9",
+    customer_id: "749d1057-877d-4365-a0eb-081301995aa2",
     customer_name: "Idara",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -1328,8 +1328,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-14T10:00:00.000Z",
     line_items: [
       {
-        id: "li-10-1",
-        order_id: "ord-10",
+        id: "c6004e1d-6a46-4a4c-a7b9-608ed6453cd8",
+        order_id: "aaff253c-93a5-4825-a62e-ccac019a70c9",
         menu_item_id: null,
         name: "Half Jollof + Half Fried Rice",
         description: "Small tray, very mild pepper",
@@ -1341,10 +1341,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-11",
+    id: "7d8097c2-b543-4f22-a436-32ef48e7a6fd",
     order_number: "ORD-2011",
     order_type: "food_delivery",
-    customer_id: "cu-sane-10",
+    customer_id: "e8c78ec3-fa8a-4b3b-a094-023b747e565e",
     customer_name: "Sane",
     phone: "+1 226 246 3521",
     address: "16 Foster Crescent, Brampton",
@@ -1370,9 +1370,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-14T10:00:00.000Z",
     line_items: [
       {
-        id: "li-11-1",
-        order_id: "ord-11",
-        menu_item_id: "mi-tease",
+        id: "1e593169-8e68-4525-af48-eaddf13b86d3",
+        order_id: "7d8097c2-b543-4f22-a436-32ef48e7a6fd",
+        menu_item_id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
         name: "The Tease Box",
         description: null,
         variant: null,
@@ -1383,10 +1383,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-12",
+    id: "1ac0f992-a17e-4275-acad-dc1fb147c006",
     order_number: "ORD-2012",
     order_type: "food_delivery",
-    customer_id: "cu-keisha-11",
+    customer_id: "6c4b3fc8-42d3-4e7e-a931-350572958fa3",
     customer_name: "Keisha",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -1412,8 +1412,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-14T10:00:00.000Z",
     line_items: [
       {
-        id: "li-12-1",
-        order_id: "ord-12",
+        id: "de5c49c3-61ec-4fb7-a391-655d98e05660",
+        order_id: "1ac0f992-a17e-4275-acad-dc1fb147c006",
         menu_item_id: null,
         name: "Sample Platter",
         description: "Fried rice, jollof, peppered turkey, peppered chicken, peppered fish, egusi, ogbono, efo, assorted buka stew",
@@ -1425,10 +1425,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-13",
+    id: "76b889fc-777e-42be-a8c6-ba14662ce524",
     order_number: "ORD-2013",
     order_type: "food_delivery",
-    customer_id: "cu-shaiyee-12",
+    customer_id: "1aaa7500-4ada-44d1-a9d3-403b46bfe66a",
     customer_name: "Shaiyee",
     phone: "+1 (437) 263-3962",
     address: "1350 Ellesmere Rd, Scarborough ON M1P 0G6",
@@ -1454,9 +1454,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-15T10:00:00.000Z",
     line_items: [
       {
-        id: "li-13-1",
-        order_id: "ord-13",
-        menu_item_id: "mi-breakfast",
+        id: "ebc03bb0-cc4b-4213-a414-f82bd5dbfe35",
+        order_id: "76b889fc-777e-42be-a8c6-ba14662ce524",
+        menu_item_id: "912f7fdb-6461-4f0c-a394-cc8cc3ee77e6",
         name: "Breakfast Box",
         description: null,
         variant: null,
@@ -1465,9 +1465,9 @@ export const seedOrders: Order[] = [
         total_price: 100
       },
       {
-        id: "li-13-2",
-        order_id: "ord-13",
-        menu_item_id: "mi-balloon",
+        id: "abea7c5d-96de-45f5-adf5-1c57612106a8",
+        order_id: "76b889fc-777e-42be-a8c6-ba14662ce524",
+        menu_item_id: "1b85276e-7b9a-4b0d-a17d-8f0a639abda8",
         name: "Balloon",
         description: null,
         variant: null,
@@ -1478,10 +1478,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-14",
+    id: "658a0419-a853-4706-a184-bf4b94bc4549",
     order_number: "ORD-2014",
     order_type: "event_catering",
-    customer_id: "cu-nofisat-13",
+    customer_id: "57eb4893-ed69-43e0-a395-a46192c10ebb",
     customer_name: "Nofisat",
     phone: "Not provided",
     address: "Event venue — details with customer",
@@ -1507,8 +1507,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-16T10:00:00.000Z",
     line_items: [
       {
-        id: "li-14-1",
-        order_id: "ord-14",
+        id: "1b09b9d6-c0e4-4e20-a99a-e90a28b65406",
+        order_id: "658a0419-a853-4706-a184-bf4b94bc4549",
         menu_item_id: null,
         name: "Kids Birthday Catering Package",
         description: "Rice & mains, proteins, finger foods, sides, desserts, beverages — NO RED AND BLACK",
@@ -1520,10 +1520,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-15",
+    id: "407d751b-0e3b-436e-a3c1-2f0e4f7f230b",
     order_number: "ORD-2015",
     order_type: "food_delivery",
-    customer_id: "cu-adiat-14",
+    customer_id: "7d68be1f-0d8a-4d09-a785-f9d01b9668d7",
     customer_name: "Adiat",
     phone: "+1 647 740 2649",
     address: "20 Mississauga Valley Blvd",
@@ -1549,9 +1549,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-20T10:00:00.000Z",
     line_items: [
       {
-        id: "li-15-1",
-        order_id: "ord-15",
-        menu_item_id: "mi-fish",
+        id: "647bb38f-da9e-453c-aaf1-ecc721c15d1b",
+        order_id: "407d751b-0e3b-436e-a3c1-2f0e4f7f230b",
+        menu_item_id: "204b8f6e-933c-49cb-ac65-81f9ca321b38",
         name: "Peppered Fish",
         description: null,
         variant: "small",
@@ -1560,9 +1560,9 @@ export const seedOrders: Order[] = [
         total_price: 90
       },
       {
-        id: "li-15-2",
-        order_id: "ord-15",
-        menu_item_id: "mi-jollof",
+        id: "1d24f08d-9029-4d45-abc4-f5f86cc680d5",
+        order_id: "407d751b-0e3b-436e-a3c1-2f0e4f7f230b",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "small",
@@ -1571,9 +1571,9 @@ export const seedOrders: Order[] = [
         total_price: 50
       },
       {
-        id: "li-15-3",
-        order_id: "ord-15",
-        menu_item_id: "mi-fried-rice",
+        id: "023fece1-f71a-4cbb-abb2-b138bcdfeaf6",
+        order_id: "407d751b-0e3b-436e-a3c1-2f0e4f7f230b",
+        menu_item_id: "dff57217-eac3-4f48-a5ae-c6170ec6fd7d",
         name: "Fried Rice",
         description: "Replace hotdogs with liver",
         variant: "small",
@@ -1584,10 +1584,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-16",
+    id: "4447d022-88e7-4c54-ac10-9e6df18e7ef5",
     order_number: "ORD-2016",
     order_type: "food_delivery",
-    customer_id: "cu-adenike-15",
+    customer_id: "d47761cf-9171-4543-a92d-0e06f1384aa4",
     customer_name: "Adenike",
     phone: "+1 (647) 467-3118",
     address: "1117-543 Richmond Street West, Toronto Ontario M5V 0W9",
@@ -1613,9 +1613,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-20T10:00:00.000Z",
     line_items: [
       {
-        id: "li-16-1",
-        order_id: "ord-16",
-        menu_item_id: "mi-signature",
+        id: "343251e3-4a19-421d-a6d4-f380b0f9b6eb",
+        order_id: "4447d022-88e7-4c54-ac10-9e6df18e7ef5",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -1626,10 +1626,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-17",
+    id: "ebb2f56c-aa60-44c1-a631-b307e5925635",
     order_number: "ORD-2017",
     order_type: "food_delivery",
-    customer_id: "cu-divine-kc-16",
+    customer_id: "73a5c257-4f6b-4a06-ad98-fb30566e6c17",
     customer_name: "Divine_kc",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -1655,8 +1655,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-21T10:00:00.000Z",
     line_items: [
       {
-        id: "li-17-1",
-        order_id: "ord-17",
+        id: "26fae8eb-ec58-4937-a014-e773ee7bb06f",
+        order_id: "ebb2f56c-aa60-44c1-a631-b307e5925635",
         menu_item_id: null,
         name: "The Signature Box",
         description: "Swap turkey for suya wings",
@@ -1666,9 +1666,9 @@ export const seedOrders: Order[] = [
         total_price: 150
       },
       {
-        id: "li-17-2",
-        order_id: "ord-17",
-        menu_item_id: "mi-ofada",
+        id: "92459df4-437f-4340-aa57-444f5fc7f1e2",
+        order_id: "ebb2f56c-aa60-44c1-a631-b307e5925635",
+        menu_item_id: "443003c4-519a-4982-a63d-5e6c6d754043",
         name: "Ofada Sauce (Red)",
         description: "500ml",
         variant: null,
@@ -1679,10 +1679,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-18",
+    id: "5af6a1f5-664e-4164-a90a-e8451d96408a",
     order_number: "ORD-2018",
     order_type: "food_delivery",
-    customer_id: "cu-jewel-17",
+    customer_id: "c91d359b-2e49-450a-a84e-65f9d5d42b09",
     customer_name: "Jewel",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -1708,9 +1708,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-23T10:00:00.000Z",
     line_items: [
       {
-        id: "li-18-1",
-        order_id: "ord-18",
-        menu_item_id: "mi-signature",
+        id: "2300ebfc-3c1f-41b0-a968-3e4bca3dc95f",
+        order_id: "5af6a1f5-664e-4164-a90a-e8451d96408a",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -1721,10 +1721,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-19",
+    id: "c4df07e2-2a12-413a-a8a9-37c58fae3ca5",
     order_number: "ORD-2019",
     order_type: "food_delivery",
-    customer_id: "cu-laurent-david-18",
+    customer_id: "410a2a7b-f1ee-4694-ae24-f2d8198b5bba",
     customer_name: "Laurent David",
     phone: "+1 437-255-4279",
     address: "East Maple House, 181 Mill St, Toronto, ON M5A 1C8",
@@ -1750,9 +1750,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-25T10:00:00.000Z",
     line_items: [
       {
-        id: "li-19-1",
-        order_id: "ord-19",
-        menu_item_id: "mi-fried-rice",
+        id: "9dddaf17-0ed9-4111-a11a-68c56b4c84b1",
+        order_id: "c4df07e2-2a12-413a-a8a9-37c58fae3ca5",
+        menu_item_id: "dff57217-eac3-4f48-a5ae-c6170ec6fd7d",
         name: "Fried Rice",
         description: null,
         variant: "small",
@@ -1761,9 +1761,9 @@ export const seedOrders: Order[] = [
         total_price: 70
       },
       {
-        id: "li-19-2",
-        order_id: "ord-19",
-        menu_item_id: "mi-jollof",
+        id: "cb507347-6fe6-414b-aedd-51392d269b95",
+        order_id: "c4df07e2-2a12-413a-a8a9-37c58fae3ca5",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "small",
@@ -1772,9 +1772,9 @@ export const seedOrders: Order[] = [
         total_price: 50
       },
       {
-        id: "li-19-3",
-        order_id: "ord-19",
-        menu_item_id: "mi-turkey",
+        id: "930c825d-f11d-44f1-aa81-620e20718b11",
+        order_id: "c4df07e2-2a12-413a-a8a9-37c58fae3ca5",
+        menu_item_id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
         name: "Peppered Turkey",
         description: null,
         variant: "small",
@@ -1783,9 +1783,9 @@ export const seedOrders: Order[] = [
         total_price: 80
       },
       {
-        id: "li-19-4",
-        order_id: "ord-19",
-        menu_item_id: "mi-chicken",
+        id: "2e619af0-7972-4ff0-a4e4-b046fe515532",
+        order_id: "c4df07e2-2a12-413a-a8a9-37c58fae3ca5",
+        menu_item_id: "c1439bdd-90c8-4e8c-a800-2cc0e2a7d5da",
         name: "Peppered Chicken",
         description: null,
         variant: "small",
@@ -1796,10 +1796,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-20",
+    id: "9f6d4db2-fe1b-4dda-a68b-5945c063c7c8",
     order_number: "ORD-2020",
     order_type: "food_delivery",
-    customer_id: "cu-adaramoti-19",
+    customer_id: "4b98899b-7286-4b8c-adae-5a39a3c13228",
     customer_name: "Adaramoti",
     phone: "Not provided",
     address: "7021 Guildhall Court, Mississauga, Ontario L5N 6Y7",
@@ -1825,9 +1825,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-08-26T10:00:00.000Z",
     line_items: [
       {
-        id: "li-20-1",
-        order_id: "ord-20",
-        menu_item_id: "mi-turkey",
+        id: "15606007-4720-4686-aec8-6aa9271f1808",
+        order_id: "9f6d4db2-fe1b-4dda-a68b-5945c063c7c8",
+        menu_item_id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
         name: "Peppered Turkey",
         description: null,
         variant: "small",
@@ -1838,10 +1838,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-21",
+    id: "5f4e57b3-87e4-4207-a653-1a76376680f3",
     order_number: "ORD-2021",
     order_type: "food_delivery",
-    customer_id: "cu-nike-20",
+    customer_id: "b51f1651-9a37-4e1e-a9c8-7319ecfeadf3",
     customer_name: "Nike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -1867,9 +1867,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-03T10:00:00.000Z",
     line_items: [
       {
-        id: "li-21-1",
-        order_id: "ord-21",
-        menu_item_id: "mi-jollof",
+        id: "1bf99b55-d267-49b3-a585-f3f61a6fea80",
+        order_id: "5f4e57b3-87e4-4207-a653-1a76376680f3",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "large",
@@ -1878,9 +1878,9 @@ export const seedOrders: Order[] = [
         total_price: 110
       },
       {
-        id: "li-21-2",
-        order_id: "ord-21",
-        menu_item_id: "mi-fish",
+        id: "b1f6fcee-f1e2-4f3a-acd0-c620348de6f2",
+        order_id: "5f4e57b3-87e4-4207-a653-1a76376680f3",
+        menu_item_id: "204b8f6e-933c-49cb-ac65-81f9ca321b38",
         name: "Peppered Fish",
         description: null,
         variant: "medium",
@@ -1889,9 +1889,9 @@ export const seedOrders: Order[] = [
         total_price: 160
       },
       {
-        id: "li-21-3",
-        order_id: "ord-21",
-        menu_item_id: "mi-ayamase-green",
+        id: "5ec20a1f-e50e-4a5e-a1ee-8660ad39f3fd",
+        order_id: "5f4e57b3-87e4-4207-a653-1a76376680f3",
+        menu_item_id: "dc5ef0dc-f82a-4fea-a8ff-719b9367f0d0",
         name: "Ayamase (Green)",
         description: "2L",
         variant: null,
@@ -1902,10 +1902,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-22",
+    id: "b14dea4d-34ca-4bd7-a777-01f415b73fbe",
     order_number: "ORD-2022",
     order_type: "food_delivery",
-    customer_id: "cu-ablegod4eva-21",
+    customer_id: "9ce9a56b-a66e-4aa9-a76b-41a76a3058c5",
     customer_name: "ablegod4eva",
     phone: "+1 647 769 8684",
     address: "73 Broadway Avenue, Apt 2205",
@@ -1931,9 +1931,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-04T10:00:00.000Z",
     line_items: [
       {
-        id: "li-22-1",
-        order_id: "ord-22",
-        menu_item_id: "mi-tease",
+        id: "4dd965b1-bc49-44cf-a355-ec634b58a1cd",
+        order_id: "b14dea4d-34ca-4bd7-a777-01f415b73fbe",
+        menu_item_id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
         name: "The Tease Box",
         description: null,
         variant: null,
@@ -1944,10 +1944,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-23",
+    id: "047426c6-aec9-4873-a968-d82c556ac6f1",
     order_number: "ORD-2023",
     order_type: "food_delivery",
-    customer_id: "cu-my-own-world-22",
+    customer_id: "c419b107-a39b-4238-af1b-55ca3191d152",
     customer_name: "my_own_world",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -1973,8 +1973,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-04T10:00:00.000Z",
     line_items: [
       {
-        id: "li-23-1",
-        order_id: "ord-23",
+        id: "ccd1e442-9907-4894-ac31-010fc333590d",
+        order_id: "047426c6-aec9-4873-a968-d82c556ac6f1",
         menu_item_id: null,
         name: "The Tease Box",
         description: "Substitute pancakes for croissant sandwich turkey, no bacon",
@@ -1986,10 +1986,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-24",
+    id: "5667232d-13f7-4a0d-adae-92746fb06d5a",
     order_number: "ORD-2024",
     order_type: "food_delivery",
-    customer_id: "cu-diana-delphonso-23",
+    customer_id: "4bc01d50-e017-441a-a139-cb5609c11795",
     customer_name: "Diana Delphonso",
     phone: "+1 437 665 8468",
     address: "1356 Woodbine Avenue, M4C 4G5",
@@ -2015,9 +2015,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-10T10:00:00.000Z",
     line_items: [
       {
-        id: "li-24-1",
-        order_id: "ord-24",
-        menu_item_id: "mi-signature",
+        id: "0e3f4385-8bf6-4808-a1be-a04a69540bd3",
+        order_id: "5667232d-13f7-4a0d-adae-92746fb06d5a",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -2026,9 +2026,9 @@ export const seedOrders: Order[] = [
         total_price: 150
       },
       {
-        id: "li-24-2",
-        order_id: "ord-24",
-        menu_item_id: "mi-balloon",
+        id: "fc28a922-e47c-409b-a68d-7913cad28bcd",
+        order_id: "5667232d-13f7-4a0d-adae-92746fb06d5a",
+        menu_item_id: "1b85276e-7b9a-4b0d-a17d-8f0a639abda8",
         name: "30 Years Old Balloon",
         description: null,
         variant: null,
@@ -2037,9 +2037,9 @@ export const seedOrders: Order[] = [
         total_price: 25
       },
       {
-        id: "li-24-3",
-        order_id: "ord-24",
-        menu_item_id: "mi-polaroid",
+        id: "cdc9d22b-64c4-427a-a855-ec797ae4ab1c",
+        order_id: "5667232d-13f7-4a0d-adae-92746fb06d5a",
+        menu_item_id: "6758510b-7e13-4b7a-a80e-0dfe2928609a",
         name: "Polaroid",
         description: null,
         variant: null,
@@ -2050,10 +2050,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-25",
+    id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
     order_number: "ORD-2025",
     order_type: "event_catering",
-    customer_id: "cu-moon-24",
+    customer_id: "fe6a4e1b-4b78-4086-a587-cb820e4ae106",
     customer_name: "Moon",
     phone: "+1 250 797 4216",
     address: "People's Church Play Place, 510 Mohawk Rd W, Hamilton, ON L9C 1X4",
@@ -2079,9 +2079,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-12T10:00:00.000Z",
     line_items: [
       {
-        id: "li-25-1",
-        order_id: "ord-25",
-        menu_item_id: "mi-jollof",
+        id: "c19ded8a-d8aa-43be-ae12-77f16a73e8f8",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "large",
@@ -2090,9 +2090,9 @@ export const seedOrders: Order[] = [
         total_price: 220
       },
       {
-        id: "li-25-2",
-        order_id: "ord-25",
-        menu_item_id: "mi-fried-rice",
+        id: "c2549017-6f47-4b32-a6ce-cf3c82114d71",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
+        menu_item_id: "dff57217-eac3-4f48-a5ae-c6170ec6fd7d",
         name: "Fried Rice",
         description: null,
         variant: "large",
@@ -2101,9 +2101,9 @@ export const seedOrders: Order[] = [
         total_price: 120
       },
       {
-        id: "li-25-3",
-        order_id: "ord-25",
-        menu_item_id: "mi-pasta",
+        id: "f80c9ce9-6b3f-453e-a0ca-5ea963ca5151",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
+        menu_item_id: "2632fced-113a-4765-a17a-8617fdb8de1a",
         name: "Pasta",
         description: null,
         variant: "small",
@@ -2112,9 +2112,9 @@ export const seedOrders: Order[] = [
         total_price: 50
       },
       {
-        id: "li-25-4",
-        order_id: "ord-25",
-        menu_item_id: "mi-turkey",
+        id: "73493719-145c-4a80-a969-07ed97588ee5",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
+        menu_item_id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
         name: "Peppered Turkey",
         description: null,
         variant: "large",
@@ -2123,8 +2123,8 @@ export const seedOrders: Order[] = [
         total_price: 320
       },
       {
-        id: "li-25-5",
-        order_id: "ord-25",
+        id: "ffed78d7-4927-434d-a6e1-b8481d35a642",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
         menu_item_id: null,
         name: "Mini Hotdogs",
         description: "20 pcs",
@@ -2134,9 +2134,9 @@ export const seedOrders: Order[] = [
         total_price: 80
       },
       {
-        id: "li-25-6",
-        order_id: "ord-25",
-        menu_item_id: "mi-slider",
+        id: "47ae5f71-daa6-427e-a2d8-890fc431612e",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
+        menu_item_id: "27745932-b1b4-4ed3-abbe-eec852848142",
         name: "Mini Beef Sliders",
         description: "20 pcs",
         variant: null,
@@ -2145,9 +2145,9 @@ export const seedOrders: Order[] = [
         total_price: 72
       },
       {
-        id: "li-25-7",
-        order_id: "ord-25",
-        menu_item_id: "mi-meat-pie",
+        id: "f04583df-5a51-48c6-a73e-262f1808ce48",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
+        menu_item_id: "e19cb160-bc36-46f0-a562-0d12f7b87154",
         name: "Mini Meat Pie",
         description: "20 pcs",
         variant: null,
@@ -2156,8 +2156,8 @@ export const seedOrders: Order[] = [
         total_price: 40
       },
       {
-        id: "li-25-8",
-        order_id: "ord-25",
+        id: "730bfe54-2c0c-4756-a12c-05086f069085",
+        order_id: "171ad377-3c3b-4549-a2f8-ff5dfc1c70f1",
         menu_item_id: null,
         name: "Signature Mocktails",
         description: "32 cups (12 for kids)",
@@ -2169,10 +2169,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-26",
+    id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
     order_number: "ORD-2026",
     order_type: "event_catering",
-    customer_id: "cu-abidemi-25",
+    customer_id: "3fc9595d-2d52-4e88-a55c-66c4e04d4edd",
     customer_name: "Abidemi",
     phone: "Not provided",
     address: "Address pending from customer",
@@ -2198,8 +2198,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-26T10:00:00.000Z",
     line_items: [
       {
-        id: "li-26-1",
-        order_id: "ord-26",
+        id: "17316734-47dd-4c06-a4d2-24c077c2084b",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
         menu_item_id: null,
         name: "Mini Hotdogs",
         description: "30 pcs",
@@ -2209,9 +2209,9 @@ export const seedOrders: Order[] = [
         total_price: 120
       },
       {
-        id: "li-26-2",
-        order_id: "ord-26",
-        menu_item_id: "mi-slider",
+        id: "1b0c74e3-3629-47a9-abe0-7ef66af796f4",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
+        menu_item_id: "27745932-b1b4-4ed3-abbe-eec852848142",
         name: "Mini Beef Sliders",
         description: "30 pcs",
         variant: null,
@@ -2220,9 +2220,9 @@ export const seedOrders: Order[] = [
         total_price: 108
       },
       {
-        id: "li-26-3",
-        order_id: "ord-26",
-        menu_item_id: "mi-spring-roll",
+        id: "eaf28fc6-7ee3-4ec2-aa4a-c192d2e0020e",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
+        menu_item_id: "eb2abe2a-7e60-4994-abe2-8bfb46f097f2",
         name: "Spring Roll",
         description: "20 pcs",
         variant: null,
@@ -2231,8 +2231,8 @@ export const seedOrders: Order[] = [
         total_price: 40
       },
       {
-        id: "li-26-4",
-        order_id: "ord-26",
+        id: "e73bbe69-d682-4dd6-a543-873da9ac217a",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
         menu_item_id: null,
         name: "Prawn in Mayonnaise Rolls",
         description: "15 pcs",
@@ -2242,9 +2242,9 @@ export const seedOrders: Order[] = [
         total_price: 45
       },
       {
-        id: "li-26-5",
-        order_id: "ord-26",
-        menu_item_id: "mi-puff",
+        id: "2a1d9526-5c57-4d16-aa52-3cee737ddec2",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
+        menu_item_id: "e9249a30-b974-4089-a516-be0e6837f5c9",
         name: "Puff-Puff",
         description: "50 pcs",
         variant: null,
@@ -2253,9 +2253,9 @@ export const seedOrders: Order[] = [
         total_price: 8
       },
       {
-        id: "li-26-6",
-        order_id: "ord-26",
-        menu_item_id: "mi-cake-pops",
+        id: "5715c592-d34e-42a3-a4cb-f2079227968f",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
+        menu_item_id: "27aacdf8-082a-4f9e-a63a-9084e02baa0e",
         name: "Cake Pops",
         description: "25 pcs",
         variant: null,
@@ -2264,8 +2264,8 @@ export const seedOrders: Order[] = [
         total_price: 30
       },
       {
-        id: "li-26-7",
-        order_id: "ord-26",
+        id: "717b4711-ddb8-4c3a-a9fa-be8e1bfd8fbd",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
         menu_item_id: null,
         name: "Doughnuts",
         description: "20 pcs",
@@ -2275,9 +2275,9 @@ export const seedOrders: Order[] = [
         total_price: 40
       },
       {
-        id: "li-26-8",
-        order_id: "ord-26",
-        menu_item_id: "mi-cake-slice",
+        id: "b73b68f4-0647-4544-a3da-198dce45312f",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
+        menu_item_id: "e32d75ff-38b2-42f2-a3c9-d5b7242bb450",
         name: "Cake Slices",
         description: "20 pcs",
         variant: null,
@@ -2286,9 +2286,9 @@ export const seedOrders: Order[] = [
         total_price: 32
       },
       {
-        id: "li-26-9",
-        order_id: "ord-26",
-        menu_item_id: "mi-fruit-cups",
+        id: "28424176-941b-4bd5-af29-59e2f55035f4",
+        order_id: "64351655-2842-4b2e-a6aa-61a03a2b47ec",
+        menu_item_id: "a98d1415-10c1-4e0a-ae97-dba30e644089",
         name: "Fresh Fruit Cups",
         description: "15 pcs",
         variant: null,
@@ -2299,10 +2299,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-27",
+    id: "5b67963a-e67c-4e5c-afc9-dca92f7ace2c",
     order_number: "ORD-2027",
     order_type: "event_catering",
-    customer_id: "cu-jane-keke-26",
+    customer_id: "a7833105-33ae-4aeb-a1db-84cb16fbabac",
     customer_name: "Jane Keke",
     phone: "Not provided",
     address: "329 Vanilla Trail, Thorold",
@@ -2328,8 +2328,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-26T10:00:00.000Z",
     line_items: [
       {
-        id: "li-27-1",
-        order_id: "ord-27",
+        id: "aa1fbbc1-4dd2-44e5-a0a4-2381ac985387",
+        order_id: "5b67963a-e67c-4e5c-afc9-dca92f7ace2c",
         menu_item_id: null,
         name: "PJ Birthday Catering Package",
         description: "Jollof, fried rice, pasta, peppered turkey, grilled chicken, wings, mini hotdogs/sliders, desserts, signature cocktails",
@@ -2341,10 +2341,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-28",
+    id: "fd16567e-1a53-4be9-a6e4-0f8a94692538",
     order_number: "ORD-2028",
     order_type: "food_delivery",
-    customer_id: "cu-sonia-27",
+    customer_id: "276d17ab-bc34-4a71-a0e3-0361be35dd5b",
     customer_name: "Sonia",
     phone: "+1 647-901-6615",
     address: "160 Vanderhoof Ave, M4G 0B7, Toronto (Leaside)",
@@ -2370,8 +2370,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-27T10:00:00.000Z",
     line_items: [
       {
-        id: "li-28-1",
-        order_id: "ord-28",
+        id: "4377a6bc-f776-467a-abf0-bc727e2ddef8",
+        order_id: "fd16567e-1a53-4be9-a6e4-0f8a94692538",
         menu_item_id: null,
         name: "The Signature Box",
         description: "Substitute pasta box for a second jollof box",
@@ -2381,9 +2381,9 @@ export const seedOrders: Order[] = [
         total_price: 150
       },
       {
-        id: "li-28-2",
-        order_id: "ord-28",
-        menu_item_id: "mi-balloon",
+        id: "3066b4d6-1c52-4a74-a2d7-6ce1e442b4a8",
+        order_id: "fd16567e-1a53-4be9-a6e4-0f8a94692538",
+        menu_item_id: "1b85276e-7b9a-4b0d-a17d-8f0a639abda8",
         name: "Helium Balloon",
         description: null,
         variant: null,
@@ -2392,9 +2392,9 @@ export const seedOrders: Order[] = [
         total_price: 35
       },
       {
-        id: "li-28-3",
-        order_id: "ord-28",
-        menu_item_id: "mi-polaroid",
+        id: "9de69b02-e797-4473-a0a4-1beb67fbdc08",
+        order_id: "fd16567e-1a53-4be9-a6e4-0f8a94692538",
+        menu_item_id: "6758510b-7e13-4b7a-a80e-0dfe2928609a",
         name: "Polaroid",
         description: null,
         variant: null,
@@ -2405,10 +2405,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-29",
+    id: "023329fa-c6f6-4150-a45b-63c045a7c8f3",
     order_number: "ORD-2029",
     order_type: "food_delivery",
-    customer_id: "cu-ubuntu-28",
+    customer_id: "5dbce2d5-c504-4c6d-a0ac-928f1b9471fc",
     customer_name: "Ubuntu",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -2434,9 +2434,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-27T10:00:00.000Z",
     line_items: [
       {
-        id: "li-29-1",
-        order_id: "ord-29",
-        menu_item_id: "mi-signature",
+        id: "5b0489ed-047b-4145-a571-ba8c1b410c49",
+        order_id: "023329fa-c6f6-4150-a45b-63c045a7c8f3",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -2447,10 +2447,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-30",
+    id: "cde26f03-c959-4d5d-a147-13006cf2bb34",
     order_number: "ORD-2030",
     order_type: "food_delivery",
-    customer_id: "cu-amarachukwu-ezeh-29",
+    customer_id: "f0beff4d-c830-4e7c-a7b0-4a33a5f0bf90",
     customer_name: "Amarachukwu Ezeh",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -2476,9 +2476,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-09-27T10:00:00.000Z",
     line_items: [
       {
-        id: "li-30-1",
-        order_id: "ord-30",
-        menu_item_id: "mi-signature",
+        id: "1cd63581-dfb5-4606-a185-276c9fa0f118",
+        order_id: "cde26f03-c959-4d5d-a147-13006cf2bb34",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -2489,10 +2489,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-31",
+    id: "6f384f8d-992b-4b49-a55d-8cf4f3164f8d",
     order_number: "ORD-2031",
     order_type: "food_delivery",
-    customer_id: "cu-adenike-3",
+    customer_id: "c37cf22e-83ab-43cc-abb1-1ad02863bfb5",
     customer_name: "Adenike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -2518,9 +2518,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-01T10:00:00.000Z",
     line_items: [
       {
-        id: "li-31-1",
-        order_id: "ord-31",
-        menu_item_id: "mi-chicken",
+        id: "0d9346c4-8d8c-4d16-a6c7-f89c2ade2f90",
+        order_id: "6f384f8d-992b-4b49-a55d-8cf4f3164f8d",
+        menu_item_id: "c1439bdd-90c8-4e8c-a800-2cc0e2a7d5da",
         name: "Peppered Chicken",
         description: null,
         variant: "medium",
@@ -2529,9 +2529,9 @@ export const seedOrders: Order[] = [
         total_price: 90
       },
       {
-        id: "li-31-2",
-        order_id: "ord-31",
-        menu_item_id: "mi-efo",
+        id: "cfa82500-1a5f-4436-abcb-8720b6f46149",
+        order_id: "6f384f8d-992b-4b49-a55d-8cf4f3164f8d",
+        menu_item_id: "16dd219b-f7a7-455e-a61b-fd32e9ea1904",
         name: "Efo Riro",
         description: "3L",
         variant: null,
@@ -2540,9 +2540,9 @@ export const seedOrders: Order[] = [
         total_price: 75
       },
       {
-        id: "li-31-3",
-        order_id: "ord-31",
-        menu_item_id: "mi-ayamase-red",
+        id: "c30ae3a3-c104-4387-a762-dcfd5f182104",
+        order_id: "6f384f8d-992b-4b49-a55d-8cf4f3164f8d",
+        menu_item_id: "1a25b8e3-c6f2-461a-a5dd-e4155d9d29ee",
         name: "Ayamase (Red)",
         description: "3L",
         variant: null,
@@ -2553,10 +2553,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-32",
+    id: "7e7e2937-90c4-4176-aea0-43263dabdcb6",
     order_number: "ORD-2032",
     order_type: "food_delivery",
-    customer_id: "cu-dhami-xo-30",
+    customer_id: "0d94382f-cf15-4920-aeb4-9b59a97ef7ac",
     customer_name: "dhami_xo",
     phone: "(506) 999-2886",
     address: "128 Grandravine Drive",
@@ -2582,9 +2582,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-03T10:00:00.000Z",
     line_items: [
       {
-        id: "li-32-1",
-        order_id: "ord-32",
-        menu_item_id: "mi-signature",
+        id: "9938ee88-e71a-4b2b-ad09-ef0ed89e9a2d",
+        order_id: "7e7e2937-90c4-4176-aea0-43263dabdcb6",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -2595,10 +2595,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-33",
+    id: "804df7a2-61a7-446b-abf5-1bd98c6c005b",
     order_number: "ORD-2033",
     order_type: "food_delivery",
-    customer_id: "cu-franchesca-31",
+    customer_id: "82af803e-c985-47a7-a958-08faf93b8910",
     customer_name: "Franchesca",
     phone: "+1 437 661 8059",
     address: "Bayhampton Crescent, Thornhill, ON L4J 7G9",
@@ -2624,9 +2624,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-04T10:00:00.000Z",
     line_items: [
       {
-        id: "li-33-1",
-        order_id: "ord-33",
-        menu_item_id: "mi-signature",
+        id: "7b1bc744-3d06-4f1d-a5bb-929119b9ff99",
+        order_id: "804df7a2-61a7-446b-abf5-1bd98c6c005b",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -2637,10 +2637,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-34",
+    id: "85af75f2-9541-4afb-aef2-61d5c7852a3f",
     order_number: "ORD-2034",
     order_type: "food_delivery",
-    customer_id: "cu-melissa-32",
+    customer_id: "a0eb8032-bb61-438d-aa6f-708181125e30",
     customer_name: "Melissa",
     phone: "+1 (416) 456-0698",
     address: "2910-159 Wellesley Street East, Toronto, M4Y 0H5",
@@ -2666,9 +2666,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-15T10:00:00.000Z",
     line_items: [
       {
-        id: "li-34-1",
-        order_id: "ord-34",
-        menu_item_id: "mi-tease",
+        id: "b56ae19d-92fb-4f8d-a7dd-ee52bdc0f15b",
+        order_id: "85af75f2-9541-4afb-aef2-61d5c7852a3f",
+        menu_item_id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
         name: "The Tease Box",
         description: null,
         variant: null,
@@ -2679,10 +2679,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-35",
+    id: "99e5366b-2d98-4a2e-af82-5b0cfe8e41f1",
     order_number: "ORD-2035",
     order_type: "food_delivery",
-    customer_id: "cu-mikazzi-33",
+    customer_id: "cd6495ba-c88e-4772-a82b-fad4b8d666f6",
     customer_name: "Mikazzi",
     phone: "+1 (437) 556-8263",
     address: "410 - 3250 Carding Mill Trail, Oakville, Ontario L6M 5T3",
@@ -2708,9 +2708,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-15T10:00:00.000Z",
     line_items: [
       {
-        id: "li-35-1",
-        order_id: "ord-35",
-        menu_item_id: "mi-tease",
+        id: "82da312b-4df1-4c6c-a18b-b4a336a55edf",
+        order_id: "99e5366b-2d98-4a2e-af82-5b0cfe8e41f1",
+        menu_item_id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
         name: "The Tease Box",
         description: null,
         variant: null,
@@ -2721,10 +2721,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-36",
+    id: "8f135c70-03b5-437e-a9ff-2a9bce60da8d",
     order_number: "ORD-2036",
     order_type: "food_delivery",
-    customer_id: "cu-adenike-3",
+    customer_id: "c37cf22e-83ab-43cc-abb1-1ad02863bfb5",
     customer_name: "Adenike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -2750,9 +2750,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-15T10:00:00.000Z",
     line_items: [
       {
-        id: "li-36-1",
-        order_id: "ord-36",
-        menu_item_id: "mi-efo",
+        id: "d95fb46b-abdb-4fa3-a3da-ce1a607427fe",
+        order_id: "8f135c70-03b5-437e-a9ff-2a9bce60da8d",
+        menu_item_id: "16dd219b-f7a7-455e-a61b-fd32e9ea1904",
         name: "Efo Riro",
         description: "4L",
         variant: null,
@@ -2761,9 +2761,9 @@ export const seedOrders: Order[] = [
         total_price: 100
       },
       {
-        id: "li-36-2",
-        order_id: "ord-36",
-        menu_item_id: "mi-beef",
+        id: "6a6aa3c0-facc-4179-a1fa-3db8ab5838e8",
+        order_id: "8f135c70-03b5-437e-a9ff-2a9bce60da8d",
+        menu_item_id: "11e1c4d7-1195-4a4a-a9aa-e78aa30929b7",
         name: "Peppered Beef",
         description: null,
         variant: "small",
@@ -2772,9 +2772,9 @@ export const seedOrders: Order[] = [
         total_price: 150
       },
       {
-        id: "li-36-3",
-        order_id: "ord-36",
-        menu_item_id: "mi-turkey",
+        id: "402d1d10-9bbd-42cb-ad7f-ae1607ef4277",
+        order_id: "8f135c70-03b5-437e-a9ff-2a9bce60da8d",
+        menu_item_id: "3873abcd-1cb6-4831-ad18-f6c5ad920dbf",
         name: "Peppered Turkey",
         description: null,
         variant: "small",
@@ -2785,10 +2785,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-37",
+    id: "2fae18bf-6444-4e0f-a235-57d338cb402d",
     order_number: "ORD-2037",
     order_type: "food_delivery",
-    customer_id: "cu-latre-exclusivefashion-34",
+    customer_id: "98eb0f81-aec3-4c0c-a7e1-499f917296b8",
     customer_name: "latre_exclusivefashion",
     phone: "+1 (226) 637-2859",
     address: "5191 Dundas Street West, Unit 1105",
@@ -2814,9 +2814,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-16T10:00:00.000Z",
     line_items: [
       {
-        id: "li-37-1",
-        order_id: "ord-37",
-        menu_item_id: "mi-tease",
+        id: "d2076103-27cc-4313-ab00-4d103a0fb72f",
+        order_id: "2fae18bf-6444-4e0f-a235-57d338cb402d",
+        menu_item_id: "c0ac982d-6a9e-45f7-a63a-3f64ed8885f5",
         name: "The Tease Box",
         description: null,
         variant: null,
@@ -2825,9 +2825,9 @@ export const seedOrders: Order[] = [
         total_price: 120
       },
       {
-        id: "li-37-2",
-        order_id: "ord-37",
-        menu_item_id: "mi-polaroid",
+        id: "fa31ab2c-9a56-47ad-a000-b6908d5051f9",
+        order_id: "2fae18bf-6444-4e0f-a235-57d338cb402d",
+        menu_item_id: "6758510b-7e13-4b7a-a80e-0dfe2928609a",
         name: "Polaroid",
         description: null,
         variant: null,
@@ -2836,9 +2836,9 @@ export const seedOrders: Order[] = [
         total_price: 15
       },
       {
-        id: "li-37-3",
-        order_id: "ord-37",
-        menu_item_id: "mi-balloon",
+        id: "2219fd35-ed1d-42e1-a97c-180ac67c516f",
+        order_id: "2fae18bf-6444-4e0f-a235-57d338cb402d",
+        menu_item_id: "1b85276e-7b9a-4b0d-a17d-8f0a639abda8",
         name: "Birthday Balloon",
         description: null,
         variant: null,
@@ -2849,10 +2849,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-38",
+    id: "959108a0-a978-42ea-a2e7-c6346ac9feec",
     order_number: "ORD-2038",
     order_type: "food_delivery",
-    customer_id: "cu-big-mo-35",
+    customer_id: "a9d33c42-8790-4e32-a907-3d640c8fc7e3",
     customer_name: "Big_mo",
     phone: "+1 437 246 9234",
     address: "50 Gerrard Street East, Toronto ON, M5B 1J6",
@@ -2878,8 +2878,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-17T10:00:00.000Z",
     line_items: [
       {
-        id: "li-38-1",
-        order_id: "ord-38",
+        id: "5c7bffb8-9be9-4e8e-a714-d0d5d80b7cde",
+        order_id: "959108a0-a978-42ea-a2e7-c6346ac9feec",
         menu_item_id: null,
         name: "The Tease Box",
         description: "Replace pancakes with small chops",
@@ -2891,10 +2891,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-39",
+    id: "ae45d9d7-57c1-4f12-ae43-b049ce9a0497",
     order_number: "ORD-2039",
     order_type: "food_delivery",
-    customer_id: "cu-dolly-36",
+    customer_id: "eff8f80e-25a5-4ae7-a045-fca6f363f2f7",
     customer_name: "Dolly",
     phone: "Not provided",
     address: "65 Broadway Avenue, Toronto",
@@ -2920,9 +2920,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-17T10:00:00.000Z",
     line_items: [
       {
-        id: "li-39-1",
-        order_id: "ord-39",
-        menu_item_id: "mi-chicken",
+        id: "08b7329c-cd2e-413c-a463-4b5467142828",
+        order_id: "ae45d9d7-57c1-4f12-ae43-b049ce9a0497",
+        menu_item_id: "c1439bdd-90c8-4e8c-a800-2cc0e2a7d5da",
         name: "Peppered Chicken",
         description: null,
         variant: "medium",
@@ -2933,10 +2933,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-40",
+    id: "7aee1133-a872-4a49-af9c-bac8d947ff27",
     order_number: "ORD-2040",
     order_type: "food_delivery",
-    customer_id: "cu-athomewuthdunni-daily-37",
+    customer_id: "9c151caf-bd50-4676-aa2d-c070b38e5a0b",
     customer_name: "athomewuthdunni_daily",
     phone: "Not provided",
     address: "81 Irwin Road, Unit 17, Etobicoke, Ontario M9W 5W1",
@@ -2962,9 +2962,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-22T10:00:00.000Z",
     line_items: [
       {
-        id: "li-40-1",
-        order_id: "ord-40",
-        menu_item_id: "mi-signature",
+        id: "abbc4e35-d0cc-44eb-a0cf-687f46f78a19",
+        order_id: "7aee1133-a872-4a49-af9c-bac8d947ff27",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -2975,10 +2975,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-41",
+    id: "86aafb5e-5624-4495-ac9a-a9dd722ea06a",
     order_number: "ORD-2041",
     order_type: "food_delivery",
-    customer_id: "cu-adenike-3",
+    customer_id: "c37cf22e-83ab-43cc-abb1-1ad02863bfb5",
     customer_name: "Adenike",
     phone: "+1-778-847-3543",
     address: "1227 Mulroney Heights, Milton",
@@ -3004,9 +3004,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-22T10:00:00.000Z",
     line_items: [
       {
-        id: "li-41-1",
-        order_id: "ord-41",
-        menu_item_id: "mi-efo",
+        id: "a1e49915-5fcd-4172-aa2c-d0fe31733ad6",
+        order_id: "86aafb5e-5624-4495-ac9a-a9dd722ea06a",
+        menu_item_id: "16dd219b-f7a7-455e-a61b-fd32e9ea1904",
         name: "Efo Riro",
         description: "4L",
         variant: null,
@@ -3015,9 +3015,9 @@ export const seedOrders: Order[] = [
         total_price: 100
       },
       {
-        id: "li-41-2",
-        order_id: "ord-41",
-        menu_item_id: "mi-beef",
+        id: "3bf0aa52-7e9f-4160-a376-2b4e5f0a049f",
+        order_id: "86aafb5e-5624-4495-ac9a-a9dd722ea06a",
+        menu_item_id: "11e1c4d7-1195-4a4a-a9aa-e78aa30929b7",
         name: "Peppered Beef",
         description: null,
         variant: "medium",
@@ -3028,10 +3028,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-42",
+    id: "2efcb69f-5826-4dd9-aab1-1414d8d8296d",
     order_number: "ORD-2042",
     order_type: "food_delivery",
-    customer_id: "cu-obiyinka-yetunde-38",
+    customer_id: "a5a4c268-6953-4d0f-a36f-a8cfb11aa3a7",
     customer_name: "Obiyinka Yetunde",
     phone: "Not provided",
     address: "990 Gainsborough Rd, London, ON N6H 5L4",
@@ -3057,8 +3057,8 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-23T10:00:00.000Z",
     line_items: [
       {
-        id: "li-42-1",
-        order_id: "ord-42",
+        id: "3f260fdc-2426-4096-ad2c-7347c0eb8085",
+        order_id: "2efcb69f-5826-4dd9-aab1-1414d8d8296d",
         menu_item_id: null,
         name: "The Signature Box",
         description: "Customised box — Best hubby ❤️",
@@ -3068,9 +3068,9 @@ export const seedOrders: Order[] = [
         total_price: 150
       },
       {
-        id: "li-42-2",
-        order_id: "ord-42",
-        menu_item_id: "mi-polaroid",
+        id: "27c68c64-812f-4cd9-a8dd-619d1e13c531",
+        order_id: "2efcb69f-5826-4dd9-aab1-1414d8d8296d",
+        menu_item_id: "6758510b-7e13-4b7a-a80e-0dfe2928609a",
         name: "Polaroid",
         description: null,
         variant: null,
@@ -3081,10 +3081,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-43",
+    id: "d53c2538-00fe-477c-a0ce-79c5da831afa",
     order_number: "ORD-2043",
     order_type: "food_delivery",
-    customer_id: "cu-jessy-39",
+    customer_id: "dd1975df-702a-4932-a5b0-0715101fc134",
     customer_name: "Jessy",
     phone: "+1 (437) 473-7570",
     address: "19 Marta Ave, Side door, Scarborough",
@@ -3110,9 +3110,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-23T10:00:00.000Z",
     line_items: [
       {
-        id: "li-43-1",
-        order_id: "ord-43",
-        menu_item_id: "mi-signature",
+        id: "6453872f-aa6a-45a5-a329-941f4d24e433",
+        order_id: "d53c2538-00fe-477c-a0ce-79c5da831afa",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -3121,9 +3121,9 @@ export const seedOrders: Order[] = [
         total_price: 150
       },
       {
-        id: "li-43-2",
-        order_id: "ord-43",
-        menu_item_id: "mi-polaroid",
+        id: "9c69261b-db6e-4cd5-ade4-df67a9eb0659",
+        order_id: "d53c2538-00fe-477c-a0ce-79c5da831afa",
+        menu_item_id: "6758510b-7e13-4b7a-a80e-0dfe2928609a",
         name: "Polaroid",
         description: null,
         variant: null,
@@ -3132,9 +3132,9 @@ export const seedOrders: Order[] = [
         total_price: 15
       },
       {
-        id: "li-43-3",
-        order_id: "ord-43",
-        menu_item_id: "mi-balloon",
+        id: "f922a141-314d-4b2b-a80f-10840c8d757c",
+        order_id: "d53c2538-00fe-477c-a0ce-79c5da831afa",
+        menu_item_id: "1b85276e-7b9a-4b0d-a17d-8f0a639abda8",
         name: "Birthday Balloon",
         description: null,
         variant: null,
@@ -3143,9 +3143,9 @@ export const seedOrders: Order[] = [
         total_price: 25
       },
       {
-        id: "li-43-4",
-        order_id: "ord-43",
-        menu_item_id: "mi-cheesecake",
+        id: "aeee3eac-46ad-4a1f-acfc-4ac6de8d804c",
+        order_id: "d53c2538-00fe-477c-a0ce-79c5da831afa",
+        menu_item_id: "3cff6d21-f90e-4bb2-a423-9754b74864dc",
         name: "Cheesecake Shooters",
         description: null,
         variant: "small",
@@ -3156,10 +3156,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-44",
+    id: "0836de0e-1d85-4825-a4f1-ff0c066cb5d7",
     order_number: "ORD-2044",
     order_type: "food_delivery",
-    customer_id: "cu-idara-9",
+    customer_id: "749d1057-877d-4365-a0eb-081301995aa2",
     customer_name: "Idara",
     phone: "Not provided",
     address: "Pickup — customer to collect",
@@ -3185,9 +3185,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-25T10:00:00.000Z",
     line_items: [
       {
-        id: "li-44-1",
-        order_id: "ord-44",
-        menu_item_id: "mi-signature",
+        id: "a76e2d53-d188-4e1c-a1a5-a4df0c01f5a6",
+        order_id: "0836de0e-1d85-4825-a4f1-ff0c066cb5d7",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -3198,10 +3198,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-45",
+    id: "c6c8e952-0b64-4987-a520-eb0b90e2c6dd",
     order_number: "ORD-2045",
     order_type: "food_delivery",
-    customer_id: "cu-latre-exclusivefashion-40",
+    customer_id: "c1fcf2d1-c804-4d4a-aad3-a074d0dbe5b9",
     customer_name: "latre_exclusivefashion",
     phone: "Not provided",
     address: "9 Valhalla Inn Road, Etobicoke",
@@ -3227,9 +3227,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-10-25T10:00:00.000Z",
     line_items: [
       {
-        id: "li-45-1",
-        order_id: "ord-45",
-        menu_item_id: "mi-fried-rice",
+        id: "ba8d6f1b-c854-4a7d-ad67-0d0473f74b17",
+        order_id: "c6c8e952-0b64-4987-a520-eb0b90e2c6dd",
+        menu_item_id: "dff57217-eac3-4f48-a5ae-c6170ec6fd7d",
         name: "Fried Rice",
         description: null,
         variant: "large",
@@ -3238,9 +3238,9 @@ export const seedOrders: Order[] = [
         total_price: 120
       },
       {
-        id: "li-45-2",
-        order_id: "ord-45",
-        menu_item_id: "mi-jollof",
+        id: "73987016-4145-4931-ac30-4ce49af3cdba",
+        order_id: "c6c8e952-0b64-4987-a520-eb0b90e2c6dd",
+        menu_item_id: "2452e7e8-35c1-49f1-a356-a679b9602299",
         name: "Jollof Rice",
         description: null,
         variant: "large",
@@ -3249,9 +3249,9 @@ export const seedOrders: Order[] = [
         total_price: 220
       },
       {
-        id: "li-45-3",
-        order_id: "ord-45",
-        menu_item_id: "mi-fish",
+        id: "eb1e9b5c-2f4e-493d-a41c-e3aec3de9b14",
+        order_id: "c6c8e952-0b64-4987-a520-eb0b90e2c6dd",
+        menu_item_id: "204b8f6e-933c-49cb-ac65-81f9ca321b38",
         name: "Peppered Fish",
         description: null,
         variant: "medium",
@@ -3260,9 +3260,9 @@ export const seedOrders: Order[] = [
         total_price: 160
       },
       {
-        id: "li-45-4",
-        order_id: "ord-45",
-        menu_item_id: "mi-chicken",
+        id: "e7d207b5-b2a3-4fd8-ae77-7271317ee172",
+        order_id: "c6c8e952-0b64-4987-a520-eb0b90e2c6dd",
+        menu_item_id: "c1439bdd-90c8-4e8c-a800-2cc0e2a7d5da",
         name: "Peppered Chicken",
         description: null,
         variant: "large",
@@ -3273,10 +3273,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-46",
+    id: "c29d680a-cf02-46a4-a65a-7d41199b270e",
     order_number: "ORD-2046",
     order_type: "food_delivery",
-    customer_id: "cu-ohenemaa-titi-41",
+    customer_id: "6bf29153-132c-4268-a6c9-ce2ead79e9f8",
     customer_name: "Ohenemaa Titi",
     phone: "+1 (437) 999-8157",
     address: "20 Huronia Crt, Brampton, ON L6S 2C7",
@@ -3302,9 +3302,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-11-07T10:00:00.000Z",
     line_items: [
       {
-        id: "li-46-1",
-        order_id: "ord-46",
-        menu_item_id: "mi-signature",
+        id: "1c5b0e4a-c0cd-4fdd-aab9-ed64a347ea19",
+        order_id: "c29d680a-cf02-46a4-a65a-7d41199b270e",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -3315,10 +3315,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-47",
+    id: "aceac76e-41fc-4b06-a065-366b77ffbd34",
     order_number: "ORD-2047",
     order_type: "food_delivery",
-    customer_id: "cu-zikky-of-lagos-42",
+    customer_id: "907933af-150b-4bb8-a1e4-15751ab18fcc",
     customer_name: "Zikky of Lagos",
     phone: "+353 899 568066",
     address: "2847 Lake Shore Blvd W, Toronto, ON M8V 1H8",
@@ -3344,9 +3344,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-11-07T10:00:00.000Z",
     line_items: [
       {
-        id: "li-47-1",
-        order_id: "ord-47",
-        menu_item_id: "mi-signature",
+        id: "2551d0a6-61bd-4f26-afb9-77250a7fb913",
+        order_id: "aceac76e-41fc-4b06-a065-366b77ffbd34",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -3357,10 +3357,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-48",
+    id: "7ca8c15b-9fef-4527-afa7-dca4146c26c7",
     order_number: "ORD-2048",
     order_type: "food_delivery",
-    customer_id: "cu-ellah-43",
+    customer_id: "338aae11-a060-43b3-a9ca-d3c8dd9e2a7c",
     customer_name: "Ellah",
     phone: "+1 (416) 746-5600",
     address: "5 Mabelle Ave, Etobicoke",
@@ -3386,9 +3386,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-11-13T10:00:00.000Z",
     line_items: [
       {
-        id: "li-48-1",
-        order_id: "ord-48",
-        menu_item_id: "mi-signature",
+        id: "3e38f369-d017-422c-ab73-627c08f03b40",
+        order_id: "7ca8c15b-9fef-4527-afa7-dca4146c26c7",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -3399,10 +3399,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-49",
+    id: "47761ab8-521d-4c0a-a71d-ac77ce96f8a1",
     order_number: "ORD-2049",
     order_type: "food_delivery",
-    customer_id: "cu-w-44",
+    customer_id: "550712ef-451c-490c-a107-cd843a2155be",
     customer_name: "W",
     phone: "+1 (437) 605-2547",
     address: "263 Dixon Road, Apt 812",
@@ -3428,9 +3428,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-11-19T10:00:00.000Z",
     line_items: [
       {
-        id: "li-49-1",
-        order_id: "ord-49",
-        menu_item_id: "mi-signature",
+        id: "5df656d2-1b15-47e8-a48b-fab18ef4c167",
+        order_id: "47761ab8-521d-4c0a-a71d-ac77ce96f8a1",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
@@ -3441,10 +3441,10 @@ export const seedOrders: Order[] = [
     ]
   },
   {
-    id: "ord-50",
+    id: "546102ea-e6e0-4f42-a4ec-6f7b92420216",
     order_number: "ORD-2050",
     order_type: "food_delivery",
-    customer_id: "cu-rita-e-a-45",
+    customer_id: "a6a0672d-0cfe-4d82-aaf8-28a426b5ad0c",
     customer_name: "Rita E.A",
     phone: "+1 (437) 505-3468",
     address: "22 John Street, York M9N 0B1",
@@ -3470,9 +3470,9 @@ export const seedOrders: Order[] = [
     updated_at: "2026-11-19T10:00:00.000Z",
     line_items: [
       {
-        id: "li-50-1",
-        order_id: "ord-50",
-        menu_item_id: "mi-signature",
+        id: "f8cbe22c-ac9e-46c3-afa9-e4463fdf96e1",
+        order_id: "546102ea-e6e0-4f42-a4ec-6f7b92420216",
+        menu_item_id: "d1908766-ece9-4317-ae71-6e3fa53647d0",
         name: "The Signature Box",
         description: null,
         variant: null,
