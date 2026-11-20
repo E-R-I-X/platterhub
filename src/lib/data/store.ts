@@ -39,7 +39,7 @@ function createStore(): StoreShape {
     menuItems: structuredClone(seedMenuItems),
     customers: structuredClone(seedCustomers),
     orders: structuredClone(seedOrders),
-    nextOrderSeq: 1070,
+    nextOrderSeq: 2051,
   }
 }
 
