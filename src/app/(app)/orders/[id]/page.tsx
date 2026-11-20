@@ -62,7 +62,7 @@ export default async function OrderDetailPage({
               "linear-gradient(135deg, #1c2414 0%, #2f3d1c 55%, #556b2f 140%)",
           }}
         >
-          <p className="text-xs tracking-[0.18em] text-olive-muted uppercase">Order detail</p>
+          <p className="text-hero-eyebrow text-xs tracking-[0.18em] uppercase">Order detail</p>
           <div className="mt-2 flex flex-wrap items-center gap-2">
             <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
               {order.notes || order.theme || order.customer_name}

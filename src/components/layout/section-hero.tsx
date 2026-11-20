@@ -30,7 +30,7 @@ export function SectionHero({
       <div className="relative flex flex-col gap-5 px-5 py-7 sm:flex-row sm:items-end sm:justify-between sm:px-7 sm:py-8">
         <div className="min-w-0">
           {eyebrow ? (
-            <p className="text-xs tracking-[0.2em] text-olive-muted uppercase">{eyebrow}</p>
+            <p className="text-hero-eyebrow text-xs tracking-[0.2em] uppercase">{eyebrow}</p>
           ) : null}
           <h1 className="font-display mt-2 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
             {title}

@@ -64,7 +64,7 @@ export function MonthCalendar({
         />
         <div className="relative flex flex-col gap-4 px-5 py-7 sm:flex-row sm:items-end sm:justify-between sm:px-7">
           <div>
-            <p className="text-xs tracking-[0.2em] text-olive-muted uppercase">Schedule</p>
+            <p className="text-hero-eyebrow text-xs tracking-[0.2em] uppercase">Schedule</p>
             <h1 className="font-display mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
               Calendar
             </h1>

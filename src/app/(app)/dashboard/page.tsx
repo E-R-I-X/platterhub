@@ -23,7 +23,7 @@ export default async function DashboardPage() {
         />
         <div className="relative grid gap-6 px-5 py-7 sm:px-7 sm:py-9 lg:grid-cols-[1.4fr_auto] lg:items-end">
           <div>
-            <p className="text-xs tracking-[0.2em] text-olive-muted uppercase">
+            <p className="text-hero-eyebrow text-xs tracking-[0.2em] uppercase">
               The Platter Hub
             </p>
             <h1 className="font-display mt-2 max-w-xl text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">

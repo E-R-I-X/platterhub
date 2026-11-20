@@ -162,6 +162,11 @@
     font-family: var(--font-fraunces), ui-serif, Georgia, serif;
   }
 
+  /* Light sage for labels on dark hero panels (theme-independent). */
+  .text-hero-eyebrow {
+    color: #d2e0b0;
+  }
+
   .skeleton {
     @apply animate-pulse rounded-md bg-muted;
   }
