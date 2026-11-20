@@ -78,10 +78,7 @@ export default async function OrdersPage({
         title="Orders"
         description="Filter, review, and manage every delivery and catering booking."
         actions={
-          <Button
-            render={<Link href="/orders/new" />}
-            className="bg-white text-foreground hover:bg-olive-soft"
-          >
+          <Button render={<Link href="/orders/new" />} variant="hero">
             <Plus className="size-4" />
             New Order
           </Button>

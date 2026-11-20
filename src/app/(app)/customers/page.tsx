@@ -58,7 +58,7 @@ export default async function CustomersPage({
                 className="border-white/20 bg-white/10 pl-9 text-white placeholder:text-white/50"
               />
             </form>
-            <Button className="bg-white text-foreground hover:bg-olive-soft">
+            <Button variant="hero">
               <Plus className="size-4" />
               Add Customer
             </Button>

@@ -35,18 +35,11 @@ export default async function DashboardPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button
-              render={<Link href="/orders/new" />}
-              className="bg-white text-foreground hover:bg-olive-soft"
-            >
+            <Button render={<Link href="/orders/new" />} variant="hero">
               <Plus className="size-4" />
               New Order
             </Button>
-            <Button
-              variant="outline"
-              render={<Link href="/calendar" />}
-              className="border-white/25 bg-white/5 text-white hover:bg-white/10"
-            >
+            <Button render={<Link href="/calendar" />} variant="hero-outline">
               Open calendar
             </Button>
           </div>

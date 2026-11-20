@@ -16,6 +16,10 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/15 text-destructive hover:bg-destructive/25 focus-visible:border-destructive/40 focus-visible:ring-destructive/20",
         link: "text-olive underline-offset-4 hover:underline",
+        /* Light CTA on dark heroes — fixed dark text so contrast holds in dark mode */
+        hero: "border-transparent bg-white text-[#1c2414] hover:bg-[#eef2e6] hover:text-[#3f5122]",
+        "hero-outline":
+          "border-white/30 bg-white/10 text-white hover:bg-white/15 hover:text-white",
       },
       size: {
         default: "h-10 gap-1.5 px-4",

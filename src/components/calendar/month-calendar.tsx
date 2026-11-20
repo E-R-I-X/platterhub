@@ -74,9 +74,8 @@ export function MonthCalendar({
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Button
-              variant="outline"
+              variant="hero-outline"
               size="sm"
-              className="border-white/25 bg-white/5 text-white hover:bg-white/10"
               onClick={() => {
                 setCursor(startOfMonth(todayDate))
                 setSelected(todayDate)
@@ -84,10 +83,7 @@ export function MonthCalendar({
             >
               Today
             </Button>
-            <Button
-              render={<Link href="/orders/new" />}
-              className="bg-white text-foreground hover:bg-olive-soft"
-            >
+            <Button render={<Link href="/orders/new" />} variant="hero">
               <Plus className="size-4" />
               Add Order
             </Button>
