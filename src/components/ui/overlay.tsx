@@ -66,7 +66,7 @@ export function Overlay({
       />
       <div
         className={cn(
-          "overlay-panel relative z-10 w-full max-w-md overflow-hidden border border-border bg-card shadow-2xl",
+          "overlay-panel relative z-10 flex w-full max-w-md flex-col overflow-hidden border border-border bg-card shadow-2xl",
           panelAnim,
           placement === "right"
             ? "max-h-[92dvh] rounded-t-[1.75rem] md:my-0 md:mr-0 md:max-h-full md:rounded-3xl"

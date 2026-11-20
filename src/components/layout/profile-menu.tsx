@@ -1,14 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
-import { createPortal } from "react-dom"
+import { useState } from "react"
 import { ChevronDown, LogOut, Settings, User, X } from "lucide-react"
 import { logoutAction } from "@/app/actions/auth"
+import { Overlay } from "@/components/ui/overlay"
 
 export function ProfileMenu({ userName }: { userName: string }) {
   const [open, setOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const initials =
     userName
       .split(" ")
@@ -16,71 +15,6 @@ export function ProfileMenu({ userName }: { userName: string }) {
       .slice(0, 2)
       .join("")
       .toUpperCase() || "AD"
-
-  useEffect(() => setMounted(true), [])
-
-  useEffect(() => {
-    if (!open) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false)
-    }
-    window.addEventListener("keydown", onKey)
-    return () => {
-      document.body.style.overflow = prev
-      window.removeEventListener("keydown", onKey)
-    }
-  }, [open])
-
-  const panel =
-    open && mounted
-      ? createPortal(
-          <div className="fixed inset-0 z-[100] flex flex-col md:block">
-            <button
-              type="button"
-              className="absolute inset-0 bg-[#1c2414]/45 backdrop-blur-sm"
-              aria-label="Close account menu"
-              onClick={() => setOpen(false)}
-            />
-
-            <div
-              className="relative z-10 mt-auto w-full rounded-t-[1.75rem] border border-border bg-card shadow-2xl md:hidden"
-              style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
-            >
-              <div className="mx-auto mt-2.5 h-1 w-11 rounded-full bg-border" />
-              <div className="flex items-start justify-between border-b border-border px-5 py-4">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
-                    {initials}
-                  </span>
-                  <div>
-                    <p className="font-semibold">{userName}</p>
-                    <p className="text-xs text-muted-foreground">Catering Manager</p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="rounded-lg p-2 text-muted-foreground hover:bg-muted"
-                  onClick={() => setOpen(false)}
-                >
-                  <X className="size-4" />
-                </button>
-              </div>
-              <MenuLinks onClose={() => setOpen(false)} />
-            </div>
-
-            <div className="absolute top-16 right-6 z-10 hidden w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:block lg:right-10">
-              <div className="border-b border-border px-4 py-3.5">
-                <p className="truncate text-sm font-semibold">{userName}</p>
-                <p className="text-xs text-muted-foreground">Catering Manager</p>
-              </div>
-              <MenuLinks onClose={() => setOpen(false)} />
-            </div>
-          </div>,
-          document.body
-        )
-      : null
 
   return (
     <>
@@ -96,39 +30,59 @@ export function ProfileMenu({ userName }: { userName: string }) {
         </span>
         <ChevronDown className="hidden size-4 text-muted-foreground sm:block" />
       </button>
-      {panel}
-    </>
-  )
-}
 
-function MenuLinks({ onClose }: { onClose: () => void }) {
-  return (
-    <div className="space-y-1 p-2">
-      <Link
-        href="/settings#profile"
-        onClick={onClose}
-        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+      <Overlay
+        open={open}
+        onClose={() => setOpen(false)}
+        placement="bottom"
+        className="md:items-start md:justify-end md:p-0 md:pt-16 md:pr-6 lg:pr-10"
+        panelClassName="max-w-none md:w-64 md:max-w-none md:rounded-2xl"
       >
-        <User className="size-4 text-olive" />
-        Profile
-      </Link>
-      <Link
-        href="/settings"
-        onClick={onClose}
-        className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
-      >
-        <Settings className="size-4 text-olive" />
-        Settings
-      </Link>
-      <form action={logoutAction}>
-        <button
-          type="submit"
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
-        >
-          <LogOut className="size-4 text-olive" />
-          Log out
-        </button>
-      </form>
-    </div>
+        <div className="flex items-center gap-3 border-b border-border px-5 py-4">
+          <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+            {initials}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold">{userName}</p>
+            <p className="text-xs text-muted-foreground">Catering Manager</p>
+          </div>
+          <button
+            type="button"
+            className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted"
+            onClick={() => setOpen(false)}
+            aria-label="Close"
+          >
+            <X className="size-4" />
+          </button>
+        </div>
+        <div className="space-y-1 p-2">
+          <Link
+            href="/settings#profile"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+          >
+            <User className="size-4 text-olive" />
+            Profile
+          </Link>
+          <Link
+            href="/settings"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+          >
+            <Settings className="size-4 text-olive" />
+            Settings
+          </Link>
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-colors hover:bg-muted"
+            >
+              <LogOut className="size-4 text-olive" />
+              Log out
+            </button>
+          </form>
+        </div>
+      </Overlay>
+    </>
   )
 }

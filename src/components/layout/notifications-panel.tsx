@@ -1,9 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { Bell, CheckCheck, X } from "lucide-react"
-import { useEffect, useState } from "react"
-import { createPortal } from "react-dom"
+import { Bell, CheckCheck } from "lucide-react"
+import { useState } from "react"
+import { Overlay, OverlayHeader } from "@/components/ui/overlay"
 import { cn } from "@/lib/utils"
 
 export type AppNotification = {
@@ -44,76 +44,8 @@ const DEFAULT_NOTIFICATIONS: AppNotification[] = [
 
 export function NotificationsButton() {
   const [open, setOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const [items, setItems] = useState<AppNotification[]>(DEFAULT_NOTIFICATIONS)
   const unread = items.filter((n) => !n.read).length
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!open) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false)
-    }
-    window.addEventListener("keydown", onKey)
-    return () => {
-      document.body.style.overflow = prev
-      window.removeEventListener("keydown", onKey)
-    }
-  }, [open])
-
-  const panel =
-    open && mounted
-      ? createPortal(
-          <div className="fixed inset-0 z-[100] flex flex-col md:block">
-            <button
-              type="button"
-              className="absolute inset-0 bg-[#1c2414]/45 backdrop-blur-sm"
-              aria-label="Close notifications"
-              onClick={() => setOpen(false)}
-            />
-
-            {/* Mobile: full-width sheet pinned to bottom of viewport */}
-            <div
-              className="relative z-10 mt-auto flex h-[min(88dvh,36rem)] w-full flex-col rounded-t-[1.75rem] border border-border bg-card shadow-2xl md:hidden"
-              style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
-            >
-              <div className="mx-auto mt-2.5 mb-1 h-1 w-11 shrink-0 rounded-full bg-border" />
-              <PanelHeader
-                onClose={() => setOpen(false)}
-                onMarkAll={() =>
-                  setItems((prev) => prev.map((n) => ({ ...n, read: true })))
-                }
-              />
-              <NotificationList
-                items={items}
-                setItems={setItems}
-                onClose={() => setOpen(false)}
-              />
-            </div>
-
-            {/* Desktop dropdown */}
-            <div className="absolute top-16 right-6 z-10 hidden max-h-[min(32rem,75vh)] w-[24rem] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:flex lg:right-10">
-              <PanelHeader
-                onClose={() => setOpen(false)}
-                onMarkAll={() =>
-                  setItems((prev) => prev.map((n) => ({ ...n, read: true })))
-                }
-              />
-              <NotificationList
-                items={items}
-                setItems={setItems}
-                onClose={() => setOpen(false)}
-              />
-            </div>
-          </div>,
-          document.body
-        )
-      : null
 
   return (
     <>
@@ -131,110 +63,85 @@ export function NotificationsButton() {
           </span>
         ) : null}
       </button>
-      {panel}
-    </>
-  )
-}
 
-function PanelHeader({
-  onClose,
-  onMarkAll,
-}: {
-  onClose: () => void
-  onMarkAll: () => void
-}) {
-  return (
-    <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-3.5">
-      <div>
-        <p className="font-semibold tracking-tight">Notifications</p>
-        <p className="text-xs text-muted-foreground">Order and payment updates</p>
-      </div>
-      <div className="flex items-center gap-1">
-        <button
-          type="button"
-          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          title="Mark all read"
-          onClick={onMarkAll}
-        >
-          <CheckCheck className="size-4" />
-        </button>
-        <button
-          type="button"
-          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          <X className="size-4" />
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function NotificationList({
-  items,
-  setItems,
-  onClose,
-}: {
-  items: AppNotification[]
-  setItems: React.Dispatch<React.SetStateAction<AppNotification[]>>
-  onClose: () => void
-}) {
-  return (
-    <>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-        {items.length === 0 ? (
-          <p className="px-4 py-10 text-center text-sm text-muted-foreground">
-            No notifications
-          </p>
-        ) : (
-          items.map((n) => (
-            <Link
-              key={n.id}
-              href={n.href || "/dashboard"}
-              onClick={() => {
-                setItems((prev) =>
-                  prev.map((item) =>
-                    item.id === n.id ? { ...item, read: true } : item
+      <Overlay
+        open={open}
+        onClose={() => setOpen(false)}
+        placement="bottom"
+        className="md:items-start md:justify-end md:p-0 md:pt-16 md:pr-6 lg:pr-10"
+        panelClassName="h-[min(88dvh,36rem)] max-h-[88dvh] max-w-none md:h-auto md:max-h-[min(32rem,75vh)] md:w-[24rem] md:rounded-2xl"
+      >
+        <OverlayHeader
+          title="Notifications"
+          description="Order and payment updates"
+          onClose={() => setOpen(false)}
+        />
+        <div className="flex shrink-0 items-center justify-end px-4 py-2">
+          <button
+            type="button"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            onClick={() =>
+              setItems((prev) => prev.map((n) => ({ ...n, read: true })))
+            }
+          >
+            <CheckCheck className="size-3.5" />
+            Mark all read
+          </button>
+        </div>
+        <div className="min-h-[12rem] flex-1 overflow-y-auto overscroll-contain">
+          {items.length === 0 ? (
+            <p className="px-4 py-10 text-center text-sm text-muted-foreground">
+              No notifications
+            </p>
+          ) : (
+            items.map((n) => (
+              <Link
+                key={n.id}
+                href={n.href || "/dashboard"}
+                onClick={() => {
+                  setItems((prev) =>
+                    prev.map((item) =>
+                      item.id === n.id ? { ...item, read: true } : item
+                    )
                   )
-                )
-                onClose()
-              }}
-              className={cn(
-                "block border-b border-border px-4 py-3.5 transition-colors hover:bg-muted/70",
-                !n.read && "bg-olive-soft/50"
-              )}
-            >
-              <div className="flex items-start gap-3">
-                <span
-                  className={cn(
-                    "mt-1.5 size-2 shrink-0 rounded-full",
-                    !n.read ? "bg-olive" : "bg-transparent"
-                  )}
-                />
-                <div className="min-w-0">
-                  <p className="text-sm font-medium">{n.title}</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                    {n.body}
-                  </p>
-                  <p className="mt-1.5 text-[11px] text-muted-foreground/80">
-                    {n.createdAt}
-                  </p>
+                  setOpen(false)
+                }}
+                className={cn(
+                  "block border-b border-border px-4 py-3.5 transition-colors hover:bg-muted/70",
+                  !n.read && "bg-olive-soft/50"
+                )}
+              >
+                <div className="flex items-start gap-3">
+                  <span
+                    className={cn(
+                      "mt-1.5 size-2 shrink-0 rounded-full",
+                      !n.read ? "bg-olive" : "bg-transparent"
+                    )}
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{n.title}</p>
+                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                      {n.body}
+                    </p>
+                    <p className="mt-1.5 text-[11px] text-muted-foreground/80">
+                      {n.createdAt}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))
-        )}
-      </div>
-      <div className="shrink-0 border-t border-border px-4 py-3 text-center">
-        <Link
-          href="/settings#notifications"
-          className="text-xs font-medium text-olive hover:underline"
-          onClick={onClose}
-        >
-          Notification settings
-        </Link>
-      </div>
+              </Link>
+            ))
+          )}
+        </div>
+        <div className="shrink-0 border-t border-border px-4 py-3 text-center">
+          <Link
+            href="/settings#notifications"
+            className="text-xs font-medium text-olive hover:underline"
+            onClick={() => setOpen(false)}
+          >
+            Notification settings
+          </Link>
+        </div>
+      </Overlay>
     </>
   )
 }
