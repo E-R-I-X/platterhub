@@ -15,7 +15,7 @@ export async function loginAction(
   if (!isSupabaseConfigured()) {
     return {
       error:
-        "Sign-in is unavailable. Publish as a private or team app, or configure Supabase Auth.",
+        "Supabase Auth is not configured on this host. In Vercel → Settings → Environment Variables, set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY (or SUPABASE_URL and SUPABASE_ANON_KEY) for Production, then Redeploy.",
     }
   }
 
