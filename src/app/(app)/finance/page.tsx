@@ -7,9 +7,10 @@ import {
   FinanceInfoButton,
   FinanceReportButton,
 } from "@/components/finance/finance-info"
+import { RevenueChart } from "@/components/finance/revenue-chart"
 import { Pagination } from "@/components/shared/pagination"
 import { PaymentBadge, OrderTypeBadge } from "@/components/shared/status-badge"
-import { getFinanceSummary } from "@/lib/data/store"
+import { getFinanceSummary, getRevenueTrend } from "@/lib/data/store"
 import { balanceDue, formatDate, formatMoney } from "@/lib/format"
 
 export const instant = false
@@ -24,7 +25,10 @@ export default async function FinancePage({
   const from = typeof params.from === "string" ? params.from : undefined
   const to = typeof params.to === "string" ? params.to : undefined
   const page = Math.max(1, Number(params.page || 1) || 1)
-  const summary = await getFinanceSummary(from, to)
+  const [summary, trend] = await Promise.all([
+    getFinanceSummary(from, to),
+    getRevenueTrend(6),
+  ])
 
   let balances = summary.withBalances
   if (q) {
@@ -52,7 +56,7 @@ export default async function FinancePage({
   return (
     <div>
       <PageHeader
-        title="Finance / Revenue"
+        title="Finance"
         description="Overview of revenue, balances and order payments."
         actions={
           <Suspense fallback={<div className="h-10 w-28 animate-pulse rounded-lg bg-muted" />}>
@@ -60,6 +64,10 @@ export default async function FinancePage({
           </Suspense>
         }
       />
+
+      <div className="mb-6">
+        <RevenueChart points={trend} />
+      </div>
 
       <div className="mb-6 grid gap-4 lg:grid-cols-3">
         <div className="surface-card p-5 sm:p-6">

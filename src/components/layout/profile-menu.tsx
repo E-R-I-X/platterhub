@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { ChevronDown, LogOut, Settings, User, X } from "lucide-react"
 import { logoutAction } from "@/app/actions/auth"
 
 export function ProfileMenu({ userName }: { userName: string }) {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const initials =
     userName
       .split(" ")
@@ -14,6 +16,8 @@ export function ProfileMenu({ userName }: { userName: string }) {
       .slice(0, 2)
       .join("")
       .toUpperCase() || "AD"
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     if (!open) return
@@ -29,6 +33,55 @@ export function ProfileMenu({ userName }: { userName: string }) {
     }
   }, [open])
 
+  const panel =
+    open && mounted
+      ? createPortal(
+          <div className="fixed inset-0 z-[100] flex flex-col md:block">
+            <button
+              type="button"
+              className="absolute inset-0 bg-[#1c2414]/45 backdrop-blur-sm"
+              aria-label="Close account menu"
+              onClick={() => setOpen(false)}
+            />
+
+            <div
+              className="relative z-10 mt-auto w-full rounded-t-[1.75rem] border border-border bg-card shadow-2xl md:hidden"
+              style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+            >
+              <div className="mx-auto mt-2.5 h-1 w-11 rounded-full bg-border" />
+              <div className="flex items-start justify-between border-b border-border px-5 py-4">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
+                    {initials}
+                  </span>
+                  <div>
+                    <p className="font-semibold">{userName}</p>
+                    <p className="text-xs text-muted-foreground">Catering Manager</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="rounded-lg p-2 text-muted-foreground hover:bg-muted"
+                  onClick={() => setOpen(false)}
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+              <MenuLinks onClose={() => setOpen(false)} />
+            </div>
+
+            <div className="absolute top-16 right-6 z-10 hidden w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:block lg:right-10">
+              <div className="border-b border-border px-4 py-3.5">
+                <p className="truncate text-sm font-semibold">{userName}</p>
+                <p className="text-xs text-muted-foreground">Catering Manager</p>
+              </div>
+              <MenuLinks onClose={() => setOpen(false)} />
+            </div>
+          </div>,
+          document.body
+        )
+      : null
+
   return (
     <>
       <button
@@ -43,57 +96,14 @@ export function ProfileMenu({ userName }: { userName: string }) {
         </span>
         <ChevronDown className="hidden size-4 text-muted-foreground sm:block" />
       </button>
-
-      {open ? (
-        <div className="fixed inset-0 z-[60]">
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
-            aria-label="Close account menu"
-            onClick={() => setOpen(false)}
-          />
-
-          {/* Mobile bottom sheet */}
-          <div className="absolute inset-x-0 bottom-0 overflow-hidden rounded-t-3xl border border-border bg-card shadow-2xl md:hidden">
-            <div className="mx-auto mt-3 h-1 w-10 rounded-full bg-border" />
-            <div className="flex items-start justify-between border-b border-border px-5 py-4">
-              <div className="flex items-center gap-3">
-                <span className="flex size-11 items-center justify-center rounded-full bg-olive text-sm font-semibold text-white">
-                  {initials}
-                </span>
-                <div>
-                  <p className="font-semibold">{userName}</p>
-                  <p className="text-xs text-muted-foreground">Catering Manager</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="rounded-lg p-2 text-muted-foreground hover:bg-muted"
-                onClick={() => setOpen(false)}
-              >
-                <X className="size-4" />
-              </button>
-            </div>
-            <MenuLinks onClose={() => setOpen(false)} />
-          </div>
-
-          {/* Desktop dropdown */}
-          <div className="absolute top-16 right-4 hidden w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:block lg:right-8">
-            <div className="border-b border-border px-4 py-3.5">
-              <p className="truncate text-sm font-semibold">{userName}</p>
-              <p className="text-xs text-muted-foreground">Catering Manager</p>
-            </div>
-            <MenuLinks onClose={() => setOpen(false)} />
-          </div>
-        </div>
-      ) : null}
+      {panel}
     </>
   )
 }
 
 function MenuLinks({ onClose }: { onClose: () => void }) {
   return (
-    <div className="space-y-1 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+    <div className="space-y-1 p-2">
       <Link
         href="/settings#profile"
         onClick={onClose}

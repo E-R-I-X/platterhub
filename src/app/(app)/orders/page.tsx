@@ -73,8 +73,8 @@ export default async function OrdersPage({
   return (
     <div>
       <PageHeader
-        title="Orders List"
-        description="View and manage all catering orders."
+        title="Orders"
+        description="Filter, review, and manage every delivery and catering booking."
       />
 
       <Suspense fallback={<div className="mb-5 h-28 animate-pulse rounded-xl bg-muted" />}>

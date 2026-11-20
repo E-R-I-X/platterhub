@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Bell, CheckCheck, X } from "lucide-react"
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { cn } from "@/lib/utils"
 
 export type AppNotification = {
@@ -43,8 +44,13 @@ const DEFAULT_NOTIFICATIONS: AppNotification[] = [
 
 export function NotificationsButton() {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [items, setItems] = useState<AppNotification[]>(DEFAULT_NOTIFICATIONS)
   const unread = items.filter((n) => !n.read).length
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -59,6 +65,55 @@ export function NotificationsButton() {
       window.removeEventListener("keydown", onKey)
     }
   }, [open])
+
+  const panel =
+    open && mounted
+      ? createPortal(
+          <div className="fixed inset-0 z-[100] flex flex-col md:block">
+            <button
+              type="button"
+              className="absolute inset-0 bg-[#1c2414]/45 backdrop-blur-sm"
+              aria-label="Close notifications"
+              onClick={() => setOpen(false)}
+            />
+
+            {/* Mobile: full-width sheet pinned to bottom of viewport */}
+            <div
+              className="relative z-10 mt-auto flex h-[min(88dvh,36rem)] w-full flex-col rounded-t-[1.75rem] border border-border bg-card shadow-2xl md:hidden"
+              style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+            >
+              <div className="mx-auto mt-2.5 mb-1 h-1 w-11 shrink-0 rounded-full bg-border" />
+              <PanelHeader
+                onClose={() => setOpen(false)}
+                onMarkAll={() =>
+                  setItems((prev) => prev.map((n) => ({ ...n, read: true })))
+                }
+              />
+              <NotificationList
+                items={items}
+                setItems={setItems}
+                onClose={() => setOpen(false)}
+              />
+            </div>
+
+            {/* Desktop dropdown */}
+            <div className="absolute top-16 right-6 z-10 hidden max-h-[min(32rem,75vh)] w-[24rem] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:flex lg:right-10">
+              <PanelHeader
+                onClose={() => setOpen(false)}
+                onMarkAll={() =>
+                  setItems((prev) => prev.map((n) => ({ ...n, read: true })))
+                }
+              />
+              <NotificationList
+                items={items}
+                setItems={setItems}
+                onClose={() => setOpen(false)}
+              />
+            </div>
+          </div>,
+          document.body
+        )
+      : null
 
   return (
     <>
@@ -76,48 +131,7 @@ export function NotificationsButton() {
           </span>
         ) : null}
       </button>
-
-      {open ? (
-        <div className="fixed inset-0 z-[60]">
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
-            aria-label="Close notifications"
-            onClick={() => setOpen(false)}
-          />
-
-          {/* Mobile: bottom sheet */}
-          <div className="absolute inset-x-0 bottom-0 flex max-h-[85dvh] flex-col overflow-hidden rounded-t-3xl border border-border bg-card shadow-2xl md:hidden">
-            <div className="mx-auto mt-3 h-1 w-10 rounded-full bg-border" />
-            <PanelHeader
-              onClose={() => setOpen(false)}
-              onMarkAll={() =>
-                setItems((prev) => prev.map((n) => ({ ...n, read: true })))
-              }
-            />
-            <NotificationList
-              items={items}
-              setItems={setItems}
-              onClose={() => setOpen(false)}
-            />
-          </div>
-
-          {/* Desktop: anchored dropdown under header actions */}
-          <div className="absolute top-16 right-4 hidden w-[min(100vw-2rem,24rem)] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl md:block lg:right-8">
-            <PanelHeader
-              onClose={() => setOpen(false)}
-              onMarkAll={() =>
-                setItems((prev) => prev.map((n) => ({ ...n, read: true })))
-              }
-            />
-            <NotificationList
-              items={items}
-              setItems={setItems}
-              onClose={() => setOpen(false)}
-            />
-          </div>
-        </div>
-      ) : null}
+      {panel}
     </>
   )
 }
@@ -130,7 +144,7 @@ function PanelHeader({
   onMarkAll: () => void
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-border px-4 py-3.5">
+    <div className="flex shrink-0 items-center justify-between border-b border-border px-4 py-3.5">
       <div>
         <p className="font-semibold tracking-tight">Notifications</p>
         <p className="text-xs text-muted-foreground">Order and payment updates</p>
@@ -168,7 +182,7 @@ function NotificationList({
 }) {
   return (
     <>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain md:max-h-[min(24rem,60vh)]">
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
         {items.length === 0 ? (
           <p className="px-4 py-10 text-center text-sm text-muted-foreground">
             No notifications
@@ -192,11 +206,12 @@ function NotificationList({
               )}
             >
               <div className="flex items-start gap-3">
-                {!n.read ? (
-                  <span className="mt-1.5 size-2 shrink-0 rounded-full bg-olive" />
-                ) : (
-                  <span className="mt-1.5 size-2 shrink-0" />
-                )}
+                <span
+                  className={cn(
+                    "mt-1.5 size-2 shrink-0 rounded-full",
+                    !n.read ? "bg-olive" : "bg-transparent"
+                  )}
+                />
                 <div className="min-w-0">
                   <p className="text-sm font-medium">{n.title}</p>
                   <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
@@ -211,7 +226,7 @@ function NotificationList({
           ))
         )}
       </div>
-      <div className="border-t border-border px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] text-center">
+      <div className="shrink-0 border-t border-border px-4 py-3 text-center">
         <Link
           href="/settings#notifications"
           className="text-xs font-medium text-olive hover:underline"

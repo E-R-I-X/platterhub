@@ -1,8 +1,8 @@
 import Link from "next/link"
-import { CalendarDays, TrendingUp, Wallet } from "lucide-react"
-import { PageHeader } from "@/components/layout/page-header"
+import { ArrowUpRight, CalendarDays, Plus, TrendingUp, Wallet } from "lucide-react"
 import { StatCard } from "@/components/dashboard/stat-card"
 import { OrderTypeBadge, PaymentBadge } from "@/components/shared/status-badge"
+import { Button } from "@/components/ui/button"
 import { getDashboardStats } from "@/lib/data/store"
 import { formatDate, formatMoney } from "@/lib/format"
 
@@ -12,18 +12,54 @@ export default async function DashboardPage() {
   const stats = await getDashboardStats()
 
   return (
-    <div>
-      <PageHeader
-        title="Dashboard"
-        description="Welcome back! Here's what's happening with your catering business today."
-      />
+    <div className="space-y-6 sm:space-y-8">
+      <section className="relative overflow-hidden rounded-[1.75rem] border border-olive/20 text-white shadow-[0_20px_50px_-28px_rgba(28,36,20,0.55)]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at 12% 20%, rgba(85,107,47,0.9), transparent 42%), radial-gradient(ellipse at 88% 10%, rgba(216,224,200,0.28), transparent 36%), linear-gradient(135deg, #1c2414 0%, #2f3d1c 55%, #556b2f 140%)",
+          }}
+        />
+        <div className="relative grid gap-6 px-5 py-7 sm:px-7 sm:py-9 lg:grid-cols-[1.4fr_auto] lg:items-end">
+          <div>
+            <p className="text-xs tracking-[0.2em] text-olive-muted uppercase">
+              The Platter Hub
+            </p>
+            <h1 className="font-display mt-2 max-w-xl text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+              Today&apos;s kitchen overview
+            </h1>
+            <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/75 sm:text-base">
+              Track deliveries and event catering from one place — upcoming jobs,
+              balances due, and revenue at a glance.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              render={<Link href="/orders/new" />}
+              className="bg-white text-foreground hover:bg-olive-soft"
+            >
+              <Plus className="size-4" />
+              New Order
+            </Button>
+            <Button
+              variant="outline"
+              render={<Link href="/calendar" />}
+              className="border-white/25 bg-white/5 text-white hover:bg-white/10"
+            >
+              Open calendar
+            </Button>
+          </div>
+        </div>
+      </section>
 
-      <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <StatCard
           icon={<CalendarDays className="size-5" />}
           label="Upcoming Orders"
           value={String(stats.upcomingCount)}
           hint="Next 7 days"
+          accent
         />
         <StatCard
           icon={<Wallet className="size-5" />}
@@ -40,10 +76,17 @@ export default async function DashboardPage() {
       </div>
 
       <section className="surface-card overflow-hidden">
-        <div className="flex items-center justify-between border-b border-border px-5 py-4">
-          <h2 className="font-semibold text-foreground">Upcoming Orders</h2>
-          <Link href="/orders" className="text-sm font-medium text-olive hover:underline">
-            View all orders →
+        <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
+          <div>
+            <h2 className="font-semibold tracking-tight">Upcoming Orders</h2>
+            <p className="text-xs text-muted-foreground">Soonest scheduled jobs first</p>
+          </div>
+          <Link
+            href="/orders"
+            className="inline-flex items-center gap-1 text-sm font-medium text-olive hover:underline"
+          >
+            View all
+            <ArrowUpRight className="size-3.5" />
           </Link>
         </div>
 
@@ -60,7 +103,7 @@ export default async function DashboardPage() {
             </thead>
             <tbody className="divide-y divide-border">
               {stats.upcomingOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-canvas/60">
+                <tr key={order.id} className="transition-colors hover:bg-olive-soft/30">
                   <td className="px-5 py-4">
                     <Link href={`/orders/${order.id}`} className="block">
                       <p className="font-medium">{formatDate(order.event_date)}</p>
@@ -100,7 +143,7 @@ export default async function DashboardPage() {
             <Link
               key={order.id}
               href={`/orders/${order.id}`}
-              className="block space-y-2 px-5 py-4 hover:bg-canvas/60"
+              className="block space-y-2 px-5 py-4 transition-colors hover:bg-olive-soft/30"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -117,12 +160,6 @@ export default async function DashboardPage() {
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="border-t border-border px-5 py-3 text-center">
-          <Link href="/orders" className="text-sm font-medium text-olive hover:underline">
-            View all upcoming orders →
-          </Link>
         </div>
       </section>
     </div>

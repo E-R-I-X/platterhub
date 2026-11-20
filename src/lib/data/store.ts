@@ -196,6 +196,35 @@ export async function getDashboardStats() {
   }
 }
 
+export async function getRevenueTrend(weeks = 6) {
+  await ready()
+  const orders = await listOrders()
+  const today = new Date()
+  const points: { label: string; revenue: number; outstanding: number }[] = []
+
+  for (let i = weeks - 1; i >= 0; i--) {
+    const end = new Date(today)
+    end.setDate(today.getDate() - i * 7)
+    const start = new Date(end)
+    start.setDate(end.getDate() - 6)
+    const startStr = start.toISOString().slice(0, 10)
+    const endStr = end.toISOString().slice(0, 10)
+    const bucket = orders.filter(
+      (o) => o.event_date >= startStr && o.event_date <= endStr
+    )
+    points.push({
+      label: start.toLocaleDateString("en-CA", { month: "short", day: "numeric" }),
+      revenue: bucket.reduce((sum, o) => sum + o.amount_paid, 0),
+      outstanding: bucket.reduce(
+        (sum, o) => sum + Math.max(0, o.total_price - o.amount_paid),
+        0
+      ),
+    })
+  }
+
+  return points
+}
+
 export async function getFinanceSummary(from?: string, to?: string) {
   await ready()
   let orders = await listOrders()

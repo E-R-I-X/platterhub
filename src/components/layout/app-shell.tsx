@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { Menu, Plus, Search } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Sidebar } from "@/components/layout/sidebar"
 import { NotificationsButton } from "@/components/layout/notifications-panel"
 import { ProfileMenu } from "@/components/layout/profile-menu"
+import { ScrollToTop } from "@/components/layout/scroll-to-top"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -31,6 +32,9 @@ export function AppShell({
 
   return (
     <div className="flex min-h-dvh bg-canvas">
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
       <Sidebar open={open} onClose={() => setOpen(false)} userName={userName} />
 
       <div className="flex min-w-0 flex-1 flex-col">
@@ -108,7 +112,7 @@ export function AppShell({
             <div className="absolute -top-24 left-1/4 size-[28rem] rounded-full bg-olive/8 blur-3xl" />
             <div className="absolute top-1/3 -right-20 size-[22rem] rounded-full bg-olive-muted/30 blur-3xl" />
           </div>
-          <div className="mx-auto w-full max-w-7xl">{children}</div>
+          <div className="page-enter mx-auto w-full max-w-7xl">{children}</div>
         </main>
       </div>
     </div>
