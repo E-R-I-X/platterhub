@@ -22,15 +22,20 @@ function parseLineItems(formData: FormData) {
     unit_price: number
   }>
 
-  return parsed.map((item) => ({
-    menu_item_id: item.menu_item_id ?? null,
-    name: item.name,
-    description: item.description ?? null,
-    variant: item.variant ?? null,
-    quantity: Number(item.quantity) || 1,
-    unit_price: Number(item.unit_price) || 0,
-    total_price: (Number(item.quantity) || 1) * (Number(item.unit_price) || 0),
-  }))
+  return parsed.map((item) => {
+    const quantity = Math.max(1, Number(item.quantity) || 1)
+    const unitPrice = Math.max(0, Number(item.unit_price) || 0)
+    const isCustom = !item.menu_item_id
+    return {
+      menu_item_id: isCustom ? null : item.menu_item_id ?? null,
+      name: String(item.name || "").trim() || (isCustom ? "Custom item" : "Item"),
+      description: item.description ?? null,
+      variant: isCustom ? null : item.variant ?? null,
+      quantity,
+      unit_price: unitPrice,
+      total_price: quantity * unitPrice,
+    }
+  })
 }
 
 function formToInput(formData: FormData): OrderInput {

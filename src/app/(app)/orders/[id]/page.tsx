@@ -205,8 +205,13 @@ export default async function OrderDetailPage({
                       <div>
                         <p className="font-medium">{item.name}</p>
                         <p className="text-xs text-muted-foreground">
-                          {[formatVariant(item.variant), item.description]
-                            .filter(Boolean)
+                          {[
+                            item.menu_item_id
+                              ? formatVariant(item.variant)
+                              : "Custom item",
+                            item.description,
+                          ]
+                            .filter((part) => part && part !== "—")
                             .join(" · ") || "—"}
                         </p>
                       </div>
@@ -230,7 +235,10 @@ export default async function OrderDetailPage({
                 <div>
                   <p className="font-medium">{item.name}</p>
                   <p className="text-xs text-muted-foreground">
-                    {formatVariant(item.variant)} · Qty {item.quantity}
+                    {item.menu_item_id
+                      ? formatVariant(item.variant)
+                      : "Custom item"}{" "}
+                    · Qty {item.quantity}
                   </p>
                 </div>
                 <p className="font-semibold">{formatMoney(item.total_price)}</p>

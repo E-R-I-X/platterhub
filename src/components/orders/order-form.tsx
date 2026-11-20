@@ -16,6 +16,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { formatMoney, isPreferredDeliveryDay } from "@/lib/format"
 import type { MenuItem, MenuVariant, Order, OrderType, PaymentStatus } from "@/lib/types"
 
+const CUSTOM_ITEM = "__custom__"
+
 type DraftItem = {
   key: string
   menu_item_id: string | null
@@ -24,6 +26,7 @@ type DraftItem = {
   variant: MenuVariant | null
   quantity: number
   unit_price: number
+  is_custom: boolean
 }
 
 const initialState: OrderFormState = {}
@@ -40,6 +43,30 @@ function availableVariants(item: MenuItem): MenuVariant[] {
   if (item.price_medium != null) variants.push("medium")
   if (item.price_large != null) variants.push("large")
   return variants
+}
+
+function toDraft(
+  item: {
+    id: string
+    menu_item_id: string | null
+    name: string
+    description: string | null
+    variant: MenuVariant | null
+    quantity: number
+    unit_price: number
+  },
+  index: number
+): DraftItem {
+  return {
+    key: `${item.id}-${index}`,
+    menu_item_id: item.menu_item_id,
+    name: item.name,
+    description: item.description,
+    variant: item.variant,
+    quantity: item.quantity,
+    unit_price: item.unit_price,
+    is_custom: !item.menu_item_id,
+  }
 }
 
 export function OrderForm({
@@ -63,15 +90,7 @@ export function OrderForm({
   const [stylingFee, setStylingFee] = useState(order?.styling_fee ?? 0)
   const [tableOrg, setTableOrg] = useState(order?.table_organisation ?? false)
   const [items, setItems] = useState<DraftItem[]>(
-    (order?.line_items ?? []).map((item, index) => ({
-      key: `${item.id}-${index}`,
-      menu_item_id: item.menu_item_id,
-      name: item.name,
-      description: item.description,
-      variant: item.variant,
-      quantity: item.quantity,
-      unit_price: item.unit_price,
-    }))
+    (order?.line_items ?? []).map((item, index) => toDraft(item, index))
   )
 
   const productFee = useMemo(
@@ -85,9 +104,27 @@ export function OrderForm({
 
   const showDateWarning = eventDate && !isPreferredDeliveryDay(eventDate)
 
-  function addItem() {
+  const lineItemsJson = useMemo(
+    () =>
+      JSON.stringify(
+        items.map(({ menu_item_id, name, description, variant, quantity, unit_price, is_custom }) => ({
+          menu_item_id: is_custom ? null : menu_item_id,
+          name: name.trim() || (is_custom ? "Custom item" : "Item"),
+          description,
+          variant: is_custom ? null : variant,
+          quantity,
+          unit_price,
+        }))
+      ),
+    [items]
+  )
+
+  function addMenuItem() {
     const first = menuItems[0]
-    if (!first) return
+    if (!first) {
+      addCustomItem()
+      return
+    }
     const variants = availableVariants(first)
     const variant = variants[0] ?? null
     setItems((prev) => [
@@ -100,6 +137,23 @@ export function OrderForm({
         variant,
         quantity: 1,
         unit_price: priceFor(first, variant),
+        is_custom: false,
+      },
+    ])
+  }
+
+  function addCustomItem() {
+    setItems((prev) => [
+      ...prev,
+      {
+        key: crypto.randomUUID(),
+        menu_item_id: null,
+        name: "",
+        description: null,
+        variant: null,
+        quantity: 1,
+        unit_price: 0,
+        is_custom: true,
       },
     ])
   }
@@ -109,7 +163,20 @@ export function OrderForm({
       prev.map((item) => {
         if (item.key !== key) return item
         const next = { ...item, ...patch }
-        if (patch.menu_item_id) {
+
+        if (patch.menu_item_id === CUSTOM_ITEM || patch.is_custom === true) {
+          next.is_custom = true
+          next.menu_item_id = null
+          next.variant = null
+          if (!item.is_custom) {
+            next.name = ""
+            next.description = null
+            next.unit_price = 0
+          }
+          return next
+        }
+
+        if (patch.menu_item_id && patch.menu_item_id !== CUSTOM_ITEM) {
           const menuItem = menuItems.find((m) => m.id === patch.menu_item_id)
           if (menuItem) {
             const variants = availableVariants(menuItem)
@@ -117,12 +184,14 @@ export function OrderForm({
               patch.variant && variants.includes(patch.variant)
                 ? patch.variant
                 : variants[0] ?? null
+            next.is_custom = false
+            next.menu_item_id = menuItem.id
             next.name = menuItem.name
             next.description = menuItem.description
             next.variant = variant
             next.unit_price = priceFor(menuItem, variant)
           }
-        } else if (patch.variant) {
+        } else if (patch.variant && !item.is_custom) {
           const menuItem = menuItems.find((m) => m.id === item.menu_item_id)
           if (menuItem) next.unit_price = priceFor(menuItem, patch.variant)
         }
@@ -138,7 +207,7 @@ export function OrderForm({
   return (
     <form action={formAction} className="mx-auto max-w-3xl space-y-6">
       <input type="hidden" name="order_type" value={orderType} />
-      <input type="hidden" name="line_items_json" value={JSON.stringify(items)} />
+      <input type="hidden" name="line_items_json" value={lineItemsJson} />
       <input
         type="hidden"
         name="table_organisation"
@@ -146,7 +215,7 @@ export function OrderForm({
       />
 
       <div>
-        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
+        <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
           {isEdit
             ? `Edit ${order?.order_number}`
             : orderType === "food_delivery"
@@ -169,7 +238,7 @@ export function OrderForm({
             className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
               orderType === type
                 ? "bg-olive text-white"
-                : "border border-border bg-white text-muted-foreground hover:bg-muted"
+                : "border border-border bg-card text-muted-foreground hover:bg-muted"
             }`}
           >
             {type === "food_delivery" ? "Food Delivery" : "Event Catering"}
@@ -177,7 +246,7 @@ export function OrderForm({
         ))}
       </div>
 
-      <div className="space-y-4 rounded-xl border border-border bg-white p-5">
+      <div className="surface-card space-y-4 p-5">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <Label htmlFor="customer_name">
@@ -345,7 +414,7 @@ export function OrderForm({
                   className={`rounded-lg px-4 py-2 text-sm font-medium ${
                     !tableOrg
                       ? "bg-olive text-white"
-                      : "border border-border bg-white text-muted-foreground"
+                      : "border border-border bg-card text-muted-foreground"
                   }`}
                 >
                   No
@@ -356,7 +425,7 @@ export function OrderForm({
                   className={`rounded-lg px-4 py-2 text-sm font-medium ${
                     tableOrg
                       ? "bg-olive text-white"
-                      : "border border-border bg-white text-muted-foreground"
+                      : "border border-border bg-card text-muted-foreground"
                   }`}
                 >
                   Yes
@@ -406,95 +475,171 @@ export function OrderForm({
         )}
       </div>
 
-      <div className="rounded-xl border border-border bg-white p-5">
-        <div className="mb-4 flex items-center justify-between gap-3">
+      <div className="surface-card p-5">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="font-semibold">Line items</h2>
             <p className="text-sm text-muted-foreground">
-              Add one or more items for this order.
+              Add menu items or custom items with their own price.
             </p>
           </div>
-          <Button type="button" variant="outline" onClick={addItem}>
-            <Plus className="size-4" />
-            Add Item
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button type="button" variant="outline" onClick={addMenuItem}>
+              <Plus className="size-4" />
+              From menu
+            </Button>
+            <Button type="button" variant="outline" onClick={addCustomItem}>
+              <Plus className="size-4" />
+              Custom item
+            </Button>
+          </div>
         </div>
 
         {items.length === 0 ? (
           <div className="rounded-xl border border-dashed border-olive-muted bg-olive-soft/40 px-4 py-10 text-center text-sm text-olive-dark">
-            No items added yet. Click &apos;Add Item&apos; to get started.
+            No items added yet. Add from the menu or create a custom item with a price.
           </div>
         ) : (
           <div className="space-y-3">
             {items.map((item) => {
-              const menuItem = menuItems.find((m) => m.id === item.menu_item_id)
+              const menuItem = !item.is_custom
+                ? menuItems.find((m) => m.id === item.menu_item_id)
+                : undefined
               const variants = menuItem ? availableVariants(menuItem) : []
               return (
                 <div
                   key={item.key}
-                  className="grid gap-3 rounded-lg border border-border p-3 md:grid-cols-[1.4fr_0.8fr_0.6fr_0.7fr_auto]"
+                  className="space-y-3 rounded-xl border border-border p-3 sm:p-4"
                 >
-                  <div>
-                    <Label>Item</Label>
-                    <Select
-                      value={item.menu_item_id ?? ""}
-                      onChange={(e) =>
-                        updateItem(item.key, { menu_item_id: e.target.value })
-                      }
-                    >
-                      {menuItems.map((m) => (
-                        <option key={m.id} value={m.id}>
-                          {m.name}
-                        </option>
-                      ))}
-                    </Select>
+                  <div className="grid gap-3 md:grid-cols-[1.5fr_0.9fr_0.6fr_0.7fr_auto]">
+                    <div>
+                      <Label>Item source</Label>
+                      <Select
+                        value={item.is_custom ? CUSTOM_ITEM : item.menu_item_id ?? ""}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (value === CUSTOM_ITEM) {
+                            updateItem(item.key, { is_custom: true, menu_item_id: CUSTOM_ITEM })
+                          } else {
+                            updateItem(item.key, {
+                              is_custom: false,
+                              menu_item_id: value,
+                            })
+                          }
+                        }}
+                      >
+                        <option value={CUSTOM_ITEM}>Custom item…</option>
+                        {menuItems.map((m) => (
+                          <option key={m.id} value={m.id}>
+                            {m.name}
+                          </option>
+                        ))}
+                      </Select>
+                    </div>
+
+                    {item.is_custom ? (
+                      <div>
+                        <Label>Unit price (CAD)</Label>
+                        <Input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={item.unit_price}
+                          onChange={(e) =>
+                            updateItem(item.key, {
+                              unit_price: Math.max(0, Number(e.target.value) || 0),
+                            })
+                          }
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <Label>Size</Label>
+                        <Select
+                          value={item.variant ?? ""}
+                          onChange={(e) =>
+                            updateItem(item.key, {
+                              variant: (e.target.value || null) as MenuVariant | null,
+                            })
+                          }
+                        >
+                          {variants.length === 0 ? (
+                            <option value="">—</option>
+                          ) : (
+                            variants.map((v) => (
+                              <option key={v} value={v}>
+                                {v.charAt(0).toUpperCase() + v.slice(1)}
+                              </option>
+                            ))
+                          )}
+                        </Select>
+                      </div>
+                    )}
+
+                    <div>
+                      <Label>Qty</Label>
+                      <Input
+                        type="number"
+                        min="1"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateItem(item.key, {
+                            quantity: Math.max(1, Number(e.target.value) || 1),
+                          })
+                        }
+                      />
+                    </div>
+                    <div>
+                      <Label>Line total</Label>
+                      <p className="flex h-10 items-center text-sm font-semibold text-olive">
+                        {formatMoney(item.quantity * item.unit_price)}
+                      </p>
+                    </div>
+                    <div className="flex items-end">
+                      <button
+                        type="button"
+                        onClick={() => removeItem(item.key)}
+                        className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-rose-50 hover:text-rose-600"
+                        aria-label="Remove item"
+                      >
+                        <Trash2 className="size-4" />
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <Label>Size</Label>
-                    <Select
-                      value={item.variant ?? ""}
-                      onChange={(e) =>
-                        updateItem(item.key, {
-                          variant: (e.target.value || null) as MenuVariant | null,
-                        })
-                      }
-                    >
-                      {variants.map((v) => (
-                        <option key={v} value={v}>
-                          {v.charAt(0).toUpperCase() + v.slice(1)}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  <div>
-                    <Label>Qty</Label>
-                    <Input
-                      type="number"
-                      min="1"
-                      value={item.quantity}
-                      onChange={(e) =>
-                        updateItem(item.key, {
-                          quantity: Math.max(1, Number(e.target.value) || 1),
-                        })
-                      }
-                    />
-                  </div>
-                  <div>
-                    <Label>Total</Label>
-                    <p className="flex h-10 items-center text-sm font-medium">
-                      {formatMoney(item.quantity * item.unit_price)}
+
+                  {item.is_custom ? (
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div>
+                        <Label>Custom item name</Label>
+                        <Input
+                          value={item.name}
+                          placeholder="e.g. Extra cutlery set"
+                          onChange={(e) =>
+                            updateItem(item.key, { name: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label>Notes (optional)</Label>
+                        <Input
+                          value={item.description ?? ""}
+                          placeholder="Size, flavour, or notes"
+                          onChange={(e) =>
+                            updateItem(item.key, {
+                              description: e.target.value || null,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                  ) : menuItem ? (
+                    <p className="text-xs text-muted-foreground">
+                      {formatMoney(item.unit_price)} each
+                      {menuItem.unit_label ? ` · ${menuItem.unit_label}` : ""}
+                      {menuItem.description ? ` · ${menuItem.description}` : ""}
                     </p>
-                  </div>
-                  <div className="flex items-end">
-                    <button
-                      type="button"
-                      onClick={() => removeItem(item.key)}
-                      className="rounded-lg p-2 text-muted-foreground hover:bg-rose-50 hover:text-rose-600"
-                      aria-label="Remove item"
-                    >
-                      <Trash2 className="size-4" />
-                    </button>
-                  </div>
+                  ) : null}
                 </div>
               )
             })}
@@ -524,7 +669,7 @@ export function OrderForm({
         </div>
       </div>
 
-      <div className="rounded-xl border border-border bg-white p-5">
+      <div className="surface-card p-5">
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
             <Label htmlFor="payment_status">
