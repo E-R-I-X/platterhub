@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Bell, KeyRound, Moon, Sun, User } from "lucide-react"
-import { PageHeader } from "@/components/layout/page-header"
+import { SectionHero } from "@/components/layout/section-hero"
 import { useTheme } from "@/components/providers/theme-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -25,14 +25,15 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
-      <PageHeader
+    <div className="stagger-children mx-auto max-w-3xl space-y-6">
+      <SectionHero
+        eyebrow="Account"
         title="Settings"
         description="Appearance, notifications, and account preferences."
       />
 
       {saved ? (
-        <p className="rounded-lg border border-olive-muted bg-olive-soft px-4 py-2 text-sm text-olive-dark">
+        <p className="rounded-xl border border-olive-muted bg-olive-soft px-4 py-2.5 text-sm text-olive-dark transition-opacity">
           {saved}
         </p>
       ) : null}
@@ -63,9 +64,9 @@ export default function SettingsPage() {
                   setTheme(opt.value)
                   flash("Theme updated.")
                 }}
-                className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-all duration-200 ${
                   active
-                    ? "border-olive bg-olive-soft text-olive"
+                    ? "border-olive bg-olive-soft text-olive shadow-sm"
                     : "border-border hover:bg-muted"
                 }`}
               >
@@ -96,7 +97,7 @@ export default function SettingsPage() {
           ).map(([key, label]) => (
             <label
               key={key}
-              className="flex items-center justify-between gap-3 rounded-lg border border-border px-4 py-3"
+              className="flex items-center justify-between gap-3 rounded-xl border border-border px-4 py-3 transition-colors hover:bg-muted/40"
             >
               <span className="text-sm font-medium">{label}</span>
               <input

@@ -92,10 +92,10 @@ export function Sidebar({
                 href={item.href}
                 onClick={onClose}
                 className={cn(
-                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
                   active
-                    ? "bg-olive-soft text-olive shadow-sm"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "translate-x-0.5 bg-olive-soft text-olive shadow-sm"
+                    : "text-muted-foreground hover:translate-x-0.5 hover:bg-muted hover:text-foreground"
                 )}
               >
                 <Icon className={cn("size-4", active && "text-olive")} />

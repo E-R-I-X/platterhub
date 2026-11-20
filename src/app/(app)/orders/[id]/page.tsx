@@ -39,11 +39,11 @@ export default async function OrderDetailPage({
   const due = balanceDue(order.total_price, order.amount_paid)
 
   return (
-    <div className="mx-auto max-w-5xl space-y-5">
+    <div className="stagger-children mx-auto max-w-5xl space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/orders"
-          className="inline-flex items-center gap-2 text-sm font-medium text-olive hover:underline"
+          className="inline-flex items-center gap-2 text-sm font-medium text-olive transition-opacity hover:opacity-80 hover:underline"
         >
           <ArrowLeft className="size-4" />
           Orders / #{order.order_number}
@@ -54,17 +54,25 @@ export default async function OrderDetailPage({
         </Button>
       </div>
 
-      <div className="rounded-xl border border-border bg-white p-5 md:p-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+      <div className="surface-card overflow-hidden">
+        <div
+          className="border-b border-olive/15 px-5 py-5 text-white md:px-6"
+          style={{
+            backgroundImage:
+              "linear-gradient(135deg, #1c2414 0%, #2f3d1c 55%, #556b2f 140%)",
+          }}
+        >
+          <p className="text-xs tracking-[0.18em] text-olive-muted uppercase">Order detail</p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+              {order.notes || order.theme || order.customer_name}
+            </h1>
+            <OrderTypeBadge type={order.order_type} />
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 p-5 md:flex-row md:items-start md:justify-between md:p-6">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Order Detail</h1>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              <p className="text-lg font-semibold">
-                {order.notes || order.theme || order.customer_name}
-              </p>
-              <OrderTypeBadge type={order.order_type} />
-            </div>
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
                 <CalendarDays className="size-4 text-olive" />
                 {formatDateLong(order.event_date)}
@@ -101,7 +109,7 @@ export default async function OrderDetailPage({
       </div>
 
       {order.order_type === "event_catering" && order.table_organisation ? (
-        <section className="rounded-xl border border-border bg-white p-5">
+        <section className="surface-card p-5">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="flex items-center gap-2 font-semibold">
               <ListChecks className="size-4 text-olive" />
@@ -127,7 +135,7 @@ export default async function OrderDetailPage({
       ) : null}
 
       {order.order_type === "event_catering" ? (
-        <section className="rounded-xl border border-border bg-white p-5">
+        <section className="surface-card p-5">
           <h2 className="mb-4 flex items-center gap-2 font-semibold">
             <Leaf className="size-4 text-olive" />
             Styling & Service
@@ -148,7 +156,7 @@ export default async function OrderDetailPage({
       ) : null}
 
       {order.order_type === "food_delivery" ? (
-        <section className="rounded-xl border border-border bg-white p-5">
+        <section className="surface-card p-5">
           <h2 className="mb-4 font-semibold">Delivery Details</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
@@ -167,7 +175,7 @@ export default async function OrderDetailPage({
         </section>
       ) : null}
 
-      <section className="rounded-xl border border-border bg-white p-5">
+      <section className="surface-card p-5">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="flex items-center gap-2 font-semibold">
             <ListChecks className="size-4 text-olive" />
@@ -258,7 +266,7 @@ export default async function OrderDetailPage({
       </section>
 
       {order.notes || order.special_requests ? (
-        <section className="rounded-xl border border-border bg-white p-5">
+        <section className="surface-card p-5">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="flex items-center gap-2 font-semibold">
               <MessageSquareText className="size-4 text-olive" />
@@ -271,7 +279,7 @@ export default async function OrderDetailPage({
         </section>
       ) : null}
 
-      <section className="overflow-hidden rounded-xl border border-border bg-white">
+      <section className="overflow-hidden surface-card">
         <div className="grid md:grid-cols-2">
           <div className="bg-olive-soft p-6">
             <div className="mb-3 flex size-10 items-center justify-center rounded-full bg-white text-olive">

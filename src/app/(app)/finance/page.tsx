@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Suspense } from "react"
 import { Clock3, Receipt, Wallet } from "lucide-react"
-import { PageHeader } from "@/components/layout/page-header"
+import { SectionHero } from "@/components/layout/section-hero"
 import { FinanceFilters } from "@/components/finance/finance-filters"
 import {
   FinanceInfoButton,
@@ -54,8 +54,9 @@ export default async function FinancePage({
       : 0
 
   return (
-    <div>
-      <PageHeader
+    <div className="stagger-children">
+      <SectionHero
+        eyebrow="Revenue"
         title="Finance"
         description="Overview of revenue, balances and order payments."
         actions={
@@ -70,7 +71,7 @@ export default async function FinancePage({
       </div>
 
       <div className="mb-6 grid gap-4 lg:grid-cols-3">
-        <div className="surface-card p-5 sm:p-6">
+        <div className="surface-card interactive-lift p-5 sm:p-6">
           <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
             <Wallet className="size-5" />
           </div>
@@ -84,7 +85,7 @@ export default async function FinancePage({
         </div>
         <Link
           href="/orders?payment=partial"
-          className="surface-card p-5 transition-colors hover:bg-muted/30 sm:p-6"
+          className="surface-card interactive-lift p-5 sm:p-6"
         >
           <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
             <Clock3 className="size-5" />
@@ -97,7 +98,7 @@ export default async function FinancePage({
             Total of total price minus amount paid.
           </p>
         </Link>
-        <div className="surface-card p-5 sm:p-6">
+        <div className="surface-card interactive-lift p-5 sm:p-6">
           <div className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-olive-soft text-olive">
             <Receipt className="size-5" />
           </div>

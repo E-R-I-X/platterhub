@@ -2,10 +2,11 @@
 
 import { useMemo, useState, useTransition } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Filter, X } from "lucide-react"
+import { Filter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Overlay, OverlayHeader } from "@/components/ui/overlay"
 import { cn } from "@/lib/utils"
 
 export function FinanceFilters() {
@@ -53,8 +54,8 @@ export function FinanceFilters() {
           setOpen(true)
         }}
         className={cn(
-          "relative inline-flex h-10 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm font-medium hover:bg-muted",
-          activeCount > 0 && "border-olive text-olive"
+          "relative inline-flex h-10 items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-3 text-sm font-medium text-white transition-colors hover:bg-white/15",
+          activeCount > 0 && "border-olive-muted"
         )}
       >
         <Filter className="size-4" />
@@ -66,72 +67,56 @@ export function FinanceFilters() {
         ) : null}
       </button>
 
-      {open ? (
-        <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-6">
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
-            aria-label="Close"
-            onClick={() => setOpen(false)}
-          />
-          <div className="relative z-10 max-h-[90dvh] w-full overflow-y-auto rounded-t-3xl border border-border bg-card p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl md:max-w-md md:rounded-3xl">
-            <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-border md:hidden" />
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Finance filters</h2>
-              <button
-                type="button"
-                className="rounded-xl p-2 hover:bg-muted"
-                onClick={() => setOpen(false)}
-              >
-                <X className="size-5" />
-              </button>
+      <Overlay open={open} onClose={() => setOpen(false)} placement="center">
+        <OverlayHeader
+          title="Finance filters"
+          description="Narrow revenue by date range or search"
+          onClose={() => setOpen(false)}
+        />
+        <div className="space-y-4 px-5 py-4">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <Label htmlFor="fin-from">Date from</Label>
+              <Input
+                id="fin-from"
+                type="date"
+                value={draft.from}
+                onChange={(e) => setDraft({ ...draft, from: e.target.value })}
+              />
             </div>
-            <div className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <Label htmlFor="fin-from">Date from</Label>
-                  <Input
-                    id="fin-from"
-                    type="date"
-                    value={draft.from}
-                    onChange={(e) => setDraft({ ...draft, from: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="fin-to">Date to</Label>
-                  <Input
-                    id="fin-to"
-                    type="date"
-                    value={draft.to}
-                    onChange={(e) => setDraft({ ...draft, to: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="fin-q">Search orders</Label>
-                <Input
-                  id="fin-q"
-                  value={draft.q}
-                  placeholder="Customer or order #"
-                  onChange={(e) => setDraft({ ...draft, q: e.target.value })}
-                />
-              </div>
-            </div>
-            <div className="mt-5 flex items-center justify-between gap-3">
-              <button
-                type="button"
-                className="text-sm font-medium text-muted-foreground hover:underline"
-                onClick={clearAll}
-              >
-                Clear all
-              </button>
-              <Button onClick={apply} disabled={pending}>
-                {pending ? "Applying…" : "Apply Filters"}
-              </Button>
+            <div>
+              <Label htmlFor="fin-to">Date to</Label>
+              <Input
+                id="fin-to"
+                type="date"
+                value={draft.to}
+                onChange={(e) => setDraft({ ...draft, to: e.target.value })}
+              />
             </div>
           </div>
+          <div>
+            <Label htmlFor="fin-q">Search orders</Label>
+            <Input
+              id="fin-q"
+              value={draft.q}
+              placeholder="Customer or order #"
+              onChange={(e) => setDraft({ ...draft, q: e.target.value })}
+            />
+          </div>
         </div>
-      ) : null}
+        <div className="flex items-center justify-between gap-3 border-t border-border px-5 py-4">
+          <button
+            type="button"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline"
+            onClick={clearAll}
+          >
+            Clear all
+          </button>
+          <Button onClick={apply} disabled={pending}>
+            {pending ? "Applying…" : "Apply Filters"}
+          </Button>
+        </div>
+      </Overlay>
     </>
   )
 }

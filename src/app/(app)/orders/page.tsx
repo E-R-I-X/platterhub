@@ -1,10 +1,11 @@
 import Link from "next/link"
-import { MoreVertical } from "lucide-react"
+import { MoreVertical, Plus } from "lucide-react"
 import { Suspense } from "react"
-import { PageHeader } from "@/components/layout/page-header"
+import { SectionHero } from "@/components/layout/section-hero"
 import { OrdersFilters } from "@/components/orders/orders-filters"
 import { Pagination } from "@/components/shared/pagination"
 import { OrderTypeBadge, PaymentBadge } from "@/components/shared/status-badge"
+import { Button } from "@/components/ui/button"
 import { listOrders } from "@/lib/data/store"
 import { formatDate, formatMoney } from "@/lib/format"
 import type {
@@ -71,10 +72,20 @@ export default async function OrdersPage({
   }
 
   return (
-    <div>
-      <PageHeader
+    <div className="stagger-children space-y-1">
+      <SectionHero
+        eyebrow="The Platter Hub"
         title="Orders"
         description="Filter, review, and manage every delivery and catering booking."
+        actions={
+          <Button
+            render={<Link href="/orders/new" />}
+            className="bg-white text-foreground hover:bg-olive-soft"
+          >
+            <Plus className="size-4" />
+            New Order
+          </Button>
+        }
       />
 
       <Suspense fallback={<div className="mb-5 h-28 animate-pulse rounded-xl bg-muted" />}>
@@ -97,7 +108,10 @@ export default async function OrdersPage({
             </thead>
             <tbody className="divide-y divide-border">
               {pageItems.map((order) => (
-                <tr key={order.id} className="hover:bg-canvas/60">
+                <tr
+                  key={order.id}
+                  className="transition-colors duration-200 hover:bg-olive-soft/35"
+                >
                   <td className="px-5 py-4">
                     <Link href={`/orders/${order.id}`} className="block">
                       <p className="font-medium">{formatDate(order.event_date)}</p>
@@ -123,7 +137,7 @@ export default async function OrdersPage({
                   <td className="px-5 py-4 text-right">
                     <Link
                       href={`/orders/${order.id}`}
-                      className="inline-flex rounded-lg p-2 text-muted-foreground hover:bg-muted"
+                      className="inline-flex rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                       aria-label="Open order"
                     >
                       <MoreVertical className="size-4" />
@@ -147,7 +161,7 @@ export default async function OrdersPage({
             <Link
               key={order.id}
               href={`/orders/${order.id}`}
-              className="block space-y-3 px-4 py-4 hover:bg-canvas/60"
+              className="block space-y-3 px-4 py-4 transition-colors duration-200 hover:bg-olive-soft/35"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>

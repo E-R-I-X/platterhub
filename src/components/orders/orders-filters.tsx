@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useMemo, useState, useTransition } from "react"
-import { createPortal } from "react-dom"
+import { useMemo, useState, useTransition } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { Filter, Search, X } from "lucide-react"
+import { Filter, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Overlay, OverlayHeader } from "@/components/ui/overlay"
 import { Select } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 
@@ -142,34 +142,18 @@ export function OrdersFilters() {
         </div>
       </div>
 
-      {open ? (
-        <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-stretch md:justify-end">
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
-            aria-label="Close filters"
-            onClick={() => setOpen(false)}
-          />
-          <aside className="relative z-10 flex max-h-[92dvh] w-full max-w-md flex-col rounded-t-3xl border border-border bg-card shadow-2xl md:my-4 md:mr-4 md:max-h-[calc(100dvh-2rem)] md:rounded-3xl">
-            <div className="mx-auto mt-3 h-1 w-10 shrink-0 rounded-full bg-border md:hidden" />
-            <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <div>
-                <h2 className="text-lg font-semibold">Filters</h2>
-                <p className="text-xs text-muted-foreground">
-                  Narrow orders by date, type, payment, and more
-                </p>
-              </div>
-              <button
-                type="button"
-                className="rounded-xl p-2 hover:bg-muted"
-                onClick={() => setOpen(false)}
-                aria-label="Close"
-              >
-                <X className="size-5" />
-              </button>
-            </div>
-
-            <div className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
+      <Overlay
+        open={open}
+        onClose={() => setOpen(false)}
+        placement="right"
+        panelClassName="flex max-h-[92dvh] flex-col md:max-h-[calc(100dvh-2rem)]"
+      >
+        <OverlayHeader
+          title="Filters"
+          description="Narrow orders by date, type, payment, and more"
+          onClose={() => setOpen(false)}
+        />
+            <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-5 py-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <Label htmlFor="from">Date from</Label>
@@ -278,10 +262,10 @@ export function OrdersFilters() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-3 border-t border-border px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+            <div className="flex shrink-0 items-center justify-between gap-3 border-t border-border px-5 py-4">
               <button
                 type="button"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground hover:underline"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline"
                 onClick={clearAll}
               >
                 Clear all
@@ -290,9 +274,7 @@ export function OrdersFilters() {
                 {pending ? "Applying…" : "Apply Filters"}
               </Button>
             </div>
-          </aside>
-        </div>
-      ) : null}
+      </Overlay>
     </>
   )
 }
